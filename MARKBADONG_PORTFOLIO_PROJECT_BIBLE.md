@@ -811,3 +811,40 @@ Manual QA:
 6. after deployment, verify an invalid path returns the custom 404 page rather than the homepage.
 
 Do not push until the local visual, keyboard, responsive, and build checks pass.
+
+---
+
+## Phase 3 — Batch 2: SEO foundation
+
+**Applied:** July 19, 2026
+
+Completed changes:
+
+- converted the homepage and four published case studies into Vite multi-page HTML entries so search and social crawlers receive route-specific metadata before JavaScript runs;
+- added unique titles, descriptions, canonical URLs, robots directives, Open Graph tags, and Twitter card tags for every indexable route;
+- added reusable React metadata management for route consistency and the local Not Found fallback;
+- added Person, WebSite, ProfilePage, CreativeWork, and BreadcrumbList JSON-LD structured data;
+- added dedicated 1200 × 630 social-sharing images for the portfolio and each published case study;
+- expanded the sitemap from one URL to all five indexable public routes;
+- retired the temporary Cloudflare SPA proxy rules because route-specific HTML files now exist in the production build, while retaining only canonical trailing-slash redirects;
+- preserved the top-level static 404 page and its real HTTP 404 behavior.
+
+### Required validation before commit
+
+```powershell
+npm run check
+git diff --check
+git status --short
+npm run preview
+```
+
+Build-output QA:
+
+1. confirm `dist/index.html` and all four `dist/projects/*.html` files exist;
+2. inspect each built HTML file and confirm its title, canonical URL, social image, and JSON-LD are route-specific;
+3. open every route through the Vite preview and confirm the correct case study renders;
+4. verify the static 404 remains present in `dist/404.html`;
+5. after Cloudflare deployment, verify all case-study routes return HTTP 200 and an invalid route returns HTTP 404;
+6. validate the live pages with Google Rich Results Test, Schema Markup Validator, and a social-sharing debugger.
+
+Do not push until local build, route, metadata, and output-file checks pass.

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
+import { PageMeta } from '../components/PageMeta'
 
 const imageBase = '/images/projects/personalvabot'
 
@@ -48,15 +49,6 @@ const validationItems = [
 
 export function PersonalVABotCaseStudy() {
   useEffect(() => {
-    const previousTitle = document.title
-    const description = document.querySelector('meta[name="description"]')
-    const previousDescription = description?.getAttribute('content')
-
-    document.title = 'PersonalVABot Case Study | Mark Anton'
-    description?.setAttribute(
-      'content',
-      'A case study of PersonalVABot, a local-first Windows operations platform connecting Discord workflows, task management, attendance, billing, documents, automation, and backups.',
-    )
     if (window.location.hash) {
       window.requestAnimationFrame(() => {
         const target = document.getElementById(window.location.hash.slice(1))
@@ -65,15 +57,11 @@ export function PersonalVABotCaseStudy() {
     } else {
       window.scrollTo(0, 0)
     }
-
-    return () => {
-      document.title = previousTitle
-      if (description && previousDescription) description.setAttribute('content', previousDescription)
-    }
   }, [])
 
   return (
     <>
+      <PageMeta pageKey="personalvabot" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell case-study-shell">
         <Header mode="case-study" />
