@@ -7,10 +7,8 @@ const navItems = [
   ['Contact', '#contact'],
 ]
 
-export function Header({ mode = 'home' }) {
+export function Header() {
   const [open, setOpen] = useState(false)
-  const isHome = mode === 'home'
-  const linkTo = (hash) => (isHome ? hash : `/${hash}`)
 
   useEffect(() => {
     const closeOnResize = () => {
@@ -22,7 +20,7 @@ export function Header({ mode = 'home' }) {
 
   return (
     <header className="site-header">
-      <a className="brand" href={isHome ? '#top' : '/'} aria-label="Mark Anton home">
+      <a className="brand" href="#top" aria-label="Mark Anton home">
         <span className="brand-mark" aria-hidden="true">MB</span>
         <span>Mark Anton</span>
       </a>
@@ -41,9 +39,9 @@ export function Header({ mode = 'home' }) {
 
       <nav id="primary-navigation" className={open ? 'primary-nav is-open' : 'primary-nav'} aria-label="Primary navigation">
         {navItems.map(([label, href]) => (
-          <a key={href} href={linkTo(href)} onClick={() => setOpen(false)}>{label}</a>
+          <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
         ))}
-        <a className="nav-cta" href={linkTo('#contact')} onClick={() => setOpen(false)}>Work with me</a>
+        <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>Work with me</a>
       </nav>
     </header>
   )

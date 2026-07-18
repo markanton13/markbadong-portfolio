@@ -1,20 +1,35 @@
 export function ProjectCard({ project, index }) {
+  const hasRealImage = Boolean(project.image)
+  const caseStudyLabel = project.caseStudyUrl ? 'View case study' : 'Case study coming in Phase 2'
+  const caseStudyHref = project.caseStudyUrl || `#${project.slug}`
+
   return (
     <article className="project-card">
-      <div className="project-visual" aria-hidden="true">
+      <div
+        className={hasRealImage ? 'project-visual project-visual-real' : 'project-visual'}
+        aria-hidden={hasRealImage ? undefined : true}
+      >
         <span className="project-index">0{index + 1}</span>
-        <div className="visual-window">
-          <div className="visual-topbar"><i /><i /><i /></div>
-          <div className="visual-body">
-            <div className="visual-sidebar" />
-            <div className="visual-content">
-              <span />
-              <span />
-              <span />
-              <div className="visual-panels"><b /><b /><b /></div>
+        {hasRealImage ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+        ) : (
+          <div className="visual-window">
+            <div className="visual-topbar"><i /><i /><i /></div>
+            <div className="visual-body">
+              <div className="visual-sidebar" />
+              <div className="visual-content">
+                <span />
+                <span />
+                <span />
+                <div className="visual-panels"><b /><b /><b /></div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="project-content">
@@ -34,8 +49,8 @@ export function ProjectCard({ project, index }) {
         <div className="tool-list" aria-label={`${project.name} tools`}>
           {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
         </div>
-        <a className="text-link" href={`#${project.slug}`} aria-label={`Case study for ${project.name}`}>
-          Case study coming in Phase 2 <span aria-hidden="true">↗</span>
+        <a className="text-link" href={caseStudyHref} aria-label={`${caseStudyLabel} for ${project.name}`}>
+          {caseStudyLabel} <span aria-hidden="true">↗</span>
         </a>
       </div>
     </article>

@@ -3,12 +3,11 @@ import { Hero } from './components/Hero'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
-import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
 import { featuredProjects, supportingProjects } from './data/projects'
 import { capabilities } from './data/capabilities'
 import './styles/site.css'
 
-function HomePage() {
+function App() {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to main content</a>
@@ -103,16 +102,6 @@ function HomePage() {
       </div>
     </>
   )
-}
-
-function App() {
-  const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
-
-  if (pathname === '/projects/personalvabot') {
-    return <PersonalVABotCaseStudy />
-  }
-
-  return <HomePage />
 }
 
 export default App

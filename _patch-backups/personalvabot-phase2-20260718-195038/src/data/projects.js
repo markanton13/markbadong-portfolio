@@ -1,19 +1,4 @@
-export const featuredProjects = [
-  {
-    slug: 'personalvabot',
-    name: 'PersonalVABot',
-    eyebrow: 'Local-first operations platform',
-    summary:
-      'A Windows desktop control center connecting client work, tasks, attendance, billing, document generation, automation, backups, and Discord workflows.',
-    outcome: 'Desktop beta completed, installer-validated, and backed by real end-to-end workflow testing.',
-    role: 'Creator, product director, workflow designer, QA',
-    tools: ['Windows App', 'Discord', 'SQLite', 'Automation'],
-    status: 'Windows Beta',
-    metric: '72 templates · multi-client ops',
-    image: '/images/projects/personalvabot/dashboard.webp',
-    imageAlt: 'PersonalVABot desktop dashboard showing tasks, clients, automation, backups, and workspace activity.',
-    caseStudyUrl: '/projects/personalvabot',
-  },
+﻿export const featuredProjects = [
   {
     slug: 'applylang',
     name: 'ApplyLang',
@@ -25,6 +10,18 @@ export const featuredProjects = [
     tools: ['Node.js', 'Discord', 'Automation', 'Prompt Systems'],
     status: 'Active build',
     metric: 'Application workflow',
+  },
+  {
+    slug: 'personalvabot',
+    name: 'PersonalVABot',
+    eyebrow: 'Desktop operations workspace',
+    summary:
+      'A Windows-first assistant for client memory, projects, tasks, documents, attendance, billing, backups, diagnostics, and guided AI workflows.',
+    outcome: 'Desktop MVP completed and installer-validated for beta use.',
+    role: 'Creator, product director, systems designer, QA',
+    tools: ['Desktop App', 'Discord', 'SQLite', 'Workflow Design'],
+    status: 'Desktop MVP',
+    metric: 'Multi-client operations',
   },
   {
     slug: 'childcare-culture',
@@ -59,3 +56,4 @@ export const supportingProjects = [
   'AnimeDNA',
   'Habit Tracker',
 ]
+
