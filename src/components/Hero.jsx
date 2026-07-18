@@ -11,6 +11,14 @@ export function Hero() {
         </p>
         <div className="hero-actions">
           <a className="button button-primary" href="#work">Explore my work</a>
+          <a
+            className="button button-secondary"
+            href="/files/Mark-Anton-Badong-Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View résumé
+          </a>
           <a className="button button-secondary" href="#contact">Start a conversation</a>
         </div>
       </div>

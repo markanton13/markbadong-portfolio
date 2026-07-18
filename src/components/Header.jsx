@@ -43,6 +43,14 @@ export function Header({ mode = 'home' }) {
         {navItems.map(([label, href]) => (
           <a key={href} href={linkTo(href)} onClick={() => setOpen(false)}>{label}</a>
         ))}
+        <a
+          href="/files/Mark-Anton-Badong-Resume.pdf"
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setOpen(false)}
+        >
+          Résumé
+        </a>
         <a className="nav-cta" href={linkTo('#contact')} onClick={() => setOpen(false)}>Work with me</a>
       </nav>
     </header>
