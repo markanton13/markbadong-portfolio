@@ -84,6 +84,7 @@ export function MarkHQCaseStudy() {
                 </div>
                 <div className="hero-actions">
                   <a className="button button-primary" href="#case-overview">Explore the case study</a>
+                  <a className="button button-secondary" href="https://github.com/markanton13/markhq-assistant-downloads" target="_blank" rel="noreferrer">View GitHub proof</a>
                   <a className="button button-secondary" href="/#contact">Discuss similar work</a>
                 </div>
               </div>
@@ -380,7 +381,8 @@ export function MarkHQCaseStudy() {
               MarkHQ demonstrates how structured workflows, clear permissions, persistent records, guided onboarding, automation, and visible reliability can turn a familiar collaboration tool into a dependable operations environment.
             </p>
             <div className="hero-actions">
-              <a className="button button-light" href="/#work">View more projects</a>
+              <a className="button button-light" href="https://github.com/markanton13/markhq-assistant-downloads" target="_blank" rel="noreferrer">View GitHub proof</a>
+              <a className="button button-outline-light" href="/#work">View more projects</a>
               <a className="button button-outline-light" href="mailto:markantonbadong13@gmail.com">Contact Mark</a>
             </div>
           </section>

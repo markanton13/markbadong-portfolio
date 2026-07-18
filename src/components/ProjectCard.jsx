@@ -1,5 +1,18 @@
 import { ExpandableImage } from './ExpandableImage'
 
+function ProjectLink({ href, label, projectName, external = false }) {
+  return (
+    <a
+      className="text-link"
+      href={href}
+      aria-label={`${label} for ${projectName}`}
+      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+    >
+      {label} <span aria-hidden="true">↗</span>
+    </a>
+  )
+}
+
 export function ProjectCard({ project, index }) {
   const hasRealImage = Boolean(project.image)
   const caseStudyLabel = project.caseStudyLabel || (project.caseStudyUrl ? 'View case study' : 'Case study coming in Phase 2')
@@ -51,15 +64,46 @@ export function ProjectCard({ project, index }) {
         <div className="tool-list" aria-label={`${project.name} tools`}>
           {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
         </div>
-        {project.caseStudyUrl ? (
-          <a className="text-link" href={project.caseStudyUrl} aria-label={`${caseStudyLabel} for ${project.name}`}>
-            {caseStudyLabel} <span aria-hidden="true">↗</span>
-          </a>
-        ) : (
-          <span className="text-link text-link-static">
-            {caseStudyLabel} <span aria-hidden="true">↗</span>
-          </span>
-        )}
+
+        <div className="project-actions" aria-label={`${project.name} links`}>
+          {project.caseStudyUrl ? (
+            <ProjectLink
+              href={project.caseStudyUrl}
+              label={caseStudyLabel}
+              projectName={project.name}
+            />
+          ) : (
+            <span className="text-link text-link-static">
+              {caseStudyLabel} <span aria-hidden="true">↗</span>
+            </span>
+          )}
+
+          {project.githubUrl && (
+            <ProjectLink
+              href={project.githubUrl}
+              label="GitHub proof"
+              projectName={project.name}
+              external
+            />
+          )}
+
+          {project.releaseUrl && (
+            <ProjectLink
+              href={project.releaseUrl}
+              label={project.releaseLabel || 'View release'}
+              projectName={project.name}
+              external
+            />
+          )}
+
+          {project.demoUrl && (
+            <ProjectLink
+              href={project.demoUrl}
+              label="Watch demo"
+              projectName={project.name}
+            />
+          )}
+        </div>
       </div>
     </article>
   )

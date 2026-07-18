@@ -84,7 +84,8 @@ export function PersonalVABotCaseStudy() {
                 </div>
                 <div className="hero-actions">
                   <a className="button button-primary" href="#case-overview">Explore the case study</a>
-                  <a className="button button-secondary" href="/#contact">Discuss similar work</a>
+                  <a className="button button-secondary" href="https://github.com/markanton13/personalvabot" target="_blank" rel="noreferrer">View GitHub proof</a>
+                  <a className="button button-secondary" href="https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta" target="_blank" rel="noreferrer">Download Windows beta</a>
                 </div>
               </div>
 
@@ -374,7 +375,8 @@ export function PersonalVABotCaseStudy() {
               The longer-term roadmap includes role-based team workspaces, client approvals, workforce reporting, web access, and optional integrations while preserving the proven workflow foundation.
             </p>
             <div className="hero-actions">
-              <a className="button button-light" href="/#work">View more projects</a>
+              <a className="button button-light" href="https://github.com/markanton13/personalvabot" target="_blank" rel="noreferrer">View GitHub proof</a>
+              <a className="button button-outline-light" href="https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta" target="_blank" rel="noreferrer">Download Windows beta</a>
               <a className="button button-outline-light" href="mailto:markantonbadong13@gmail.com">Contact Mark</a>
             </div>
           </section>
