@@ -90,6 +90,7 @@ export function ApplyLangCaseStudy() {
 
                 <div className="hero-actions">
                   <a className="button button-primary" href="#case-overview">Explore the case study</a>
+                  <a className="button button-secondary" href="https://github.com/markanton13/applylang" target="_blank" rel="noreferrer">View GitHub proof</a>
                   <a className="button button-secondary" href="/#contact">Discuss similar work</a>
                 </div>
               </div>
@@ -330,7 +331,8 @@ export function ApplyLangCaseStudy() {
             <p className="eyebrow">Need a structured workflow?</p>
             <h2>I design systems that make repeated work easier to trust, track, and improve.</h2>
             <div className="hero-actions">
-              <a className="button button-light" href="mailto:markantonbadong13@gmail.com">Email Mark</a>
+              <a className="button button-light" href="https://github.com/markanton13/applylang" target="_blank" rel="noreferrer">View GitHub proof</a>
+              <a className="button button-outline-light" href="mailto:markantonbadong13@gmail.com">Email Mark</a>
               <a className="button button-outline-light" href="/#work">View more work</a>
             </div>
           </section>

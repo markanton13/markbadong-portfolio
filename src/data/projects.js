@@ -13,6 +13,9 @@ export const featuredProjects = [
     image: '/images/projects/personalvabot/dashboard.webp',
     imageAlt: 'PersonalVABot desktop dashboard showing tasks, clients, automation, backups, and workspace activity.',
     caseStudyUrl: '/projects/personalvabot',
+    githubUrl: 'https://github.com/markanton13/personalvabot',
+    releaseUrl: 'https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta',
+    releaseLabel: 'Windows beta',
   },
   {
     slug: 'markhq',
@@ -28,6 +31,7 @@ export const featuredProjects = [
     image: '/images/projects/markhq/guided-onboarding.webp',
     imageAlt: 'MarkHQ Discord workspace onboarding with guided navigation, private workspace information, and action buttons.',
     caseStudyUrl: '/projects/markhq',
+    githubUrl: 'https://github.com/markanton13/markhq-assistant-downloads',
   },
   {
     slug: 'applylang',
@@ -44,6 +48,7 @@ export const featuredProjects = [
     image: '/images/projects/applylang/application-record.webp',
     imageAlt: 'ApplyLang Discord application record showing a fictional role, frozen resume and career-profile sources, application details, status, and workflow actions.',
     caseStudyUrl: '/projects/applylang',
+    githubUrl: 'https://github.com/markanton13/applylang',
   },
   {
     slug: 'childcare-culture',
@@ -74,7 +79,10 @@ export const featuredProjects = [
     image: '/images/projects/leaveflow/employee-dashboard.webp',
     imageAlt: 'LeaveFlow employee dashboard showing request summaries, leave balances, and a leave request form.',
     caseStudyUrl: '/projects/leaveflow',
-  },]
+    githubUrl: 'https://github.com/markanton13/leaveflow',
+    demoUrl: '/projects/leaveflow#leaveflow-demo',
+  },
+]
 
 export const supportingProjects = [
   'Enterprise Assessment System',

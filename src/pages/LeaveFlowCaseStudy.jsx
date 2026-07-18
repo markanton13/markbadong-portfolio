@@ -85,6 +85,7 @@ export function LeaveFlowCaseStudy() {
                 <div className="hero-actions">
                   <a className="button button-primary" href="#case-overview">Explore the case study</a>
                   <a className="button button-secondary" href="#leaveflow-demo">Watch the demo</a>
+                  <a className="button button-secondary" href="https://github.com/markanton13/leaveflow" target="_blank" rel="noreferrer">View GitHub proof</a>
                 </div>
               </div>
 
@@ -417,7 +418,8 @@ export function LeaveFlowCaseStudy() {
               LeaveFlow demonstrates how clear permissions, validated actions, shared records, and responsive views can replace an inconsistent manual process with a dependable web application.
             </p>
             <div className="hero-actions">
-              <a className="button button-light" href="/#work">View more projects</a>
+              <a className="button button-light" href="https://github.com/markanton13/leaveflow" target="_blank" rel="noreferrer">View GitHub proof</a>
+              <a className="button button-outline-light" href="/#work">View more projects</a>
               <a className="button button-outline-light" href="mailto:markantonbadong13@gmail.com">Contact Mark</a>
             </div>
           </section>

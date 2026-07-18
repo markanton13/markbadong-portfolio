@@ -1,20 +1,29 @@
 # MARKBADONG.COM PORTFOLIO — PROJECT BIBLE
 
-**Canonical source of truth for the MARK PORTFOLIO DOMAIN project**  
-**Owner:** Mark Anton  
-**Primary domain:** `markbadong.com`  
-**Repository:** `C:\Users\Mark\markbadong-portfolio`  
-**Hosting:** Cloudflare Pages  
+**Canonical source of truth for the MARK PORTFOLIO DOMAIN project**
+**Owner:** Mark Anton
+**Primary domain:** `markbadong.com`
+**Portfolio repository:** `C:\Users\Mark\markbadong-portfolio`
+**Hosting:** Cloudflare Pages
 **Last updated:** July 19, 2026
-**Current milestone:** Phase 4A résumé and ApplyLang career-source activation
+**Current milestone:** **Phase 4 complete — career system activated, flagship GitHub proof integrated, and public proof ecosystem connected**
 
 ---
 
 ## 1. Purpose
 
-This document preserves the current portfolio state, architecture, routes, design decisions, proof strategy, resume outputs, privacy rules, completed milestones, pending work, and exact restart sequence.
+This Bible preserves the current portfolio architecture, brand, routes, project status, proof assets, repository boundaries, résumé system, privacy rules, deployment workflow, completed phases, and next actions.
 
-Use this file as the first reference when opening a new portfolio thread. It exists to prevent duplicated work, lost decisions, outdated assumptions, and accidental regressions.
+Read this file first when beginning a new MARK PORTFOLIO DOMAIN thread.
+
+Update it whenever:
+
+- a project status changes;
+- a case study or route changes;
+- a public repository or release changes;
+- the public résumé changes;
+- a client grants or withdraws publication permission;
+- a major QA, deployment, or architecture milestone is completed.
 
 ---
 
@@ -24,26 +33,27 @@ The portfolio presents Mark as:
 
 > **An operations-focused systems builder who combines virtual assistance, workflow design, automation, QA, documentation, client implementation, web development, and product thinking.**
 
-The portfolio should prove that Mark can:
+The strongest public message is:
 
-- understand real operational problems;
-- translate scattered requirements into structured workflows;
-- design systems around actual users and business processes;
-- build and test practical tools;
-- improve processes and interfaces;
-- document systems clearly;
-- validate releases and production reliability;
-- work across virtual assistance, operations, CRM, automation, QA, and web systems.
+> **Mark does not only use tools. He understands the work, designs the workflow, builds practical systems, tests real scenarios, documents decisions, and turns functioning products into clear proof.**
 
-The evidence model remains:
+### Evidence model
 
-> **Skill → real project → screenshot or demo → problem solved → workflow shown → proof point**
+> **Skill → real project → screenshot or demo → problem solved → workflow shown → proof point → public technical evidence**
+
+### Best-fit directions
+
+- Virtual Assistance
+- Operations and workflow coordination
+- Automation and systems support
+- Quality assurance and product testing
+- CRM and GoHighLevel implementation
+- Documentation, training, and SOP work
+- Junior web and internal-tools development
 
 ---
 
-## 3. Brand and visual system
-
-### Public identity
+## 3. Public identity and brand
 
 - **Public name:** Mark Anton
 - **Domain:** `markbadong.com`
@@ -55,12 +65,12 @@ The evidence model remains:
 - warm cream background;
 - dark ink text;
 - strong blue accent;
-- minimal gold accent;
+- restrained gold accent;
 - rounded editorial cards;
 - Manrope headings;
 - DM Sans body text;
 - spacious layouts;
-- real project proof instead of decorative placeholders.
+- real proof instead of decorative placeholders.
 
 ### Core tokens
 
@@ -71,7 +81,7 @@ The evidence model remains:
 --muted: #69665f;
 --blue: #3157d5;
 --blue-dark: #203a91;
---gold: #a97d32;
+--gold: #8b641f;
 --white: #fffdf8;
 ```
 
@@ -84,86 +94,45 @@ The evidence model remains:
 - React 19
 - Vite 8
 - JavaScript / JSX
-- custom CSS
+- custom responsive CSS
 - Oxlint
 - Cloudflare Pages
-- manual pathname-based routing
-- no React Router
+- route-specific HTML entries
+- shared React case-study components
+- no React Router dependency
 
-### Routing model
-
-```js
-const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
-```
-
-Known or prepared case-study routes:
+### Public routes
 
 ```text
 /
 /projects/personalvabot
 /projects/markhq
-/projects/leaveflow
 /projects/applylang
+/projects/leaveflow
+/files/Mark-Anton-Badong-Resume.pdf
 ```
 
-### SPA fallback
+### Build and metadata model
 
-```text
-public/_redirects
-```
+The portfolio uses:
 
-```text
-/* /index.html 200
-```
+- route-specific titles and descriptions;
+- canonical URLs;
+- Open Graph and Twitter metadata;
+- JSON-LD structured data;
+- social-sharing images;
+- sitemap and robots configuration;
+- a static custom 404;
+- route-level JavaScript splitting;
+- intrinsic image dimensions and loading hints.
 
-### Important architecture decision
+### Architecture rule
 
-Do not add React Router unless future navigation complexity makes it necessary. The current route count remains manageable with the lightweight pathname model.
+Do not add React Router unless future complexity clearly requires it. The current Vite entry and pathname model is sufficient.
 
 ---
 
-## 5. Current local implementation snapshot
-
-This checkpoint was generated by inspecting the local repository during documentation installation.
-
-| Workstream | Local state |
-|---|---|
-| LeaveFlow case-study component | Detected |
-| Reusable screenshot lightbox | Detected |
-| Public ATS résumé PDF | Detected |
-| Portrait-led About section | Detected |
-| Approved About portrait asset | Detected |
-| ApplyLang case-study route | Detected |
-| ApplyLang real screenshot assets | 6 WebP file(s) detected |
-
-### Confirmed project-level milestones from this work session
-
-- PersonalVABot flagship case study implemented.
-- MarkHQ Assistant case study implemented and visually approved.
-- LeaveFlow proof pack, case study, real screenshots, demo, and homepage treatment completed during Phase 2.
-- Reusable screenshot expansion added across homepage cards and case-study figures.
-- Public ATS General résumé v2 integrated into the portfolio.
-- Complete 2026 résumé system v2 generated and synchronized from Master Career Profile v2:
-  1. Master Resume
-  2. ATS General Resume
-  3. VA / Operations Resume
-  4. QA / Product Testing Resume
-  5. CRM / GoHighLevel Resume
-  6. Junior Web / Automation Resume
-- Portrait-led About section designed with explicit virtual-assistance positioning.
-- ApplyLang real screenshot pack captured:
-  - Quick Start / onboarding
-  - Career Prompt Bridge
-  - Application record
-  - Tailor Résumé output
-  - Career dashboard
-  - Résumé vault
-- ApplyLang is correctly positioned as a **complete Discord career operations system**.
-- ApplyLang's standalone RBAC web app remains a **planned next product**, not completed functionality.
-
----
-
-## 6. Homepage structure
+## 5. Homepage structure
 
 1. Header
 2. Hero
@@ -176,22 +145,7 @@ This checkpoint was generated by inspecting the local repository during document
 9. Contact
 10. Footer
 
-### Core strengths
-
-- Virtual assistance
-- Workflow design
-- Automation
-- Web systems
-- Quality assurance
-- Training and SOPs
-- CRM implementation
-- Documentation-first handoff
-
----
-
-## 7. Featured projects
-
-Current order:
+### Current featured order
 
 1. PersonalVABot
 2. MarkHQ Assistant
@@ -199,7 +153,7 @@ Current order:
 4. Childcare Culture & Co.
 5. LeaveFlow
 
-Supporting projects:
+### Supporting projects
 
 - Enterprise Assessment System
 - LILO LIVE Dashboard / FlowTrack Engine
@@ -208,9 +162,60 @@ Supporting projects:
 
 ---
 
-## 8. PersonalVABot
+## 6. Flagship public-proof architecture
 
-### Route
+### Canonical public/private map
+
+| Product | Private source/runtime | Public proof |
+|---|---|---|
+| PersonalVABot | `markanton13/personalvabot-source` | `markanton13/personalvabot` |
+| MarkHQ Assistant | Private Railway production source; local path `C:\Users\Mark\markhq-assistant` | `markanton13/markhq-assistant-downloads` |
+| ApplyLang | `markanton13/applylang-bot` | `markanton13/applylang` |
+| LeaveFlow | `markanton13/leaveflow-source` | `markanton13/leaveflow` |
+
+### Public proof URLs
+
+```text
+https://github.com/markanton13/personalvabot
+https://github.com/markanton13/markhq-assistant-downloads
+https://github.com/markanton13/applylang
+https://github.com/markanton13/leaveflow
+```
+
+### PersonalVABot public release
+
+```text
+https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta
+```
+
+### Boundary rule
+
+Public proof repositories may contain:
+
+- recruiter-facing README files;
+- sanitized screenshots and demos;
+- architecture and validation documentation;
+- privacy and security policies;
+- release assets explicitly approved for public distribution.
+
+They must not contain:
+
+- private application source unless intentionally open-sourced;
+- `.env` files;
+- credentials;
+- production databases;
+- backups;
+- private logs;
+- real résumé or career-profile records;
+- private client, employee, or workspace data;
+- Railway variables;
+- internal recovery secrets.
+
+---
+
+## 7. PersonalVABot
+
+### Public route
 
 ```text
 /projects/personalvabot
@@ -233,10 +238,11 @@ A Windows desktop and Discord-connected system for:
 ### Public status
 
 - Windows Desktop Beta
-- version shown: `0.3.12`
+- version `0.3.12`
 - installer validated
 - local-first SQLite data
 - 72 built-in templates
+- public prerelease and SHA-256 checksum
 
 ### Mark's role
 
@@ -244,17 +250,22 @@ A Windows desktop and Discord-connected system for:
 - product director;
 - workflow designer;
 - QA owner;
-- release-documentation owner.
+- release and packaging owner.
 
-### Transparency language
+### Product decisions
 
-> Development used an AI-assisted workflow. Product vision, workflow design, requirements, validation, release direction, and final decisions remained under Mark's ownership.
+- archive before permanent deletion;
+- attendance remains optional;
+- billing logic must remain explainable;
+- suggestions never silently create work;
+- local data must survive normal upgrades;
+- Discord remains a companion interface.
 
 ---
 
-## 9. MarkHQ Assistant
+## 8. MarkHQ Assistant
 
-### Route
+### Public route
 
 ```text
 /projects/markhq
@@ -268,25 +279,82 @@ A Railway-hosted workspace system for:
 
 - task pipelines and timers;
 - private workspaces;
-- onboarding and requests;
+- onboarding and request approvals;
 - documentation sync;
 - recurring work and reminders;
 - persistent SQLite data;
 - automated backups;
 - runtime health and deployment readiness.
 
+### Public status
+
+- live Railway production deployment;
+- persistent storage;
+- multi-workspace operations;
+- automated backups;
+- health and deployment-preflight commands.
+
 ### Mark's role
 
 - creator;
 - product director;
 - workflow architect;
-- QA and release-validation owner.
+- QA and release-validation owner;
+- deployment and documentation owner.
+
+### Product decisions
+
+- private workspaces require approval;
+- system guides remain separate from personal notes;
+- archive precedes permanent deletion;
+- production health must be visible;
+- workspace rename preserves records;
+- startup and synchronization behavior must be traceable.
+
+---
+
+## 9. ApplyLang
+
+### Public route
+
+```text
+/projects/applylang
+```
+
+### Positioning
+
+**ApplyLang — Complete Discord Career Operations System**
+
+Release screenshots may retain the earlier internal **ApplyHQ** label. ApplyLang is the official public product identity and planned standalone-platform name.
+
+### Complete functionality
+
+- private Discord career workspaces;
+- reusable Master Résumé and Master Career Profile;
+- version and integrity references;
+- frozen application source snapshots;
+- unique application IDs;
+- company, role, platform, date, responsibilities, status, notes, and follow-ups;
+- ATS, tailoring, cover-letter, interview, outreach, negotiation, and full-pack prompt workflows;
+- saved Markdown prompt files;
+- role-profile detection and confidence reporting;
+- dashboards, conversion tracking, platform metrics, and follow-up aging;
+- résumé vault;
+- no required paid bot-managed AI API.
+
+### Truth rule
+
+The résumé remains authoritative for formal employment history. The Master Career Profile may add verified supporting detail. Neither the system nor generated prompts may invent employers, dates, tools, credentials, metrics, or completed experience.
+
+### Future direction
+
+The standalone RBAC web application remains **planned**, not implemented.
 
 ---
 
 ## 10. LeaveFlow
 
-### Route
+### Public route
 
 ```text
 /projects/leaveflow
@@ -294,97 +362,42 @@ A Railway-hosted workspace system for:
 
 ### Positioning
 
-**LeaveFlow — Role-Based Leave Management Application**
+**LeaveFlow — Role-Based Full-Stack Leave Management System**
 
-A full-stack system connecting:
+A React, Express, and MySQL application connecting:
 
 - employee requests and cancellation;
-- leave balances and history;
+- balances and request history;
 - manager approval and rejection;
-- employee and manager calendars;
-- administrator user, role, and manager assignment;
+- employee and team calendars;
+- administrator user, role, activation, and manager assignment;
 - responsive mobile behavior.
 
 ### Stack
 
 - React
+- Vite
+- Tailwind CSS
+- Axios
+- FullCalendar
 - Node.js
 - Express
 - MySQL
 - JWT
-- FullCalendar
-- Zod
+- layered controller/service/repository architecture
 
 ### Mark's role
 
 - system design;
 - frontend and backend development;
-- database workflows;
-- role and approval logic;
+- database relationships;
+- role and approval workflows;
+- business-rule implementation;
 - functional and responsive QA.
 
 ---
 
-## 11. ApplyLang
-
-### Product identity
-
-**ApplyLang — Complete Discord Career Operations System**
-
-Release screenshots may still display the existing internal Discord bot label **ApplyHQ**. ApplyLang is the public product identity and future standalone platform name.
-
-### Current complete functionality
-
-- private Discord career workspaces;
-- reusable master résumé registration;
-- Master Career Profile registration;
-- version and integrity references;
-- frozen application source snapshots;
-- unique application IDs;
-- employer, role, platform, date, responsibility, and status records;
-- ATS-match, résumé-tailoring, cover-letter, interview-prep, and full-pack actions;
-- saved Markdown prompt files;
-- role-profile detection and visible confidence;
-- career dashboard, conversion tracking, status breakdown, and follow-up aging;
-- résumé vault;
-- notes, follow-ups, archive, and delete controls;
-- no required paid bot-managed AI API.
-
-### Real proof assets
-
-```text
-public/images/projects/applylang/
-├── application-record.webp
-├── career-dashboard.webp
-├── career-prompts.webp
-├── quick-start.webp
-├── resume-vault.webp
-└── tailoring-output.webp
-```
-
-### Future product direction
-
-**Standalone ApplyLang Web App — planned**
-
-The web app should preserve the bot's full functional model and add:
-
-- authentication;
-- role-based access control;
-- users, roles, and workspaces;
-- full CRUD for career sources, applications, prompts, notes, reminders, and output records;
-- dashboard, search, filters, statuses, and histories;
-- file generation and downloads;
-- optional Discord integration.
-
-Do not present these web-app capabilities as built until they are implemented and validated.
-
----
-
-## 12. Childcare Culture & Co.
-
-### Project type
-
-Real GoHighLevel client implementation.
+## 11. Childcare Culture & Co.
 
 ### Current public treatment
 
@@ -392,7 +405,7 @@ Real GoHighLevel client implementation.
 Client project · In progress
 ```
 
-The current portfolio card may describe completed page foundations, responsive layout systems, and implementation scope. A full public case study remains deferred.
+A full case study remains deferred.
 
 ### Publish only after
 
@@ -400,14 +413,14 @@ The current portfolio card may describe completed page foundations, responsive l
 2. remaining pages are complete;
 3. forms and booking flows are validated;
 4. desktop, tablet, and mobile QA pass;
-5. client or TL approval is saved in writing;
-6. sensitive GHL and customer data are removed.
+5. written client or TL approval is saved;
+6. sensitive GoHighLevel and customer data are removed.
 
-Never publish:
+### Never publish
 
 - lead data;
 - form submissions;
-- email addresses or phone numbers;
+- contact details;
 - calendar bookings;
 - account IDs;
 - credentials;
@@ -416,9 +429,9 @@ Never publish:
 
 ---
 
-## 13. Resume system
+## 12. Résumé and career-source system
 
-### Completed outputs
+### Canonical v2 outputs
 
 1. Master Resume
 2. ATS General Resume
@@ -427,17 +440,34 @@ Never publish:
 5. CRM / GoHighLevel Resume
 6. Junior Web / Automation Resume
 
-### Public portfolio file
+### Public résumé
 
 ```text
 public/files/Mark-Anton-Badong-Resume.pdf
+https://markbadong.com/files/Mark-Anton-Badong-Resume.pdf
 ```
 
-The public version is the broad ATS General résumé. Editable masters, specialized variants, and application-specific files remain private.
+The public file is ATS General Resume v2. Editable masters, targeted variants, and application-specific outputs remain private.
 
-### Date rule
+### ApplyLang canonical pair
 
-Until Mark's official Wipro relieving date:
+- Master Resume v2
+- Master Career Profile v2
+
+### Phase 4A completion
+
+Phase 4A is complete because:
+
+- both canonical sources were registered;
+- source history and downloads were verified;
+- a real application was captured without a custom résumé override;
+- the application used the active Master Résumé;
+- the prompt package contained one frozen résumé snapshot and one frozen Master Career Profile snapshot;
+- the workflow persisted correctly.
+
+### Wipro date rule
+
+Until the official relieving date:
 
 ```text
 Process Trainer | Wipro — 2023–Present
@@ -449,471 +479,242 @@ After August 14, 2026:
 Process Trainer | Wipro — 2023–Aug 2026
 ```
 
-Update every resume source and ApplyLang master career source together when this date changes.
+Update all résumé sources, the Master Career Profile, ApplyLang canonical sources, and the public PDF together.
 
 ---
 
-## 14. About section
+## 13. Accessibility, SEO, and performance baseline
 
-### Direction
+### Accessibility
 
-The About section should feel personal without becoming informal or résumé-like.
+- skip link;
+- semantic page structure;
+- keyboard-visible focus;
+- screenshot-dialog focus containment;
+- Escape and outside-click dismissal;
+- focus return;
+- accessible mobile menu labels and controls;
+- demo text alternative;
+- meaningful alt text and captions.
 
-Headline:
+### SEO
 
-> **A systems builder shaped by operations—not just code.**
+- route-specific HTML and metadata;
+- canonical URLs;
+- indexable case-study pages;
+- Open Graph and Twitter cards;
+- JSON-LD;
+- sitemap;
+- robots configuration;
+- real static 404.
 
-Key messages:
+### Performance
 
-- Mark's experience spans support, geospatial data operations, enterprise training, workflow automation, QA, client implementation, and development.
-- Virtual assistance must remain explicit in the direction and best-fit language.
-- The story should explain that Mark builds around repeated operational problems: scattered tasks, unclear ownership, difficult handoffs, and disconnected records.
-- The portrait is for the portfolio About section, not the ATS resumes.
-- The approved portrait uses a navy shirt and warm neutral background.
+- route-specific JavaScript chunks;
+- lazy case-study fallback loading;
+- lazy project images below the fold;
+- eager high-priority case-study hero images;
+- image dimensions and asynchronous decoding;
+- document-level font preconnect;
+- immutable caching for hashed build assets.
 
 ---
 
-## 15. Screenshot system
+## 14. Phase history
 
-### Reusable component
+### Phase 1 — Foundation
+
+**Complete**
+
+- React/Vite foundation;
+- brand and layout system;
+- initial positioning;
+- Cloudflare Pages and `markbadong.com`;
+- responsive homepage structure.
+
+### Phase 2 — Real proof
+
+**Complete**
+
+- four flagship case studies;
+- real screenshots and LeaveFlow demo;
+- reusable screenshot lightbox;
+- portrait-led About section;
+- six-résumé system;
+- public ATS résumé;
+- accurate project positioning.
+
+### Phase 3 — Accessibility, SEO, and performance
+
+**Complete**
+
+- route integrity and static 404;
+- accessibility and keyboard improvements;
+- route-specific SEO and social metadata;
+- structured data and sitemap;
+- route splitting and image-performance work.
+
+### Phase 4A — Résumé and ApplyLang activation
+
+**Complete**
+
+- résumé system v2 synchronized;
+- public résumé replaced at stable URL;
+- Master Resume v2 and Master Career Profile v2 registered;
+- real application and frozen-source workflow validated.
+
+### Phase 4B — GitHub proof upgrade and integration
+
+**Complete**
+
+- PersonalVABot private/public split and public Windows prerelease;
+- MarkHQ public proof repository;
+- ApplyLang private/public split;
+- LeaveFlow private/public split;
+- four GitHub proof links integrated into portfolio case studies and project cards;
+- GitHub profile rewritten around current positioning and projects;
+- repository metadata and homepage links standardized;
+- final public-link and route QA completed before merge.
+
+---
+
+## 15. GitHub profile standard
+
+The GitHub profile README should lead with:
+
+1. portfolio positioning;
+2. `markbadong.com`;
+3. four flagship systems;
+4. practical capabilities;
+5. documentation-first and truth-safe working style.
+
+Recommended pinned repositories:
+
+1. `markbadong-portfolio`
+2. `personalvabot`
+3. `markhq-assistant-downloads`
+4. `applylang`
+5. `leaveflow`
+6. `GAS-Assessment-Dashboard`
+
+Pinning is a manual GitHub profile action.
+
+---
+
+## 16. Git and deployment safety
+
+### Before work
+
+```powershell
+cd "C:\Users\Mark\markbadong-portfolio"
+git status --short
+```
+
+### Branch rule
+
+Use a dedicated branch for portfolio closeout changes:
+
+```powershell
+git switch main
+git pull --ff-only origin main
+git switch -c phase4b-closeout
+```
+
+### Validation
+
+```powershell
+npm run check
+git diff --check
+git status --short
+npm run preview
+```
+
+### Safety rules
+
+1. never auto-push;
+2. never force-push;
+3. keep `_patch-backups/` ignored;
+4. preserve route-specific HTML entries and the static 404;
+5. do not add unnecessary dependencies;
+6. never overwrite newer local changes blindly;
+7. visually review desktop, tablet, and mobile before commit;
+8. verify every external proof link;
+9. confirm invalid production routes still return 404;
+10. merge only after local and live QA.
+
+---
+
+## 17. Phase 4 final QA
+
+### Portfolio
+
+- homepage project-card links;
+- four case-study GitHub buttons;
+- PersonalVABot release button;
+- LeaveFlow demo anchor;
+- résumé download;
+- contact and email links;
+- direct route refresh;
+- mobile wrapping of action links;
+- screenshot lightboxes;
+- invalid route behavior.
+
+### GitHub
+
+- four repositories are public;
+- private source repositories remain private;
+- README screenshots render;
+- internal documentation links work;
+- PersonalVABot release contains only approved assets;
+- no credentials, databases, backups, logs, or personal career records are exposed;
+- repository descriptions, topics, and homepage URLs are current;
+- profile README displays correctly.
+
+### Cloudflare
 
 ```text
-src/components/ExpandableImage.jsx
+https://markbadong.com
+https://markbadong.com/projects/personalvabot
+https://markbadong.com/projects/markhq
+https://markbadong.com/projects/applylang
+https://markbadong.com/projects/leaveflow
+https://markbadong.com/files/Mark-Anton-Badong-Resume.pdf
 ```
 
-The screenshot pattern supports:
-
-- click-to-expand;
-- keyboard activation;
-- Escape to close;
-- outside click;
-- visible Close control;
-- background scroll locking;
-- desktop and mobile use.
-
-### Future rule
-
-All major new case-study screenshots should use the same reusable expansion behavior unless there is a strong accessibility or layout reason not to.
-
 ---
 
-## 16. Git, patch, and deployment safety
+## 18. Next phase
 
-Before work:
+### Phase 5 — Career launch and continuous proof
 
-```powershell
-cd "C:\Users\Mark\markbadong-portfolio"
-git status --short
-```
+Primary objective:
 
-Validation:
+> Use the completed portfolio and ApplyLang system in real applications, then improve both only from verified evidence.
 
-```powershell
-npm run check
-git diff --check
-git status --short
-```
+Planned work:
 
-Commit flow:
-
-```powershell
-git add .
-git commit -m "Describe the portfolio update"
-git push
-```
-
-Patch rules:
-
-1. target only `C:\Users\Mark\markbadong-portfolio`;
-2. create timestamped backups under `_patch-backups`;
-3. keep `_patch-backups/` ignored by Git;
-4. never auto-push;
-5. preserve `public/_redirects`;
-6. avoid unnecessary dependencies;
-7. never overwrite newer local changes blindly;
-8. use UTF-8 without BOM for JSON files;
-9. run lint and build against `src`;
-10. visually review before commit.
-
----
-
-## 17. Pause checkpoint — exact restart sequence
-
-Start the next thread with:
-
-> Continue MARKBADONG.COM from the July 18, 2026 pause checkpoint. Read `MARKBADONG_PORTFOLIO_PROJECT_BIBLE.md` first. Confirm Git status, finish or verify the ApplyLang real-proof integration, run portfolio-wide QA, commit/push, and verify Cloudflare before beginning Phase 3.
-
-### First commands
-
-```powershell
-cd "C:\Users\Mark\markbadong-portfolio"
-git status --short
-npm run check
-git diff --check
-```
-
-### Phase 2 closeout tasks
-
-1. Confirm whether `applylang-proof-patch` has been applied.
-2. Verify:
-   ```text
-   http://localhost:5173/#work
-   http://localhost:5173/#about
-   http://localhost:5173/projects/applylang
-   ```
-3. Expand all six ApplyLang screenshots.
-4. Check desktop, tablet, and `390px` mobile.
-5. Refresh the direct ApplyLang route.
-6. Confirm the homepage status says **Complete Discord bot**.
-7. Confirm the web app is labeled **planned**.
-8. Confirm the public résumé opens.
-9. Run:
-   ```powershell
-   npm run check
-   git diff --check
-   git status --short
-   ```
-10. Commit and push only after visual approval.
-11. Verify Cloudflare:
-    ```text
-    https://markbadong.com
-    https://markbadong.com/projects/applylang
-    https://markbadong.com/files/Mark-Anton-Badong-Resume.pdf
-    ```
-
----
-
-# 18. Upcoming phases
-
-## Phase 3 — Portfolio polish, accessibility, SEO, and discoverability
-
-### Goal
-
-Turn the strong proof library into a complete, polished public portfolio.
-
-### Planned work
-
-- full desktop, tablet, and mobile regression pass;
-- keyboard and focus QA;
-- semantic heading and landmark audit;
-- alt-text and caption review;
-- contrast and reduced-motion review;
-- performance and image-loading audit;
-- Open Graph images and metadata;
-- canonical metadata;
-- sitemap and robots configuration;
-- structured project metadata;
-- favicon and browser-title review;
-- project-to-project navigation;
-- GitHub and demo links where appropriate;
-- final contact, email, résumé, and external-link verification.
-
-### Definition of done
-
-- no lint or build errors;
-- no known broken routes or links;
-- direct-route refresh works;
-- major Lighthouse or accessibility issues are resolved;
-- each case study has accurate metadata and proof.
-
----
-
-## Phase 4 — Client proof and portfolio conversion
-
-### Goal
-
-Add final client credibility and make the portfolio easier to convert into conversations.
-
-### Planned work
-
-- complete Childcare Culture & Co. project;
-- obtain written permission for public brand and screenshot use;
-- capture final desktop, tablet, and mobile screenshots;
-- publish the final CCCC case study;
-- add before-and-after or implementation-story proof when approved;
-- integrate a contact form or approved GoHighLevel lead-capture layer;
-- optionally add a booking calendar;
-- verify autoresponders and follow-up automation;
-- consider a custom domain email later.
-
-### Safety condition
-
-Do not build the public client case study before final QA and written approval.
-
----
-
-## Phase 5 — ApplyLang standalone web application
-
-### Goal
-
-Translate the complete Discord product into a dedicated multi-user web platform.
-
-### Foundation
-
-The Discord release remains the workflow laboratory and reference implementation.
-
-### Proposed build sequence
-
-1. **Product specification**
-   - users and personas;
-   - role matrix;
-   - application lifecycle;
-   - source and snapshot rules;
-   - web/Discord boundaries.
-
-2. **Architecture**
-   - frontend and API stack;
-   - authentication;
-   - database schema;
-   - file storage;
-   - tenant/workspace model;
-   - deployment target.
-
-3. **RBAC and identity**
-   - owner/admin/member roles;
-   - private user workspaces;
-   - permissions and audit events.
-
-4. **Core CRUD**
-   - master resumes;
-   - career profiles;
-   - applications;
-   - notes;
-   - follow-ups;
-   - generated prompts and document records.
-
-5. **Dashboard and tracking**
-   - statuses;
-   - conversion funnel;
-   - response rate;
-   - interviews and offers;
-   - platform metrics;
-   - follow-up aging.
-
-6. **Prompt and document workflow**
-   - role-profile detection;
-   - truth-safe prompt packages;
-   - exact source selection;
-   - saved versions;
-   - supported exports.
-
-7. **Discord integration**
-   - optional notifications;
-   - quick capture;
-   - deep links to web records;
-   - no duplicated source of truth.
-
-8. **QA and release**
-   - permission tests;
-   - source immutability tests;
-   - role and lifecycle testing;
-   - backup and recovery;
-   - responsive QA;
-   - beta deployment.
-
----
-
-## Phase 6 — Career launch and continuous proof
-
-### Goal
-
-Use the portfolio and ApplyLang system in real applications, then improve both from evidence.
-
-### Planned work
-
-- begin application campaigns using the targeted resume variants;
-- maintain the Master Career Profile as the factual source;
+- begin targeted application campaigns;
+- use the appropriate résumé variant per role;
 - track applications and follow-ups in ApplyLang;
-- refine role profiles based on real job posts;
-- add verified testimonials, client feedback, or outcomes when available;
-- update project statuses and resume dates;
-- publish new case studies only when proof is strong;
-- review portfolio analytics and conversion points.
+- maintain Master Career Profile accuracy;
+- update the Wipro date after August 14, 2026;
+- add verified testimonials or outcomes when available;
+- complete Childcare Culture & Co. and publish only after written approval;
+- expand supporting-project proof selectively;
+- review portfolio conversion points and recruiter feedback.
+
+### Deferred product track
+
+ApplyLang standalone web application remains a separate product-development phase. It should begin only with a written product specification, role model, source-of-truth rules, and architecture plan.
 
 ---
 
-## 19. Phase 2 revised definition of done
+## 19. Exact restart message
 
-Phase 2 closeout is complete when:
+Use this at the beginning of the next portfolio thread:
 
-- PersonalVABot, MarkHQ, LeaveFlow, and ApplyLang have accurate live case studies;
-- major featured cards use real proof;
-- expandable screenshots work;
-- the portrait-led About section is live;
-- Virtual Assistance remains visible in positioning;
-- all six resume outputs exist;
-- the ATS General résumé is public;
-- desktop and mobile QA pass;
-- all direct Cloudflare routes refresh;
-- sensitive data is removed;
-- final Phase 2 changes are committed, pushed, and live-verified.
-
-The final CCCC case study is intentionally moved to Phase 4 because it depends on project completion and written publication permission.
-
----
-
-## 20. Current strongest message
-
-> **Mark does not only use tools. He understands the work, designs the workflow, builds practical systems, tests real scenarios, documents decisions, and turns functioning products into clear proof.**
+> Continue MARKBADONG.COM after the Phase 4 closeout. Read `MARKBADONG_PORTFOLIO_PROJECT_BIBLE.md` first. Phase 1 foundation, Phase 2 real proof, Phase 3 accessibility/SEO/performance, Phase 4A career-source activation, and Phase 4B GitHub proof integration are complete. Begin Phase 5 career launch and continuous proof, while keeping Childcare Culture & Co. deferred until final QA and written publication permission.
 
 ---
 
 ## End of Bible
-
-Update this file whenever:
-
-- a case study is added or changed;
-- a route is added;
-- a project status changes;
-- a patch is applied;
-- a release is committed or deployed;
-- a resume source changes;
-- the Wipro end date becomes official in public files;
-- CCCC receives final approval;
-- ApplyLang web-app architecture is decided;
-- portfolio-wide QA is completed.
-
----
-
-## Phase 3 — Batch 1: route integrity and accessibility
-
-**Applied:** July 19, 2026
-
-Completed changes:
-
-- replaced the catch-all Cloudflare rewrite with explicit rewrites for the four published case-study routes;
-- corrected the rewrite destination to / so Cloudflare proxies the SPA without redirecting valid case-study URLs to the homepage;
-- added a top-level static `404.html` so unknown production paths can return Cloudflare’s real Not Found response;
-- added a React Not Found page with `noindex, nofollow` for local development and client-side fallback behavior;
-- added keyboard focus containment and inert background handling to the reusable screenshot lightbox;
-- improved mobile navigation with Escape-to-close, outside-click dismissal, focus return, and dynamic accessible labels;
-- added consistent portfolio-wide `:focus-visible` styling;
-- darkened the gold accent used for small text to improve contrast;
-- preserved direct hash navigation on case-study routes instead of always forcing scroll position to the top;
-- added a complete text alternative for the LeaveFlow visual demo.
-
-### Required validation before commit
-
-```powershell
-npm run check
-git diff --check
-git status --short
-npm run dev
-```
-
-Manual QA:
-
-1. tab through the homepage, navigation, project cards, résumé links, contact links, and footer;
-2. open a screenshot, press Tab and Shift+Tab, then Escape, confirming focus stays in the dialog and returns to the trigger;
-3. open the mobile menu, close it with Escape, and confirm focus returns to the menu button;
-4. verify `/projects/leaveflow#leaveflow-demo` lands on the demo section;
-5. verify every published direct route refreshes correctly;
-6. after deployment, verify an invalid path returns the custom 404 page rather than the homepage.
-
-Do not push until the local visual, keyboard, responsive, and build checks pass.
-
----
-
-## Phase 3 — Batch 2: SEO foundation
-
-**Applied:** July 19, 2026
-
-Completed changes:
-
-- converted the homepage and four published case studies into Vite multi-page HTML entries so search and social crawlers receive route-specific metadata before JavaScript runs;
-- added unique titles, descriptions, canonical URLs, robots directives, Open Graph tags, and Twitter card tags for every indexable route;
-- added reusable React metadata management for route consistency and the local Not Found fallback;
-- added Person, WebSite, ProfilePage, CreativeWork, and BreadcrumbList JSON-LD structured data;
-- added dedicated 1200 × 630 social-sharing images for the portfolio and each published case study;
-- expanded the sitemap from one URL to all five indexable public routes;
-- retired the temporary Cloudflare SPA proxy rules because route-specific HTML files now exist in the production build, while retaining only canonical trailing-slash redirects;
-- preserved the top-level static 404 page and its real HTTP 404 behavior.
-
-### Required validation before commit
-
-```powershell
-npm run check
-git diff --check
-git status --short
-npm run preview
-```
-
-Build-output QA:
-
-1. confirm `dist/index.html` and all four `dist/projects/*.html` files exist;
-2. inspect each built HTML file and confirm its title, canonical URL, social image, and JSON-LD are route-specific;
-3. open every route through the Vite preview and confirm the correct case study renders;
-4. verify the static 404 remains present in `dist/404.html`;
-5. after Cloudflare deployment, verify all case-study routes return HTTP 200 and an invalid route returns HTTP 404;
-6. validate the live pages with Google Rich Results Test, Schema Markup Validator, and a social-sharing debugger.
-
-Do not push until local build, route, metadata, and output-file checks pass.
-
----
-
-## Phase 3 — Batch 3: performance optimization
-
-**Applied:** July 19, 2026
-
-Completed changes:
-
-- split each published case study into its own Vite/React entry so direct visits no longer download the homepage application code;
-- lazy-loaded case studies and the React Not Found fallback when routes are served through the development SPA entry;
-- generated a canonical intrinsic-dimension map from every supported image under `public/images`;
-- added width, height, asynchronous decoding, and fetch-priority hints to reusable screenshots and the About portrait;
-- changed portfolio project screenshots to lazy loading because the Selected Work section begins below the opening hero;
-- preloaded each case study’s primary proof image and gave eager hero screenshots high fetch priority;
-- replaced the CSS-level Google Fonts `@import` with document-level preconnect and stylesheet links;
-- added immutable browser caching only for Vite’s content-hashed `/assets/*` output while preserving Cloudflare’s normal behavior for HTML and replaceable images.
-
-### Required validation before commit
-
-```powershell
-npm run check
-git diff --check
-git status --short
-npm run preview
-```
-
-Performance validation:
-
-1. compare the new JavaScript output with the pre-Batch-3 baseline of approximately 288.36 kB / 80.98 kB gzip for the single main bundle;
-2. confirm the homepage, four direct case-study routes, hash navigation, screenshot lightboxes, and static 404 still work;
-3. confirm `dist/assets` contains separate route chunks rather than one case-study-heavy application bundle;
-4. confirm generated images include intrinsic width and height attributes in the rendered DOM;
-5. after deployment, verify direct case-study routes remain HTTP 200 and invalid routes remain HTTP 404.
-
-Do not push until the production preview, responsive layout, keyboard controls, and route checks pass.
----
-
-## Phase 4A — Résumé and ApplyLang career-source activation
-
-**Applied:** July 19, 2026
-
-Completed changes:
-
-- generated and synchronized the six-résumé v2 system from Master Career Profile v2;
-- retained separate Master, ATS General, VA / Operations, QA / Product Testing, CRM / GoHighLevel, and Junior Web / Automation versions;
-- replaced the public portfolio résumé at `public/files/Mark-Anton-Badong-Resume.pdf` with ATS General Resume v2 while preserving the stable public URL;
-- prepared Master Resume v2 and Master Career Profile v2 as the canonical ApplyLang source pair;
-- kept Wipro listed as `2023–Present` until the official August 14, 2026 relieving date.
-
-ApplyLang activation commands:
-
-```text
-/resume master-replace
-/profile master-replace
-```
-
-Required verification:
-
-```text
-/resume master-view
-/resume master-history
-/resume master-download
-/profile master-view
-/profile master-history
-/profile master-download
-```
-
-Phase 4A remains open until the two canonical sources are registered, one real application is captured without a custom résumé override, the application confirms the active Master Résumé version, a prompt package contains one résumé snapshot and one Master Career Profile snapshot, and persistence is verified after restart.

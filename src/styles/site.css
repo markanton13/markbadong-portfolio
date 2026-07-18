@@ -1217,3 +1217,24 @@ h1 em { font-style: normal; color: var(--blue); }
   object-fit: contain;
 }
 /* Phase 3 Batch 3: preserve screenshot preview proportions — end */
+
+/* Phase 4 closeout: connected portfolio proof links */
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  margin-top: 26px;
+}
+
+.project-actions .text-link,
+.project-actions .text-link-static {
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .project-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
