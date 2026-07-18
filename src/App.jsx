@@ -1,11 +1,13 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { AboutSection } from './components/AboutSection'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
 import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
 import { MarkHQCaseStudy } from './pages/MarkHQCaseStudy'
 import { LeaveFlowCaseStudy } from './pages/LeaveFlowCaseStudy'
+import { ApplyLangCaseStudy } from './pages/ApplyLangCaseStudy'
 import { featuredProjects, supportingProjects } from './data/projects'
 import { capabilities } from './data/capabilities'
 import './styles/site.css'
@@ -71,25 +73,8 @@ function HomePage() {
             </ol>
           </section>
 
-          <section id="about" className="section about-section">
-            <div className="about-card">
-              <p className="eyebrow">About Mark</p>
-              <h2>Operations experience shaped the way I build.</h2>
-              <p>
-                My background spans enterprise process training, geospatial data operations, customer and technical support, workflow automation, web development, and client implementation. That mix helps me see both the human side of work and the system behind it.
-              </p>
-              <p>
-                I care about making tools understandable, processes repeatable, and collaboration easier—especially for remote teams, clients, and growing operations.
-              </p>
-              <a className="text-link" href="#contact">More about my experience <span aria-hidden="true">→</span></a>
-            </div>
-            <aside className="about-notes">
-              <div><span>Based in</span><strong>Philippines</strong></div>
-              <div><span>Best fit</span><strong>Remote operations & systems roles</strong></div>
-              <div><span>Working style</span><strong>Structured, curious, documentation-first</strong></div>
-              <div><span>Current direction</span><strong>VA · Operations · CRM · Automation</strong></div>
-            </aside>
-          </section>
+          <AboutSection />
+
 
           <section id="contact" className="contact-section">
             <p className="eyebrow">Let’s work together</p>
@@ -119,6 +104,10 @@ function App() {
   }
   if (pathname === '/projects/leaveflow') {
     return <LeaveFlowCaseStudy />
+  }
+
+  if (pathname === '/projects/applylang') {
+    return <ApplyLangCaseStudy />
   }
 
   return <HomePage />

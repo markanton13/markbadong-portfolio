@@ -32,14 +32,18 @@ export const featuredProjects = [
   {
     slug: 'applylang',
     name: 'ApplyLang',
-    eyebrow: 'Career operations system',
+    eyebrow: 'Complete Discord career operations system',
     summary:
-      'A structured application workspace that turns job posts and source resumes into truth-safe, role-focused application materials and trackable workflows.',
-    outcome: 'Built to make repeated applications faster, safer, and easier to manage.',
-    role: 'Product direction, workflow design, automation model, QA',
+      'A complete Discord workspace connecting reusable career sources, structured application records, truth-safe prompt packages, resume snapshots, follow-ups, and career tracking.',
+    outcome:
+      'The Discord product is complete and validated through real application workflows; its next evolution is a standalone web app with RBAC, full CRUD, and optional Discord integration.',
+    role: 'Creator, product direction, workflow design, automation model, QA',
     tools: ['Node.js', 'Discord', 'Automation', 'Prompt Systems'],
-    status: 'Active build',
-    metric: 'Application workflow',
+    status: 'Complete Discord bot',
+    metric: 'Applications · prompts · resume vault',
+    image: '/images/projects/applylang/application-record.webp',
+    imageAlt: 'ApplyLang Discord application record showing a fictional role, frozen resume and career-profile sources, application details, status, and workflow actions.',
+    caseStudyUrl: '/projects/applylang',
   },
   {
     slug: 'childcare-culture',
