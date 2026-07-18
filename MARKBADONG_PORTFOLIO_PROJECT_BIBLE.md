@@ -782,6 +782,7 @@ Update this file whenever:
 Completed changes:
 
 - replaced the catch-all Cloudflare rewrite with explicit rewrites for the four published case-study routes;
+- corrected the rewrite destination to / so Cloudflare proxies the SPA without redirecting valid case-study URLs to the homepage;
 - added a top-level static `404.html` so unknown production paths can return Cloudflare’s real Not Found response;
 - added a React Not Found page with `noindex, nofollow` for local development and client-side fallback behavior;
 - added keyboard focus containment and inert background handling to the reusable screenshot lightbox;
