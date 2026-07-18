@@ -383,7 +383,7 @@ export function MarkHQCaseStudy() {
             <div className="hero-actions">
               <a className="button button-light" href="https://github.com/markanton13/markhq-assistant-downloads" target="_blank" rel="noreferrer">View GitHub proof</a>
               <a className="button button-outline-light" href="/#work">View more projects</a>
-              <a className="button button-outline-light" href="mailto:markantonbadong13@gmail.com">Contact Mark</a>
+              <a className="button button-outline-light" href="mailto:markantonbadong@gmail.com">Contact Mark</a>
             </div>
           </section>
         </main>
