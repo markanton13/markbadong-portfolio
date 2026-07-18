@@ -1,4 +1,4 @@
-# markbadong.com Portfolio Build — Phase 1
+﻿# markbadong.com Portfolio Build — Phase 1
 
 ## Goal
 Create a clean, credible, conversion-ready portfolio foundation that positions Mark Anton as a Virtual Assistant, Operations, Automation & Systems Specialist.
@@ -24,7 +24,7 @@ Create a clean, credible, conversion-ready portfolio foundation that positions M
 10. Footer
 
 ## Featured projects
-- ApplyHQ
+- ApplyLang
 - PersonalVABot
 - Childcare Culture & Co.
 - LeaveFlow
@@ -39,3 +39,4 @@ Create a clean, credible, conversion-ready portfolio foundation that positions M
 - Add Open Graph image and social metadata
 - Run accessibility, performance, SEO, and mobile QA
 - Connect Cloudflare Pages and `markbadong.com`
+

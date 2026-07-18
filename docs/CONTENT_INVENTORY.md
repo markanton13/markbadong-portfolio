@@ -1,4 +1,4 @@
-# Content & Asset Inventory
+﻿# Content & Asset Inventory
 
 ## Ready in the Phase 1 build
 - Locked professional positioning
@@ -39,7 +39,7 @@
 - Progress view
 
 ## New assets needed
-### ApplyHQ
+### ApplyLang
 - Workspace overview
 - Application capture flow
 - Resume-tailoring flow
@@ -79,3 +79,4 @@
 - Confirm client work can be publicly shown
 - Compress large images and videos
 - Add descriptive alt text to every meaningful image
+

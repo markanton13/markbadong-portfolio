@@ -1,7 +1,7 @@
-export const featuredProjects = [
+﻿export const featuredProjects = [
   {
-    slug: 'applyhq',
-    name: 'ApplyHQ',
+    slug: 'applylang',
+    name: 'ApplyLang',
     eyebrow: 'Career operations system',
     summary:
       'A structured application workspace that turns job posts and source resumes into truth-safe, role-focused application materials and trackable workflows.',
@@ -56,3 +56,4 @@ export const supportingProjects = [
   'AnimeDNA',
   'Habit Tracker',
 ]
+
