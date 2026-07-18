@@ -1,0 +1,43 @@
+export function ProjectCard({ project, index }) {
+  return (
+    <article className="project-card">
+      <div className="project-visual" aria-hidden="true">
+        <span className="project-index">0{index + 1}</span>
+        <div className="visual-window">
+          <div className="visual-topbar"><i /><i /><i /></div>
+          <div className="visual-body">
+            <div className="visual-sidebar" />
+            <div className="visual-content">
+              <span />
+              <span />
+              <span />
+              <div className="visual-panels"><b /><b /><b /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="project-content">
+        <div className="project-heading">
+          <div>
+            <p className="eyebrow">{project.eyebrow}</p>
+            <h3>{project.name}</h3>
+          </div>
+          <span className="status-pill">{project.status}</span>
+        </div>
+        <p className="project-summary">{project.summary}</p>
+        <p className="project-outcome">{project.outcome}</p>
+        <dl className="project-meta">
+          <div><dt>My role</dt><dd>{project.role}</dd></div>
+          <div><dt>Proof point</dt><dd>{project.metric}</dd></div>
+        </dl>
+        <div className="tool-list" aria-label={`${project.name} tools`}>
+          {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
+        </div>
+        <a className="text-link" href={`#${project.slug}`} aria-label={`Case study for ${project.name}`}>
+          Case study coming in Phase 2 <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+  )
+}
