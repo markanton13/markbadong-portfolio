@@ -121,17 +121,61 @@ function HomePage() {
             </div>
 
             <div className="contact-panel" aria-label="Professional contact options">
-              <a className="contact-primary" href="mailto:markantonbadong@gmail.com">
+              <div className="contact-primary">
                 <span>Primary email</span>
                 <strong>markantonbadong@gmail.com</strong>
                 <small>Best for job opportunities, project inquiries, and collaborations.</small>
-              </a>
+
+                <div className="contact-email-actions">
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong@gmail.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Compose in Gmail <span aria-hidden="true">↗</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await navigator.clipboard.writeText('markantonbadong@gmail.com')
+                      } catch {
+                        window.prompt('Copy this email address:', 'markantonbadong@gmail.com')
+                      }
+                    }}
+                  >
+                    Copy address
+                  </button>
+                </div>
+              </div>
 
               <div className="contact-direct-grid">
-                <a className="contact-secondary" href="mailto:markantonbadong13@gmail.com">
+                <div className="contact-secondary">
                   <span>Alternate email</span>
                   <strong>markantonbadong13@gmail.com</strong>
-                </a>
+
+                  <div className="contact-email-actions">
+                    <a
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong13@gmail.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Compose in Gmail <span aria-hidden="true">↗</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          await navigator.clipboard.writeText('markantonbadong13@gmail.com')
+                        } catch {
+                          window.prompt('Copy this email address:', 'markantonbadong13@gmail.com')
+                        }
+                      }}
+                    >
+                      Copy address
+                    </button>
+                  </div>
+                </div>
 
                 <div className="contact-messaging">
                   <span>Messaging</span>

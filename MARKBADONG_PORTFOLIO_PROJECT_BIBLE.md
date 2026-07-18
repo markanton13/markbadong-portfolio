@@ -736,7 +736,7 @@ The public portfolio exposes the following verified professional contact details
 - **Location:** Quezon City, Philippines
 - **Availability:** Open to remote opportunities
 
-The clean primary email should be used for default `mailto:` actions. The alternate email remains visible as a fallback.
+Both email addresses remain visible. Each address provides a browser-based Gmail compose action and a Copy address control with a manual-copy fallback. Footer and case-study Email CTAs route visitors to the full Contact section instead of depending on an operating-system `mailto:` handler.
 
 Do not publish a phone number, private street address, or account-specific internal identifiers.
 

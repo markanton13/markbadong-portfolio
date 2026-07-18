@@ -332,7 +332,7 @@ export function ApplyLangCaseStudy() {
             <h2>I design systems that make repeated work easier to trust, track, and improve.</h2>
             <div className="hero-actions">
               <a className="button button-light" href="https://github.com/markanton13/applylang" target="_blank" rel="noreferrer">View GitHub proof</a>
-              <a className="button button-outline-light" href="mailto:markantonbadong@gmail.com">Email Mark</a>
+              <a className="button button-outline-light" href="/#contact">Email Mark</a>
               <a className="button button-outline-light" href="/#work">View more work</a>
             </div>
           </section>

@@ -9,7 +9,7 @@ export function Footer() {
         <p>Operations, automation, systems, and practical digital support.</p>
       </div>
       <nav className="footer-links" aria-label="Professional links">
-        <a href="mailto:markantonbadong@gmail.com">Email</a>
+        <a href="/#contact">Email</a>
         <a href="https://linkedin.com/in/markanton13" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://github.com/markanton13" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Telegram</a>

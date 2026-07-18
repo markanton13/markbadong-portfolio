@@ -377,7 +377,7 @@ export function PersonalVABotCaseStudy() {
             <div className="hero-actions">
               <a className="button button-light" href="https://github.com/markanton13/personalvabot" target="_blank" rel="noreferrer">View GitHub proof</a>
               <a className="button button-outline-light" href="https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta" target="_blank" rel="noreferrer">Download Windows beta</a>
-              <a className="button button-outline-light" href="mailto:markantonbadong@gmail.com">Contact Mark</a>
+              <a className="button button-outline-light" href="/#contact">Contact Mark</a>
             </div>
           </section>
         </main>
