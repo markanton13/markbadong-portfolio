@@ -1,3 +1,8 @@
+import { imageDimensions } from '../data/imageDimensions'
+
+const portraitSrc = '/images/about/mark-anton.webp'
+const portraitDimensions = imageDimensions[portraitSrc]
+
 export function AboutSection() {
   return (
     <section id="about" className="section about-section about-section-v2">
@@ -5,9 +10,13 @@ export function AboutSection() {
         <figure className="about-portrait-card">
           <div className="about-portrait-frame">
             <img
-              src="/images/about/mark-anton.webp"
+              src={portraitSrc}
+              width={portraitDimensions?.width}
+              height={portraitDimensions?.height}
               alt="Mark Anton wearing a navy shirt against a warm neutral background."
               loading="lazy"
+              decoding="async"
+              fetchPriority="low"
             />
           </div>
           <figcaption>

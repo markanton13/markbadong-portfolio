@@ -1,4 +1,4 @@
-﻿import { ExpandableImage } from './ExpandableImage'
+import { ExpandableImage } from './ExpandableImage'
 
 export function ProjectCard({ project, index }) {
   const hasRealImage = Boolean(project.image)
@@ -15,7 +15,7 @@ export function ProjectCard({ project, index }) {
           <ExpandableImage
             src={project.image}
             alt={project.imageAlt}
-            loading={index === 0 ? 'eager' : 'lazy'}
+            loading="lazy"
             label={`Expand ${project.name} screenshot`}
           />
         ) : (
