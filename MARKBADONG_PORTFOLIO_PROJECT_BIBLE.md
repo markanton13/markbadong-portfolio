@@ -58,7 +58,8 @@ The strongest public message is:
 - **Public name:** Mark Anton
 - **Domain:** `markbadong.com`
 - **GitHub:** `https://github.com/markanton13`
-- **Portfolio email:** `markantonbadong13@gmail.com`
+- **Primary portfolio email:** `markantonbadong@gmail.com`
+- **Alternate portfolio email:** `markantonbadong13@gmail.com`
 
 ### Visual direction
 
@@ -714,6 +715,43 @@ ApplyLang standalone web application remains a separate product-development phas
 Use this at the beginning of the next portfolio thread:
 
 > Continue MARKBADONG.COM after the Phase 4 closeout. Read `MARKBADONG_PORTFOLIO_PROJECT_BIBLE.md` first. Phase 1 foundation, Phase 2 real proof, Phase 3 accessibility/SEO/performance, Phase 4A career-source activation, and Phase 4B GitHub proof integration are complete. Begin Phase 5 career launch and continuous proof, while keeping Childcare Culture & Co. deferred until final QA and written publication permission.
+
+---
+
+---
+
+---
+
+## Public contact standard
+
+The public portfolio exposes the following verified professional contact details:
+
+- **Primary email:** `markantonbadong@gmail.com`
+- **Alternate email:** `markantonbadong13@gmail.com`
+- **LinkedIn:** `https://linkedin.com/in/markanton13`
+- **GitHub:** `https://github.com/markanton13`
+- **Telegram:** `https://t.me/markanton13`
+- **WhatsApp / Telegram / Discord handle:** `@markanton13`
+- **Résumé:** `https://markbadong.com/files/Mark-Anton-Badong-Resume.pdf`
+- **Location:** Quezon City, Philippines
+- **Availability:** Open to remote opportunities
+
+The clean primary email should be used for default `mailto:` actions. The alternate email remains visible as a fallback.
+
+Do not publish a phone number, private street address, or account-specific internal identifiers.
+
+### GoHighLevel contact-layer status
+
+TL Anj confirmed that the GoHighLevel agency is currently closed/suspended because it is not yet being used. Therefore:
+
+- no GoHighLevel contact form is active on the portfolio;
+- no GoHighLevel booking calendar is active;
+- no public portfolio CTA should depend on the suspended agency;
+- the GHL contact layer may be reconsidered only after the account is reactivated and the form routing, calendar, confirmation state, privacy behavior, and spam protection are tested end to end.
+
+### Messaging-link rule
+
+Display `@markanton13` for WhatsApp, Telegram, and Discord. Telegram may use its verified public handle URL. Do not create a WhatsApp or Discord direct-profile URL until a working public URL is confirmed.
 
 ---
 

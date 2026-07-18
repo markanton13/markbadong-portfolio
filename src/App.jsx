@@ -106,12 +106,59 @@ function HomePage() {
 
 
           <section id="contact" className="contact-section">
-            <p className="eyebrow">Let’s work together</p>
-            <h2>Need someone who can support the work—and improve the system behind it?</h2>
-            <p>I’m building toward remote opportunities in virtual assistance, operations, CRM, automation, quality, and practical web systems.</p>
-            <div className="hero-actions">
-              <a className="button button-light" href="mailto:markantonbadong13@gmail.com">Email Mark</a>
-              <a className="button button-outline-light" href="https://github.com/markanton13" target="_blank" rel="noreferrer">View GitHub</a>
+            <div className="contact-copy">
+              <p className="eyebrow">Let’s work together</p>
+              <h2>Need someone who can support the work—and improve the system behind it?</h2>
+              <p>
+                I’m open to remote opportunities in virtual assistance, operations, CRM,
+                automation, quality assurance, and practical web systems.
+              </p>
+
+              <div className="contact-availability" aria-label="Location and availability">
+                <span>Quezon City, Philippines</span>
+                <span>Open to remote opportunities</span>
+              </div>
+            </div>
+
+            <div className="contact-panel" aria-label="Professional contact options">
+              <a className="contact-primary" href="mailto:markantonbadong@gmail.com">
+                <span>Primary email</span>
+                <strong>markantonbadong@gmail.com</strong>
+                <small>Best for job opportunities, project inquiries, and collaborations.</small>
+              </a>
+
+              <div className="contact-direct-grid">
+                <a className="contact-secondary" href="mailto:markantonbadong13@gmail.com">
+                  <span>Alternate email</span>
+                  <strong>markantonbadong13@gmail.com</strong>
+                </a>
+
+                <div className="contact-messaging">
+                  <span>Messaging</span>
+                  <strong>@markanton13</strong>
+                  <small>WhatsApp · Telegram · Discord</small>
+                  <a href="https://t.me/markanton13" target="_blank" rel="noreferrer">
+                    Open Telegram <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-link-grid">
+                <a href="https://linkedin.com/in/markanton13" target="_blank" rel="noreferrer">
+                  <span>LinkedIn</span>
+                  <strong>Professional profile</strong>
+                </a>
+
+                <a href="https://github.com/markanton13" target="_blank" rel="noreferrer">
+                  <span>GitHub</span>
+                  <strong>Repositories and proof</strong>
+                </a>
+
+                <a href="/files/Mark-Anton-Badong-Resume.pdf" target="_blank" rel="noreferrer">
+                  <span>Résumé</span>
+                  <strong>View public résumé</strong>
+                </a>
+              </div>
             </div>
           </section>
         </main>
