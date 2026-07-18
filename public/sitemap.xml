@@ -2,7 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://markbadong.com/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://markbadong.com/projects/personalvabot</loc>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://markbadong.com/projects/markhq</loc>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://markbadong.com/projects/applylang</loc>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://markbadong.com/projects/leaveflow</loc>
+    <lastmod>2026-07-19</lastmod>
   </url>
 </urlset>

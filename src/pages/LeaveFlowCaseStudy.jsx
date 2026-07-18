@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
+import { PageMeta } from '../components/PageMeta'
 
 const imageBase = '/images/projects/leaveflow'
 
@@ -48,15 +49,6 @@ const validationItems = [
 
 export function LeaveFlowCaseStudy() {
   useEffect(() => {
-    const previousTitle = document.title
-    const description = document.querySelector('meta[name="description"]')
-    const previousDescription = description?.getAttribute('content')
-
-    document.title = 'LeaveFlow Case Study | Mark Anton'
-    description?.setAttribute(
-      'content',
-      'A case study of LeaveFlow, a full-stack role-based leave management application for employee requests, manager approvals, balances, calendars, and user administration.',
-    )
     if (window.location.hash) {
       window.requestAnimationFrame(() => {
         const target = document.getElementById(window.location.hash.slice(1))
@@ -65,15 +57,11 @@ export function LeaveFlowCaseStudy() {
     } else {
       window.scrollTo(0, 0)
     }
-
-    return () => {
-      document.title = previousTitle
-      if (description && previousDescription) description.setAttribute('content', previousDescription)
-    }
   }, [])
 
   return (
     <>
+      <PageMeta pageKey="leaveflow" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell case-study-shell">
         <Header mode="case-study" />

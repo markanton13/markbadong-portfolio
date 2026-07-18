@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
+import { PageMeta } from '../components/PageMeta'
 
 const imageBase = '/images/projects/applylang'
 
@@ -52,15 +53,6 @@ const validationItems = [
 
 export function ApplyLangCaseStudy() {
   useEffect(() => {
-    const previousTitle = document.title
-    const description = document.querySelector('meta[name="description"]')
-    const previousDescription = description?.getAttribute('content')
-
-    document.title = 'ApplyLang Case Study | Mark Anton'
-    description?.setAttribute(
-      'content',
-      'A case study of ApplyLang, a complete Discord career operations system for truth-safe application records, resume tailoring prompts, dashboards, source snapshots, and a planned RBAC web platform.',
-    )
     if (window.location.hash) {
       window.requestAnimationFrame(() => {
         const target = document.getElementById(window.location.hash.slice(1))
@@ -69,15 +61,11 @@ export function ApplyLangCaseStudy() {
     } else {
       window.scrollTo(0, 0)
     }
-
-    return () => {
-      document.title = previousTitle
-      if (description && previousDescription) description.setAttribute('content', previousDescription)
-    }
   }, [])
 
   return (
     <>
+      <PageMeta pageKey="applylang" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell case-study-shell">
         <Header mode="case-study" />

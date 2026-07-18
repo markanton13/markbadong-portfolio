@@ -4,6 +4,7 @@ import { AboutSection } from './components/AboutSection'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
+import { PageMeta } from './components/PageMeta'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
 import { MarkHQCaseStudy } from './pages/MarkHQCaseStudy'
@@ -16,6 +17,7 @@ import './styles/site.css'
 function HomePage() {
   return (
     <>
+      <PageMeta pageKey="home" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell">
         <Header />

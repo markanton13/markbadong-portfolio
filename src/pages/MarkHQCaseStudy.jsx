@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
+import { PageMeta } from '../components/PageMeta'
 
 const imageBase = '/images/projects/markhq'
 
@@ -48,15 +49,6 @@ const validationItems = [
 
 export function MarkHQCaseStudy() {
   useEffect(() => {
-    const previousTitle = document.title
-    const description = document.querySelector('meta[name="description"]')
-    const previousDescription = description?.getAttribute('content')
-
-    document.title = 'MarkHQ Assistant Case Study | Mark Anton'
-    description?.setAttribute(
-      'content',
-      'A case study of MarkHQ Assistant, a Railway-hosted Discord operations system for task pipelines, workspaces, onboarding, requests, documentation, automation, backups, and deployment health.',
-    )
     if (window.location.hash) {
       window.requestAnimationFrame(() => {
         const target = document.getElementById(window.location.hash.slice(1))
@@ -65,15 +57,11 @@ export function MarkHQCaseStudy() {
     } else {
       window.scrollTo(0, 0)
     }
-
-    return () => {
-      document.title = previousTitle
-      if (description && previousDescription) description.setAttribute('content', previousDescription)
-    }
   }, [])
 
   return (
     <>
+      <PageMeta pageKey="markhq" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell case-study-shell">
         <Header mode="case-study" />
