@@ -46,31 +46,26 @@ export const featuredProjects = [
     name: 'Childcare Culture & Co.',
     eyebrow: 'GoHighLevel client website',
     summary:
-      'An in-progress GoHighLevel website rebuild translating an early childhood leadership brand into a responsive, conversion-focused page system with custom navigation, program pages, and mobile-ready layouts.',
-    outcome:
-      'Home, About, 90-Day Experience, and Culture Club foundations are built; final visual polish, remaining pages, forms, booking flows, and full QA are still in progress.',
-    role: 'GoHighLevel implementation, responsive layout systems, custom HTML/CSS, UX and mobile QA',
+      'A luxury-minimal website rebuild with responsive page systems, custom navigation, conversion-focused sections, program pages, forms, and booking flows.',
+    outcome: 'Real client project designed as both a working funnel and portfolio proof.',
+    role: 'Website build, responsive QA, layout systems, implementation',
     tools: ['GoHighLevel', 'HTML', 'CSS', 'Responsive QA'],
-    status: 'Client project · In progress',
-    metric: '4 page foundations · responsive system',
-    caseStudyLabel: 'Case study after final QA',
+    status: 'Client project',
+    metric: '6-page website system',
   },
   {
     slug: 'leaveflow',
     name: 'LeaveFlow',
-    eyebrow: 'Role-based full-stack web application',
+    eyebrow: 'Role-based web application',
     summary:
-      'A connected leave-management system for employee requests, manager decisions, leave balances, shared calendars, and administrator-controlled access.',
-    outcome:
-      'A functional end-to-end workflow connecting submission, approval or rejection, status history, calendars, and user administration across three roles.',
-    role: 'System design, frontend, backend, database workflows, responsive QA',
+      'A full-stack leave management system with employee, manager, and admin experiences, approval rules, balance tracking, and calendar visibility.',
+    outcome: 'Replaces manual leave handling with a structured digital workflow.',
+    role: 'System design, frontend, backend, database, testing',
     tools: ['React', 'Node.js', 'Express', 'MySQL'],
-    status: 'Functional full-stack app',
-    metric: '3 roles · end-to-end workflow',
-    image: '/images/projects/leaveflow/employee-dashboard.webp',
-    imageAlt: 'LeaveFlow employee dashboard showing request summaries, leave balances, and a leave request form.',
-    caseStudyUrl: '/projects/leaveflow',
-  },]
+    status: 'Portfolio flagship',
+    metric: '3 role-based dashboards',
+  },
+]
 
 export const supportingProjects = [
   'Enterprise Assessment System',

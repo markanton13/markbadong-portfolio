@@ -5,7 +5,6 @@ import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
 import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
 import { MarkHQCaseStudy } from './pages/MarkHQCaseStudy'
-import { LeaveFlowCaseStudy } from './pages/LeaveFlowCaseStudy'
 import { featuredProjects, supportingProjects } from './data/projects'
 import { capabilities } from './data/capabilities'
 import './styles/site.css'
@@ -116,9 +115,6 @@ function App() {
 
   if (pathname === '/projects/markhq') {
     return <MarkHQCaseStudy />
-  }
-  if (pathname === '/projects/leaveflow') {
-    return <LeaveFlowCaseStudy />
   }
 
   return <HomePage />

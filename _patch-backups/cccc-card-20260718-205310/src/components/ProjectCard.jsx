@@ -1,6 +1,7 @@
 export function ProjectCard({ project, index }) {
   const hasRealImage = Boolean(project.image)
-  const caseStudyLabel = project.caseStudyLabel || (project.caseStudyUrl ? 'View case study' : 'Case study coming in Phase 2')
+  const caseStudyLabel = project.caseStudyUrl ? 'View case study' : 'Case study coming in Phase 2'
+  const caseStudyHref = project.caseStudyUrl || `#${project.slug}`
 
   return (
     <article className="project-card">
@@ -48,15 +49,9 @@ export function ProjectCard({ project, index }) {
         <div className="tool-list" aria-label={`${project.name} tools`}>
           {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
         </div>
-        {project.caseStudyUrl ? (
-          <a className="text-link" href={project.caseStudyUrl} aria-label={`${caseStudyLabel} for ${project.name}`}>
-            {caseStudyLabel} <span aria-hidden="true">↗</span>
-          </a>
-        ) : (
-          <span className="text-link text-link-static">
-            {caseStudyLabel} <span aria-hidden="true">↗</span>
-          </span>
-        )}
+        <a className="text-link" href={caseStudyHref} aria-label={`${caseStudyLabel} for ${project.name}`}>
+          {caseStudyLabel} <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </article>
   )
