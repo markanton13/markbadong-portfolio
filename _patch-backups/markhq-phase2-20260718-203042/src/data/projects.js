@@ -15,21 +15,6 @@ export const featuredProjects = [
     caseStudyUrl: '/projects/personalvabot',
   },
   {
-    slug: 'markhq',
-    name: 'MarkHQ Assistant',
-    eyebrow: 'Production Discord operations system',
-    summary:
-      'A Railway-hosted workspace assistant for task pipelines, private workspaces, onboarding, request approvals, documentation sync, reminders, backups, and health monitoring.',
-    outcome: 'Deployed as a live production system with persistent data, automated backups, health checks, and validated release workflows.',
-    role: 'Creator, product director, workflow designer, QA',
-    tools: ['Node.js', 'Discord', 'SQLite', 'Railway'],
-    status: 'Production',
-    metric: 'Multi-workspace automation',
-    image: '/images/projects/markhq/guided-onboarding.webp',
-    imageAlt: 'MarkHQ Discord workspace onboarding with guided navigation, private workspace information, and action buttons.',
-    caseStudyUrl: '/projects/markhq',
-  },
-  {
     slug: 'applylang',
     name: 'ApplyLang',
     eyebrow: 'Career operations system',
@@ -68,6 +53,7 @@ export const featuredProjects = [
 ]
 
 export const supportingProjects = [
+  'MarkHQ Assistant',
   'Enterprise Assessment System',
   'LILO LIVE Dashboard / FlowTrack Engine',
   'AnimeDNA',
