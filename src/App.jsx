@@ -4,6 +4,7 @@ import { AboutSection } from './components/AboutSection'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
 import { MarkHQCaseStudy } from './pages/MarkHQCaseStudy'
 import { LeaveFlowCaseStudy } from './pages/LeaveFlowCaseStudy'
@@ -110,7 +111,11 @@ function App() {
     return <ApplyLangCaseStudy />
   }
 
-  return <HomePage />
+  if (pathname === '/') {
+    return <HomePage />
+  }
+
+  return <NotFoundPage />
 }
 
 export default App

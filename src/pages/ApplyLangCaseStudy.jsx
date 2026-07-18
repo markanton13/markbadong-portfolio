@@ -61,7 +61,14 @@ export function ApplyLangCaseStudy() {
       'content',
       'A case study of ApplyLang, a complete Discord career operations system for truth-safe application records, resume tailoring prompts, dashboards, source snapshots, and a planned RBAC web platform.',
     )
-    window.scrollTo(0, 0)
+    if (window.location.hash) {
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(window.location.hash.slice(1))
+        target?.scrollIntoView()
+      })
+    } else {
+      window.scrollTo(0, 0)
+    }
 
     return () => {
       document.title = previousTitle

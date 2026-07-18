@@ -5,7 +5,7 @@
   --muted: #69665f;
   --blue: #3157d5;
   --blue-dark: #203a91;
-  --gold: #a97d32;
+  --gold: #8b641f;
   --line: rgba(23, 23, 20, 0.14);
   --white: #fffdf8;
   --radius-lg: 32px;
@@ -1131,3 +1131,80 @@ h1 em { font-style: normal; color: var(--blue); }
   }
 }
 /* ApplyLang proof case study v2 — end */
+
+/* Phase 3 Batch 1: accessibility and route integrity */
+:where(a, button, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--blue);
+}
+
+.not-found-main {
+  width: min(1180px, calc(100% - 32px));
+  min-height: 68vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(70px, 12vw, 150px) 0;
+}
+
+.not-found-card {
+  width: min(860px, 100%);
+  padding: clamp(38px, 7vw, 78px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.not-found-card h1 {
+  max-width: 780px;
+  font-size: clamp(48px, 7vw, 82px);
+}
+
+.not-found-card > p:not(.eyebrow) {
+  max-width: 650px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.case-video-description {
+  margin: 18px 0 0;
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.case-video-transcript {
+  margin-top: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 16px;
+  background: rgba(255,255,255,.06);
+}
+
+.case-video-transcript summary {
+  padding: 16px 18px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.case-video-transcript ol {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0 38px 22px 48px;
+  color: rgba(255,255,255,.74);
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .not-found-main {
+    width: calc(100% - 24px);
+  }
+
+  .not-found-card {
+    padding: 36px 24px;
+  }
+}
+/* Phase 3 Batch 1: accessibility and route integrity — end */
