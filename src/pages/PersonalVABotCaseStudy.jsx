@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
+import { ExpandableImage } from '../components/ExpandableImage'
 
 const imageBase = '/images/projects/personalvabot'
 
 function CaseFigure({ src, alt, caption, className = '', eager = false }) {
   return (
     <figure className={`case-figure ${className}`.trim()}>
-      <img src={`${imageBase}/${src}`} alt={alt} loading={eager ? 'eager' : 'lazy'} />
+      <ExpandableImage src={`${imageBase}/${src}`} alt={alt} loading={eager ? 'eager' : 'lazy'} />
       <figcaption>{caption}</figcaption>
     </figure>
   )

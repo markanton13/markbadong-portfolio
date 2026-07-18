@@ -1,19 +1,22 @@
+﻿import { ExpandableImage } from './ExpandableImage'
+
 export function ProjectCard({ project, index }) {
   const hasRealImage = Boolean(project.image)
   const caseStudyLabel = project.caseStudyLabel || (project.caseStudyUrl ? 'View case study' : 'Case study coming in Phase 2')
 
   return (
-    <article className="project-card">
+    <article className={`project-card project-card-${project.slug}`}>
       <div
         className={hasRealImage ? 'project-visual project-visual-real' : 'project-visual'}
         aria-hidden={hasRealImage ? undefined : true}
       >
         <span className="project-index">0{index + 1}</span>
         {hasRealImage ? (
-          <img
+          <ExpandableImage
             src={project.image}
             alt={project.imageAlt}
             loading={index === 0 ? 'eager' : 'lazy'}
+            label={`Expand ${project.name} screenshot`}
           />
         ) : (
           <div className="visual-window">

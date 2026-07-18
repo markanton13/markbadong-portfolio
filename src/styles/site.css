@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --paper: #f4f0e8;
   --paper-deep: #e9e2d5;
   --ink: #171714;
@@ -262,6 +262,7 @@ h1 em { font-style: normal; color: var(--blue); }
   box-shadow: 0 28px 70px rgba(8,8,22,.42);
 }
 
+
 .case-study-main { width: min(1280px, calc(100% - 32px)); }
 .case-hero { padding: 88px clamp(10px, 4vw, 48px) 70px; }
 .case-hero-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: clamp(44px, 7vw, 96px); align-items: end; }
@@ -463,4 +464,173 @@ h1 em { font-style: normal; color: var(--blue); }
   .case-video-card video { border-radius: 12px; }
   .case-architecture-grid article { min-height: auto; padding: 28px; }
   .case-architecture-grid h3 { margin-top: 34px; }
+}
+
+/* Reusable screenshot expansion — use ExpandableImage for future portfolio proof */
+.expandable-image-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.project-visual-real .expandable-image-trigger {
+  flex: 1;
+  min-height: 350px;
+  margin-top: 18px;
+}
+
+.expandable-image-trigger img {
+  display: block;
+}
+
+.expandable-image-hint {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  background: rgba(8,10,20,.78);
+  color: white;
+  box-shadow: 0 8px 26px rgba(8,10,20,.22);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none;
+}
+
+.expandable-image-trigger:hover .expandable-image-hint,
+.expandable-image-trigger:focus-visible .expandable-image-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.expandable-image-trigger:focus-visible {
+  outline: 3px solid rgba(49,87,213,.48);
+  outline-offset: 5px;
+  border-radius: 20px;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 3vw, 40px);
+  background: rgba(7,8,14,.92);
+  backdrop-filter: blur(14px);
+}
+
+.image-lightbox-panel {
+  width: min(1600px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 22px;
+  background: #10121d;
+  box-shadow: 0 36px 120px rgba(0,0,0,.52);
+}
+
+.image-lightbox-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  min-height: 58px;
+  padding: 12px 14px 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.72);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.image-lightbox-toolbar > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-lightbox-close {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: rgba(255,255,255,.08);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.image-lightbox-close:hover,
+.image-lightbox-close:focus-visible {
+  background: white;
+  color: #10121d;
+}
+
+.image-lightbox-image {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 130px);
+  object-fit: contain;
+  background: #090b13;
+}
+
+.project-card-leaveflow .project-visual-real img {
+  object-position: center top;
+}
+
+@media (hover: none) {
+  .expandable-image-hint {
+    opacity: .9;
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-visual-real .expandable-image-trigger {
+    min-height: 275px;
+  }
+
+  .expandable-image-hint {
+    top: 9px;
+    right: 9px;
+    padding: 7px 9px;
+  }
+
+  .image-lightbox {
+    padding: 8px;
+  }
+
+  .image-lightbox-panel {
+    border-radius: 15px;
+  }
+
+  .image-lightbox-toolbar {
+    min-height: 52px;
+    padding-left: 14px;
+  }
+
+  .image-lightbox-toolbar > span {
+    display: none;
+  }
+
+  .image-lightbox-image {
+    max-height: calc(100vh - 76px);
+  }
 }
