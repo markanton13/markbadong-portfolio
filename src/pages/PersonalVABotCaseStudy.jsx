@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
@@ -57,7 +57,14 @@ export function PersonalVABotCaseStudy() {
       'content',
       'A case study of PersonalVABot, a local-first Windows operations platform connecting Discord workflows, task management, attendance, billing, documents, automation, and backups.',
     )
-    window.scrollTo(0, 0)
+    if (window.location.hash) {
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(window.location.hash.slice(1))
+        target?.scrollIntoView()
+      })
+    } else {
+      window.scrollTo(0, 0)
+    }
 
     return () => {
       document.title = previousTitle

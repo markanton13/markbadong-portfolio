@@ -5,8 +5,8 @@
 **Primary domain:** `markbadong.com`  
 **Repository:** `C:\Users\Mark\markbadong-portfolio`  
 **Hosting:** Cloudflare Pages  
-**Last updated:** July 18, 2026  
-**Current milestone:** Phase 2 proof expansion and career-asset build — pause checkpoint
+**Last updated:** July 19, 2026  
+**Current milestone:** Phase 3 portfolio-wide accessibility, route integrity, SEO, and performance hardening
 
 ---
 
@@ -772,3 +772,42 @@ Update this file whenever:
 - CCCC receives final approval;
 - ApplyLang web-app architecture is decided;
 - portfolio-wide QA is completed.
+
+---
+
+## Phase 3 — Batch 1: route integrity and accessibility
+
+**Applied:** July 19, 2026
+
+Completed changes:
+
+- replaced the catch-all Cloudflare rewrite with explicit rewrites for the four published case-study routes;
+- added a top-level static `404.html` so unknown production paths can return Cloudflare’s real Not Found response;
+- added a React Not Found page with `noindex, nofollow` for local development and client-side fallback behavior;
+- added keyboard focus containment and inert background handling to the reusable screenshot lightbox;
+- improved mobile navigation with Escape-to-close, outside-click dismissal, focus return, and dynamic accessible labels;
+- added consistent portfolio-wide `:focus-visible` styling;
+- darkened the gold accent used for small text to improve contrast;
+- preserved direct hash navigation on case-study routes instead of always forcing scroll position to the top;
+- added a complete text alternative for the LeaveFlow visual demo.
+
+### Required validation before commit
+
+```powershell
+npm run check
+git diff --check
+git status --short
+npm run dev
+```
+
+Manual QA:
+
+1. tab through the homepage, navigation, project cards, résumé links, contact links, and footer;
+2. open a screenshot, press Tab and Shift+Tab, then Escape, confirming focus stays in the dialog and returns to the trigger;
+3. open the mobile menu, close it with Escape, and confirm focus returns to the menu button;
+4. verify `/projects/leaveflow#leaveflow-demo` lands on the demo section;
+5. verify every published direct route refreshes correctly;
+6. after deployment, verify an invalid path returns the custom 404 page rather than the homepage.
+
+Do not push until the local visual, keyboard, responsive, and build checks pass.
+

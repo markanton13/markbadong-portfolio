@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
@@ -57,7 +57,14 @@ export function LeaveFlowCaseStudy() {
       'content',
       'A case study of LeaveFlow, a full-stack role-based leave management application for employee requests, manager approvals, balances, calendars, and user administration.',
     )
-    window.scrollTo(0, 0)
+    if (window.location.hash) {
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(window.location.hash.slice(1))
+        target?.scrollIntoView()
+      })
+    } else {
+      window.scrollTo(0, 0)
+    }
 
     return () => {
       document.title = previousTitle
@@ -166,10 +173,26 @@ export function LeaveFlowCaseStudy() {
                 preload="metadata"
                 poster={`${imageBase}/employee-dashboard.webp`}
                 aria-label="LeaveFlow application demo"
+                aria-describedby="leaveflow-demo-description"
               >
                 <source src={`${imageBase}/demo.mp4`} type="video/mp4" />
                 Your browser does not support the embedded video.
               </video>
+              <p id="leaveflow-demo-description" className="case-video-description">
+                This portfolio demo is designed to be understandable as a silent visual walkthrough. The complete text alternative below covers the workflow shown on screen.
+              </p>
+              <details className="case-video-transcript">
+                <summary>Read the demo text alternative</summary>
+                <ol>
+                  <li>Sign in and open the employee dashboard.</li>
+                  <li>Review request-status summaries and available vacation and sick-leave balances.</li>
+                  <li>Complete the leave request form with a leave type, date range, and reason.</li>
+                  <li>Review the submitted request in history and calendar views.</li>
+                  <li>Open the manager queue, inspect the request, and record an approval or rejection decision.</li>
+                  <li>Confirm the updated status remains visible to the employee across the connected views.</li>
+                  <li>Open administrator controls for users, roles, and manager relationships.</li>
+                </ol>
+              </details>
               <figcaption>
                 The recorded demo moves through login, employee balances, leave submission, request history, manager review, decision controls, calendar updates, and user administration.
               </figcaption>
