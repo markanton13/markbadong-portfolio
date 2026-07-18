@@ -5,7 +5,7 @@
 **Primary domain:** `markbadong.com`  
 **Repository:** `C:\Users\Mark\markbadong-portfolio`  
 **Hosting:** Cloudflare Pages  
-**Last updated:** July 19, 2026  
+**Last updated:** July 19, 2026
 **Current milestone:** Phase 3 portfolio-wide accessibility, route integrity, SEO, and performance hardening
 
 ---
@@ -810,4 +810,3 @@ Manual QA:
 6. after deployment, verify an invalid path returns the custom 404 page rather than the homepage.
 
 Do not push until the local visual, keyboard, responsive, and build checks pass.
-
