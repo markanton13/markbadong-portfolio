@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { imageDimensions } from '../data/imageDimensions'
 
 const focusableSelector = [
   'a[href]',
@@ -22,6 +23,7 @@ export function ExpandableImage({
   src,
   alt,
   loading = 'lazy',
+  fetchPriority,
   className = '',
   imageClassName = '',
   label,
@@ -31,6 +33,8 @@ export function ExpandableImage({
   const triggerRef = useRef(null)
   const panelRef = useRef(null)
   const closeRef = useRef(null)
+  const dimensions = imageDimensions[src]
+  const resolvedFetchPriority = fetchPriority ?? (loading === 'eager' ? 'high' : 'low')
 
   useEffect(() => {
     if (!isOpen) return undefined
@@ -107,7 +111,14 @@ export function ExpandableImage({
                 Close ×
               </button>
             </div>
-            <img className="image-lightbox-image" src={src} alt="" />
+            <img
+              className="image-lightbox-image"
+              src={src}
+              alt=""
+              width={dimensions?.width}
+              height={dimensions?.height}
+              decoding="async"
+            />
           </div>
         </div>,
         document.body,
@@ -127,7 +138,11 @@ export function ExpandableImage({
           className={imageClassName}
           src={src}
           alt={alt}
+          width={dimensions?.width}
+          height={dimensions?.height}
           loading={loading}
+          decoding="async"
+          fetchPriority={resolvedFetchPriority}
         />
         <span className="expandable-image-hint" aria-hidden="true">
           ⛶ Expand

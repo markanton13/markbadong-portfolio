@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { AboutSection } from './components/AboutSection'
@@ -5,14 +6,39 @@ import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Footer } from './components/Footer'
 import { PageMeta } from './components/PageMeta'
-import { NotFoundPage } from './pages/NotFoundPage'
-import { PersonalVABotCaseStudy } from './pages/PersonalVABotCaseStudy'
-import { MarkHQCaseStudy } from './pages/MarkHQCaseStudy'
-import { LeaveFlowCaseStudy } from './pages/LeaveFlowCaseStudy'
-import { ApplyLangCaseStudy } from './pages/ApplyLangCaseStudy'
 import { featuredProjects, supportingProjects } from './data/projects'
 import { capabilities } from './data/capabilities'
 import './styles/site.css'
+
+const PersonalVABotCaseStudy = lazy(() =>
+  import('./pages/PersonalVABotCaseStudy').then((module) => ({
+    default: module.PersonalVABotCaseStudy,
+  })),
+)
+
+const MarkHQCaseStudy = lazy(() =>
+  import('./pages/MarkHQCaseStudy').then((module) => ({
+    default: module.MarkHQCaseStudy,
+  })),
+)
+
+const LeaveFlowCaseStudy = lazy(() =>
+  import('./pages/LeaveFlowCaseStudy').then((module) => ({
+    default: module.LeaveFlowCaseStudy,
+  })),
+)
+
+const ApplyLangCaseStudy = lazy(() =>
+  import('./pages/ApplyLangCaseStudy').then((module) => ({
+    default: module.ApplyLangCaseStudy,
+  })),
+)
+
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage').then((module) => ({
+    default: module.NotFoundPage,
+  })),
+)
 
 function HomePage() {
   return (
@@ -95,29 +121,38 @@ function HomePage() {
   )
 }
 
+function renderLazyPage(PageComponent) {
+  return (
+    <Suspense fallback={null}>
+      <PageComponent />
+    </Suspense>
+  )
+}
+
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
 
   if (pathname === '/projects/personalvabot') {
-    return <PersonalVABotCaseStudy />
+    return renderLazyPage(PersonalVABotCaseStudy)
   }
 
   if (pathname === '/projects/markhq') {
-    return <MarkHQCaseStudy />
+    return renderLazyPage(MarkHQCaseStudy)
   }
+
   if (pathname === '/projects/leaveflow') {
-    return <LeaveFlowCaseStudy />
+    return renderLazyPage(LeaveFlowCaseStudy)
   }
 
   if (pathname === '/projects/applylang') {
-    return <ApplyLangCaseStudy />
+    return renderLazyPage(ApplyLangCaseStudy)
   }
 
   if (pathname === '/') {
     return <HomePage />
   }
 
-  return <NotFoundPage />
+  return renderLazyPage(NotFoundPage)
 }
 
 export default App

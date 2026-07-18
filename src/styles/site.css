@@ -1208,3 +1208,12 @@ h1 em { font-style: normal; color: var(--blue); }
   }
 }
 /* Phase 3 Batch 1: accessibility and route integrity — end */
+/* Phase 3 Batch 3: preserve screenshot preview proportions */
+.expandable-image-trigger > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+/* Phase 3 Batch 3: preserve screenshot preview proportions — end */

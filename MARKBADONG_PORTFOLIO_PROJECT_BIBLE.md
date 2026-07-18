@@ -6,7 +6,7 @@
 **Repository:** `C:\Users\Mark\markbadong-portfolio`  
 **Hosting:** Cloudflare Pages  
 **Last updated:** July 19, 2026
-**Current milestone:** Phase 3 portfolio-wide accessibility, route integrity, SEO, and performance hardening
+**Current milestone:** Phase 3 Batch 3 performance optimization and delivery hardening
 
 ---
 
@@ -848,3 +848,39 @@ Build-output QA:
 6. validate the live pages with Google Rich Results Test, Schema Markup Validator, and a social-sharing debugger.
 
 Do not push until local build, route, metadata, and output-file checks pass.
+
+---
+
+## Phase 3 — Batch 3: performance optimization
+
+**Applied:** July 19, 2026
+
+Completed changes:
+
+- split each published case study into its own Vite/React entry so direct visits no longer download the homepage application code;
+- lazy-loaded case studies and the React Not Found fallback when routes are served through the development SPA entry;
+- generated a canonical intrinsic-dimension map from every supported image under `public/images`;
+- added width, height, asynchronous decoding, and fetch-priority hints to reusable screenshots and the About portrait;
+- changed portfolio project screenshots to lazy loading because the Selected Work section begins below the opening hero;
+- preloaded each case study’s primary proof image and gave eager hero screenshots high fetch priority;
+- replaced the CSS-level Google Fonts `@import` with document-level preconnect and stylesheet links;
+- added immutable browser caching only for Vite’s content-hashed `/assets/*` output while preserving Cloudflare’s normal behavior for HTML and replaceable images.
+
+### Required validation before commit
+
+```powershell
+npm run check
+git diff --check
+git status --short
+npm run preview
+```
+
+Performance validation:
+
+1. compare the new JavaScript output with the pre-Batch-3 baseline of approximately 288.36 kB / 80.98 kB gzip for the single main bundle;
+2. confirm the homepage, four direct case-study routes, hash navigation, screenshot lightboxes, and static 404 still work;
+3. confirm `dist/assets` contains separate route chunks rather than one case-study-heavy application bundle;
+4. confirm generated images include intrinsic width and height attributes in the rendered DOM;
+5. after deployment, verify direct case-study routes remain HTTP 200 and invalid routes remain HTTP 404.
+
+Do not push until the production preview, responsive layout, keyboard controls, and route checks pass.
