@@ -4,6 +4,7 @@ import { Hero } from './components/Hero'
 import { AboutSection } from './components/AboutSection'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
+import { TestimonialsCarousel } from './components/TestimonialsCarousel'
 import { Footer } from './components/Footer'
 import { PageMeta } from './components/PageMeta'
 import { featuredProjects, supportingProjects } from './data/projects'
@@ -103,6 +104,8 @@ function HomePage() {
           </section>
 
           <AboutSection />
+
+          <TestimonialsCarousel />
 
 
           <section id="contact" className="contact-section">
