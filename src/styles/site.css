@@ -1843,3 +1843,82 @@ h1 em { font-style: normal; color: var(--blue); }
   }
 }
 /* Testimonials carousel — end */
+/* Portfolio booking popup — start */
+.booking-button-shell {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+}
+
+.booking-button-target {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.booking-button-shell.is-ready .booking-fallback {
+  display: none;
+}
+
+/*
+ * Google inserts its scheduling button beside the target marker.
+ * These scoped rules make it match the portfolio without affecting
+ * any other buttons on the website.
+ */
+.booking-button-shell button {
+  min-height: 52px !important;
+  padding: 15px 21px !important;
+  border: 1px solid var(--blue) !important;
+  border-radius: 14px !important;
+  background: var(--blue) !important;
+  color: white !important;
+  box-shadow: none !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  cursor: pointer !important;
+  transition:
+    transform .2s ease,
+    background .2s ease !important;
+}
+
+.booking-button-shell button:hover {
+  background: var(--blue-dark) !important;
+  transform: translateY(-2px);
+}
+
+.booking-button-shell button:focus-visible {
+  outline: 3px solid var(--white) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px var(--blue-dark) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-button-shell button {
+    transition: none !important;
+  }
+}
+/* Portfolio booking popup — end */
+/* Adaptive mobile booking handoff — start */
+.booking-fallback {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: white;
+}
+
+.booking-fallback:hover {
+  background: var(--blue-dark);
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .booking-button-shell {
+    width: 100%;
+  }
+
+  .booking-button-shell .booking-fallback {
+    width: 100%;
+  }
+}
+/* Adaptive mobile booking handoff — end */
