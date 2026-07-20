@@ -5,6 +5,34 @@ import { SectionHeading } from './SectionHeading'
 const AUTOPLAY_DELAY = 8000
 const SWIPE_THRESHOLD = 52
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function renderHighlightedText(text, highlights = []) {
+  const phrases = highlights
+    .filter(Boolean)
+    .sort((firstPhrase, secondPhrase) => secondPhrase.length - firstPhrase.length)
+
+  if (phrases.length === 0) {
+    return text
+  }
+
+  const pattern = new RegExp(`(${phrases.map(escapeRegExp).join('|')})`, 'g')
+
+  return text.split(pattern).map((part, index) => {
+    if (!phrases.includes(part)) {
+      return part
+    }
+
+    return (
+      <mark key={`${part}-${index}`} className="testimonial-highlight">
+        {part}
+      </mark>
+    )
+  })
+}
+
 export function TestimonialsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
@@ -141,7 +169,9 @@ export function TestimonialsCarousel() {
           <div key={testimonial.id} className="testimonial-stage-content">
             <blockquote className="testimonial-quote">
               {testimonial.quote.split('\n\n').map((paragraph) => (
-                <p key={`${testimonial.id}-${paragraph.slice(0, 28)}`}>{paragraph}</p>
+                <p key={`${testimonial.id}-${paragraph.slice(0, 28)}`}>
+                  {renderHighlightedText(paragraph, testimonial.highlights)}
+                </p>
               ))}
             </blockquote>
 

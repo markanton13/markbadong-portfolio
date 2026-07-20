@@ -1645,6 +1645,18 @@ h1 em { font-style: normal; color: var(--blue); }
 .testimonial-quote p + p {
   margin-top: 22px;
 }
+
+.testimonial-highlight {
+  color: inherit;
+  background: linear-gradient(
+    180deg,
+    transparent 61%,
+    rgba(49,87,213,.17) 61%
+  );
+  font-weight: 800;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 .testimonial-stage.is-long .testimonial-quote p {
   font-size: clamp(18px, 2vw, 25px);
   line-height: 1.48;
