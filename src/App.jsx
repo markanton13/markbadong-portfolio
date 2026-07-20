@@ -201,9 +201,12 @@ function HomePage() {
                   <strong>Repositories and proof</strong>
                 </a>
 
-                <a href="/files/Mark-Anton-Badong-Resume.pdf" target="_blank" rel="noreferrer">
+                <a
+                  href="/files/Mark-Anton-Badong-Resume.pdf"
+                  download="Mark-Anton-Badong-Resume.pdf"
+                >
                   <span>Résumé</span>
-                  <strong>View public résumé</strong>
+                  <strong>Download résumé</strong>
                 </a>
               </div>
             </div>

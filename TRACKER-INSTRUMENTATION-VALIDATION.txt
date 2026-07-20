@@ -1,0 +1,43 @@
+MARKBADONG Portfolio - Phase 1 Instrumentation Validation
+Validated: 2026-07-20
+
+Branch:
+feature/tracker-instrumentation-disabled
+
+Collector used for testing:
+Local Cloudflare Worker
+http://127.0.0.1:8787/api/events
+
+Database used for testing:
+Local D1 only
+
+Disabled-mode validation:
+- Tracking bundle loaded
+- VITE_TRACKER_ENABLED=false
+- Events recorded: 0
+- Result: PASS
+
+Enabled-mode event validation:
+- page_view: PASS
+- project_view: PASS
+- resume_open: PASS
+- resume_download: PASS
+- github_click: PASS
+- linkedin_click: PASS
+- email_click: PASS
+- contact_click: PASS
+- booking_click: PASS
+- external_demo_click: PASS
+
+Additional validation:
+- Homepage entry initialized tracking
+- Standalone project entry initialized tracking
+- Interaction events stored with source route and target metadata
+- Duplicate handling remains server-owned
+- Failed analytics requests do not block normal navigation
+- Production collector was not used
+- Remote production D1 was not modified
+- Production tracking remains disabled by default
+
+Production enablement requirement:
+VITE_TRACKER_ENABLED=true must not be configured until the disabled production deployment is verified.
