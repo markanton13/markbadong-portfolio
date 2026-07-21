@@ -103,4 +103,29 @@ As a friend - I really appreciate how much effort you put into keeping us connec
       'make those around you better',
     ],
   },
-]
+  {
+    id: 'renz-cedric-capricho',
+    initials: 'RC',
+    name: 'Renz Cedric Capricho',
+    relationship: 'Former Teammate at Wipro · MIS Lead',
+    quote: `He is a great colleague who is easy to work with, adapts quickly to new challenges, and consistently delivers high-quality work. - MIS Lead`,
+    highlights: [
+      'adapts quickly to new challenges',
+      'consistently delivers high-quality work',
+    ],
+  },
+  {
+    id: 'rhess-rhen-facundo',
+    initials: 'RF',
+    name: 'Rhess Rhen Facundo',
+    relationship: 'Former Teammate at TTEC',
+    quote: `I’ve worked with Anton, and one thing I can always count on is his reliability. As far as I can remember, he’s always early for our shifts and makes sure he’s ready before work starts. He consistently meets the required metrics and always gets the job done.
+
+At first, Anton can seem quiet and a bit reserved, but once you get to know him, you’ll realize he’s someone who has a lot of valuable insights to share. Whether it’s about work or personal experiences, he’s always willing to offer helpful advice or a different perspective.
+
+He’s also someone you can rely on when unexpected problems come up. He takes the time to think things through, shares practical ideas, and helps find solutions. Working with Anton made our team stronger, and he definitely made the workplace more enjoyable and easier to get through.`,
+    highlights: [
+      'one thing I can always count on is his reliability',
+      'Working with Anton made our team stronger',
+    ],
+  },]
