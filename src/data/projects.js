@@ -65,7 +65,7 @@ export const featuredProjects = [
     image: '/images/projects/learning-library/library-overview.svg',
     imageAlt: 'Learning Library overview showing interactive guides, premium access, recovery, and operations controls.',
     caseStudyUrl: '/projects/learning-library',
-    githubUrl: 'https://github.com/markanton13/learn-markbadong-learning-library',
+    githubUrl: 'https://github.com/markanton13/learning-library-public-proof',
     releaseUrl: 'https://learn.markbadong.com',
     releaseLabel: 'Live platform',
   },

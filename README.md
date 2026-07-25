@@ -13,13 +13,14 @@ Evidence-led personal portfolio and case-study platform for **Mark Anton**, posi
 
 **Phase 4 complete — career-source activation, public GitHub proof, and portfolio integration.**
 
-The portfolio now connects four flagship case studies to dedicated public proof repositories:
+The portfolio now connects five flagship case studies to dedicated public proof repositories:
 
 | Project | Case study | Public GitHub proof |
 |---|---|---|
 | PersonalVABot | https://markbadong.com/projects/personalvabot | https://github.com/markanton13/personalvabot |
 | MarkHQ Assistant | https://markbadong.com/projects/markhq | https://github.com/markanton13/markhq-assistant-downloads |
 | ApplyLang | https://markbadong.com/projects/applylang | https://github.com/markanton13/applylang |
+| Learning Library | https://markbadong.com/projects/learning-library | https://github.com/markanton13/learning-library-public-proof |
 | LeaveFlow | https://markbadong.com/projects/leaveflow | https://github.com/markanton13/leaveflow |
 
 PersonalVABot also has a public Windows Desktop Beta prerelease:
@@ -31,7 +32,7 @@ https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta
 ## Completed portfolio foundation
 
 - Responsive homepage and project cards
-- Four full flagship case studies
+- Five full flagship case studies
 - Real screenshots and an embedded LeaveFlow demo
 - Reusable accessible screenshot lightbox
 - Public ATS General résumé
@@ -54,6 +55,7 @@ https://github.com/markanton13/personalvabot/releases/tag/v0.3.12-beta
 /projects/personalvabot
 /projects/markhq
 /projects/applylang
+/projects/learning-library
 /projects/leaveflow
 /files/Mark-Anton-Badong-Resume.pdf
 ```
@@ -73,6 +75,10 @@ Railway-hosted Discord operations system for task pipelines, private workspaces,
 ### ApplyLang
 
 Complete Discord career operations system for reusable career sources, frozen application snapshots, truth-safe prompt packages, dashboards, follow-ups, and résumé version control.
+
+### Learning Library
+
+Cloudflare Pages, Workers, and D1 interactive learning platform with 10 guides, registry-driven access, test payment and rewarded-access flows, passwordless recovery, analytics, backups, and launch controls.
 
 ### LeaveFlow
 
@@ -127,7 +133,7 @@ git status --short
 After deployment, verify:
 
 - homepage;
-- all four direct case-study routes;
+- all five direct case-study routes;
 - résumé link;
 - every GitHub proof link;
 - PersonalVABot release;

@@ -537,7 +537,7 @@ Update all résumé sources, the Master Career Profile, ApplyLang canonical sour
 
 **Complete**
 
-- four flagship case studies;
+- five flagship case studies;
 - real screenshots and LeaveFlow demo;
 - reusable screenshot lightbox;
 - portrait-led About section;
@@ -572,7 +572,7 @@ Update all résumé sources, the Master Career Profile, ApplyLang canonical sour
 - MarkHQ public proof repository;
 - ApplyLang private/public split;
 - LeaveFlow private/public split;
-- four GitHub proof links integrated into portfolio case studies and project cards;
+- five GitHub proof links integrated into portfolio case studies and project cards;
 - GitHub profile rewritten around current positioning and projects;
 - repository metadata and homepage links standardized;
 - final public-link and route QA completed before merge.
@@ -585,7 +585,7 @@ The GitHub profile README should lead with:
 
 1. portfolio positioning;
 2. `markbadong.com`;
-3. four flagship systems;
+3. five flagship systems;
 4. practical capabilities;
 5. documentation-first and truth-safe working style.
 
@@ -650,7 +650,7 @@ npm run preview
 ### Portfolio
 
 - homepage project-card links;
-- four case-study GitHub buttons;
+- five case-study GitHub buttons;
 - PersonalVABot release button;
 - LeaveFlow demo anchor;
 - résumé download;
@@ -662,7 +662,7 @@ npm run preview
 
 ### GitHub
 
-- four repositories are public;
+- five repositories are public;
 - private source repositories remain private;
 - README screenshots render;
 - internal documentation links work;
