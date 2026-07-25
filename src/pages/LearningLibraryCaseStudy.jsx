@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { ExpandableImage } from '../components/ExpandableImage'
+import { PageMeta } from '../components/PageMeta'
 
 const imageBase = '/images/projects/learning-library'
 
@@ -63,6 +64,7 @@ export function LearningLibraryCaseStudy() {
 
   return (
     <>
+      <PageMeta pageKey="learningLibrary" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div id="top" className="page-shell case-study-shell">
         <Header mode="case-study" />
@@ -87,7 +89,7 @@ export function LearningLibraryCaseStudy() {
                 <div className="hero-actions">
                   <a className="button button-primary" href="https://learn.markbadong.com" target="_blank" rel="noreferrer">Open live demo</a>
                   <a className="button button-secondary" href="#case-overview">Explore the case study</a>
-                  <a className="button button-secondary" href="https://learn.markbadong.com/demo/" target="_blank" rel="noreferrer">Open guided tour</a>
+                  <a className="button button-secondary" href="#architecture">View architecture</a>
                 </div>
               </div>
 
@@ -154,7 +156,7 @@ export function LearningLibraryCaseStudy() {
             </article>
           </section>
 
-          <section className="case-section case-section-dark">
+          <section id="architecture" className="case-section case-section-dark">
             <div className="case-section-heading">
               <p className="eyebrow">Architecture</p>
               <h2>Public learning, protected access, provider integrations, and private operations remain separate.</h2>
@@ -176,7 +178,7 @@ export function LearningLibraryCaseStudy() {
             </div>
           </section>
 
-          <section className="case-section">
+          <section id="demo" className="case-section">
             <div className="case-section-heading">
               <p className="eyebrow">Access lifecycle</p>
               <h2>Learners can unlock access without creating a traditional account.</h2>
@@ -294,7 +296,7 @@ export function LearningLibraryCaseStudy() {
             </div>
           </section>
 
-          <section className="case-section case-section-dark">
+          <section id="validation" className="case-section case-section-dark">
             <div className="case-section-heading">
               <p className="eyebrow">Validation</p>
               <h2>Each new layer was tested against the workflows that already worked.</h2>
@@ -325,14 +327,14 @@ export function LearningLibraryCaseStudy() {
 
           <section className="case-section case-cta-section">
             <p className="eyebrow">Explore the system</p>
-            <h2>Open the deployed library and follow the public guided tour.</h2>
+            <h2>Open the deployed library and review the live access experience.</h2>
             <p>
-              The live demo includes free guides, a premium access gate, test payment and rewarded-ad flows, recovery, and visible test-mode disclosures.
+              The live platform includes free guides, a premium access gate, test payment and rewarded-ad flows, recovery, and visible portfolio-mode disclosures.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="https://learn.markbadong.com" target="_blank" rel="noreferrer">Open Learning Library</a>
-              <a className="button button-secondary" href="https://learn.markbadong.com/demo/" target="_blank" rel="noreferrer">View demo tour</a>
-              <a className="button button-secondary" href="https://learn.markbadong.com/architecture/" target="_blank" rel="noreferrer">View architecture</a>
+              <a className="button button-secondary" href="https://learn.markbadong.com/pricing/" target="_blank" rel="noreferrer">View access options</a>
+              <a className="button button-secondary" href="https://learn.markbadong.com/support/" target="_blank" rel="noreferrer">View recovery support</a>
             </div>
           </section>
         </main>

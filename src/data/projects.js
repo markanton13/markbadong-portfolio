@@ -66,7 +66,8 @@ export const featuredProjects = [
     imageAlt: 'Learning Library overview showing interactive guides, premium access, recovery, and operations controls.',
     caseStudyUrl: '/projects/learning-library',
     githubUrl: 'https://github.com/markanton13/learn-markbadong-learning-library',
-    demoUrl: 'https://learn.markbadong.com',
+    releaseUrl: 'https://learn.markbadong.com',
+    releaseLabel: 'Live platform',
   },
   {
     slug: 'childcare-culture',

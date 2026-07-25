@@ -7,20 +7,32 @@ export const capabilities = [
   },
   {
     number: '02',
-    title: 'Automation & Systems',
+    title: 'Training, QA & Documentation',
     description:
-      'Practical tools, bots, dashboards, and process models that reduce manual work and make complex operations easier to follow.',
+      'Process training, defect reproduction, structured QA, SOP creation, onboarding support, regression testing, and quality-focused workflow improvement.',
   },
   {
     number: '03',
-    title: 'Web & CRM Implementation',
+    title: 'Automation & Workflow Systems',
     description:
-      'Responsive websites, internal applications, GoHighLevel builds, forms, calendars, lead flows, and conversion-focused interfaces.',
+      'Practical bots, dashboards, event-driven workflows, operational controls, and process models that reduce manual work and keep decisions traceable.',
   },
   {
     number: '04',
-    title: 'QA, Training & Documentation',
+    title: 'Web & CRM Implementation',
     description:
-      'Process testing, defect reproduction, structured training, SOP creation, onboarding support, and quality-focused workflow improvement.',
+      'Responsive web systems, internal applications, GoHighLevel builds, forms, calendars, lead flows, and accessible conversion-focused interfaces.',
+  },
+  {
+    number: '05',
+    title: 'Serverless Platforms & Data',
+    description:
+      'Cloudflare Pages, Workers, D1, route middleware, signed access, database migrations, backups, analytics, and fail-closed production safeguards.',
+  },
+  {
+    number: '06',
+    title: 'Integrations & Access Operations',
+    description:
+      'Payment webhooks, transactional email, Turnstile verification, rewarded-access flows, passwordless recovery, device limits, and launch controls.',
   },
 ]

@@ -40,7 +40,7 @@ function HomePage() {
         <main id="main-content">
           <Hero />
           <section className="trust-strip" aria-label="Core strengths">
-            <span>Workflow design</span><span>Automation</span><span>Web systems</span><span>Quality assurance</span><span>Training & SOPs</span>
+            <span>Workflow design</span><span>Automation</span><span>Serverless systems</span><span>Quality assurance</span><span>Training & SOPs</span>
           </section>
           <section id="work" className="section section-work">
             <SectionHeading eyebrow="Selected work" title="Systems designed around real work—not just screens." copy="My strongest projects combine operations thinking, practical technology, careful testing, and clear user flows." />
