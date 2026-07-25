@@ -15,6 +15,7 @@ export default defineConfig({
         markhq: resolve(projectRoot, 'projects/markhq.html'),
         applylang: resolve(projectRoot, 'projects/applylang.html'),
         leaveflow: resolve(projectRoot, 'projects/leaveflow.html'),
+        learningLibrary: resolve(projectRoot, 'projects/learning-library.html'),
       },
     },
   },

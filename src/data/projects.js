@@ -51,6 +51,24 @@ export const featuredProjects = [
     githubUrl: 'https://github.com/markanton13/applylang',
   },
   {
+    slug: 'learning-library',
+    name: 'Learning Library',
+    eyebrow: 'Serverless interactive learning platform',
+    summary:
+      'A Cloudflare-based learning system combining ten interactive guides with premium access control, test payments, rewarded unlocks, passwordless recovery, analytics, and launch operations.',
+    outcome:
+      'Deployed as a live portfolio demo with verified end-to-end purchase, rewarded access, recovery, device-limit, immutable-clock, analytics, backup, and emergency-pause workflows.',
+    role: 'Creator, system designer, access architecture, QA',
+    tools: ['Cloudflare Workers', 'D1', 'PayMongo', 'Resend'],
+    status: 'Live portfolio demo',
+    metric: '10 guides · 15 D1 tables',
+    image: '/images/projects/learning-library/library-overview.svg',
+    imageAlt: 'Learning Library overview showing interactive guides, premium access, recovery, and operations controls.',
+    caseStudyUrl: '/projects/learning-library',
+    githubUrl: 'https://github.com/markanton13/learn-markbadong-learning-library',
+    demoUrl: 'https://learn.markbadong.com',
+  },
+  {
     slug: 'childcare-culture',
     name: 'Childcare Culture & Co.',
     eyebrow: 'GoHighLevel client website',
