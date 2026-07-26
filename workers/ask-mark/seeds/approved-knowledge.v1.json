@@ -1,0 +1,553 @@
+{
+  "seedVersion": "2B.1",
+  "approvedAt": "2026-07-27T00:00:00Z",
+  "approvedBy": "mark-anton-badong",
+  "sources": [
+    {
+      "id": "src_master",
+      "key": "master-career-profile-v5-2026-07-25",
+      "type": "master_career_profile",
+      "title": "Mark Anton Badong — Master Career Profile v5",
+      "location": "MARK_BADONG_MASTER_CAREER_PROFILE_V5_2026-07-25.md",
+      "snapshot": {
+        "id": "snap_master",
+        "version": "initial",
+        "content": "Canonical approved career identity, professional history, education, credentials, proof points, projects, working style, role classification, AI disclosure, contact details, and synchronization rules."
+      }
+    },
+    {
+      "id": "src_handoff",
+      "key": "ask-mark-master-handoff",
+      "type": "manual_approved",
+      "title": "Ask Mark — Next Thread Master Handoff",
+      "location": "ASK-MARK-NEXT-THREAD-MASTER-HANDOFF.md",
+      "snapshot": {
+        "id": "snap_handoff",
+        "version": "initial",
+        "content": "Approved Ask Mark career foundation, privacy boundaries, role-experience rules, human approval model, date rule, and zero-cost constraints."
+      }
+    },
+    {
+      "id": "src_bible",
+      "key": "ask-mark-project-bible",
+      "type": "manual_approved",
+      "title": "Ask Mark — AI Portfolio Assistant Project Bible",
+      "location": "MARKBADONG-AI-PORTFOLIO-ASSISTANT-PROJECT-BIBLE.md",
+      "snapshot": {
+        "id": "snap_bible",
+        "version": "initial",
+        "content": "Approved product scope, knowledge categories, project coverage, contact journey, prohibited claims, security rules, accessibility, and conversational tone."
+      }
+    },
+    {
+      "id": "src_repo",
+      "key": "portfolio-static-baseline",
+      "type": "portfolio",
+      "title": "markbadong.com — Ask Mark static baseline",
+      "location": "C:/Users/Mark/markbadong-portfolio",
+      "snapshot": {
+        "id": "snap_repo",
+        "version": "initial",
+        "content": "Approved public routes, project summaries and statuses, résumé route, contact and booking routes, and frozen deterministic fallback."
+      }
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "k_identity",
+      "key": "assistant.identity",
+      "kind": "faq",
+      "category": "assistant",
+      "title": "Ask Mark identity",
+      "content": "Ask Mark is Mark Anton Badong's AI portfolio concierge. It uses approved professional information and cannot make promises or private disclosures on Mark's behalf.",
+      "sources": [
+        "snap_bible",
+        "snap_repo"
+      ],
+      "terms": [
+        "ask mark",
+        "who are you",
+        "portfolio concierge"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_positioning",
+      "key": "profile.positioning",
+      "kind": "fact",
+      "category": "profile",
+      "title": "Master positioning",
+      "content": "Mark's approved master positioning is Operations, Automation & Systems Specialist.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "professional title",
+        "positioning",
+        "what does mark do"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_summary",
+      "key": "profile.summary",
+      "kind": "fact",
+      "category": "profile",
+      "title": "Professional summary",
+      "content": "Mark is an operations, automation, and systems-focused professional with 8+ years of combined experience across training, geospatial data operations, quality assurance, technical and customer support, documentation, reporting, workflow improvement, and hands-on automation, CRM, web, and internal-tool projects.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "who is mark",
+        "about mark",
+        "professional summary"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_history",
+      "key": "experience.history",
+      "kind": "experience",
+      "category": "experience",
+      "title": "Career history",
+      "content": "Mark's approved history is Process Trainer at Wipro supporting Google from 2023 to Present; Geospatial Data Operator at Wipro supporting Google from 2022 to 2023; and Customer and Technical Support across Capital One, Verizon, and Comcast programs from 2017 to 2021. Program names must not be rewritten as direct employment.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "work experience",
+        "career history",
+        "employment history"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_trainer",
+      "key": "experience.trainer",
+      "kind": "experience",
+      "category": "experience",
+      "title": "Process Trainer",
+      "content": "As a Process Trainer at Wipro supporting Google, Mark delivers onboarding, refreshers, policy guidance, SOPs, learning materials, assessments, reports, and quality-focused support for geospatial operations.",
+      "sources": [
+        "snap_master",
+        "snap_repo"
+      ],
+      "terms": [
+        "process trainer",
+        "trainer",
+        "training experience"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_geo",
+      "key": "experience.geospatial",
+      "kind": "experience",
+      "category": "experience",
+      "title": "Geospatial Data Operator",
+      "content": "As a Geospatial Data Operator at Wipro supporting Google from 2022 to 2023, Mark validated road, traffic, and speed-limit data against mapping rules, policies, and source evidence using Atlas and Calypso.",
+      "sources": [
+        "snap_master",
+        "snap_repo"
+      ],
+      "terms": [
+        "geospatial",
+        "gis",
+        "atlas",
+        "calypso"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_support",
+      "key": "experience.support",
+      "kind": "experience",
+      "category": "experience",
+      "title": "Customer and technical support",
+      "content": "From 2017 to 2021, Mark worked in customer and technical support across Capital One, Verizon, and Comcast programs, handling account, billing, service, connectivity, device, and technical concerns through structured troubleshooting and documentation.",
+      "sources": [
+        "snap_master",
+        "snap_repo"
+      ],
+      "terms": [
+        "customer support",
+        "customer service",
+        "technical support",
+        "troubleshooting"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_education",
+      "key": "education.cs",
+      "kind": "education",
+      "category": "education",
+      "title": "Education",
+      "content": "Mark earned a Bachelor of Science in Computer Science from Bicol University.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "education",
+        "college",
+        "university",
+        "bicol university"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_credentials",
+      "key": "credentials.approved",
+      "kind": "credential",
+      "category": "credentials",
+      "title": "Credentials",
+      "content": "Mark's approved credentials are Civil Service Examination — Professional Passer, Train the Trainer — Wipro Philippines, and Google Cloud GenAI — Level 1.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "certifications",
+        "credentials",
+        "civil service",
+        "genai"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_proof",
+      "key": "profile.proof",
+      "kind": "fact",
+      "category": "proof",
+      "title": "Verified proof points",
+      "content": "Approved proof points include up to a 90% efficiency gain in a supported assessment and reporting workflow, a 5/5 Wipro L&D session evaluation, PersonalVABot v0.3.12 with 72 templates, and MarkHQ deployed in production on Railway. Each proof point must remain attached to its original context.",
+      "sources": [
+        "snap_master",
+        "snap_repo"
+      ],
+      "terms": [
+        "proof",
+        "metrics",
+        "90 percent",
+        "5/5"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_style",
+      "key": "working_style.professional",
+      "kind": "working_style",
+      "category": "working_style",
+      "title": "Working style",
+      "content": "Mark works professionally, communicates directly, asks clarifying questions, communicates early when deadlines may be affected, documents mistakes, attempts corrections, and performs best with clear expectations and responsible autonomy.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "working style",
+        "work ethic",
+        "communication style"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_ai",
+      "key": "working_style.ai",
+      "kind": "working_style",
+      "category": "working_style",
+      "title": "AI-assisted development",
+      "content": "Development used an AI-assisted workflow. Product vision, requirements, workflow design, validation, release direction, and final decisions remained under Mark's ownership.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "ai use",
+        "ai assisted",
+        "uses ai"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_direct",
+      "key": "roles.direct",
+      "kind": "role_classification",
+      "category": "role_fit",
+      "title": "Direct professional evidence",
+      "content": "Mark has direct professional experience in training, operations, customer support, technical support, geospatial data work, data quality, and QA or policy-compliance review.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "direct experience",
+        "operations role",
+        "support role"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_project_roles",
+      "key": "roles.project",
+      "kind": "role_classification",
+      "category": "role_fit",
+      "title": "Hands-on project evidence",
+      "content": "Mark has hands-on project experience in GoHighLevel and CRM implementation, frontend and web development, internal tools, automation, Cloudflare systems, and Discord operations systems. This must not be presented as formal engineering employment.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "project experience",
+        "frontend development",
+        "gohighlevel",
+        "automation"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_transfer",
+      "key": "roles.transferable",
+      "kind": "role_classification",
+      "category": "role_fit",
+      "title": "Transferable evidence",
+      "content": "Mark has transferable experience for virtual assistance, administrative and executive support, project coordination, process documentation, and workflow support.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "virtual assistant",
+        "executive assistant",
+        "project coordination"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_bookkeeping",
+      "key": "roles.bookkeeping",
+      "kind": "role_classification",
+      "category": "role_fit",
+      "title": "Bookkeeping foundation",
+      "content": "Mark has foundational bookkeeping knowledge and QuickBooks familiarity covering income and expense tracking, categorization, invoices, bills, and reconciliation concepts. This is not prior bookkeeping employment.",
+      "sources": [
+        "snap_master",
+        "snap_handoff"
+      ],
+      "terms": [
+        "bookkeeping",
+        "quickbooks",
+        "reconciliation"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_private",
+      "key": "boundary.private",
+      "kind": "privacy_boundary",
+      "category": "guardrail",
+      "title": "Private information boundary",
+      "content": "Ask Mark must not disclose health details, salary, private relationships, private phone numbers, secrets, credentials, API keys, confidential employer or client information, or unapproved private conversations.",
+      "sources": [
+        "snap_handoff",
+        "snap_bible"
+      ],
+      "terms": [
+        "health",
+        "salary",
+        "phone number",
+        "private information"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_unsupported",
+      "key": "boundary.unsupported",
+      "kind": "unsupported_boundary",
+      "category": "guardrail",
+      "title": "Unsupported claims boundary",
+      "content": "Ask Mark must not invent skills, employment, results, metrics, rates, availability, schedules, commitments, seniority, completed features, or contractual promises. It must state when approved evidence is insufficient.",
+      "sources": [
+        "snap_handoff",
+        "snap_bible"
+      ],
+      "terms": [
+        "unsupported",
+        "rate",
+        "availability",
+        "commitment"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_no_web",
+      "key": "boundary.no_web",
+      "kind": "unsupported_boundary",
+      "category": "guardrail",
+      "title": "No public-web search",
+      "content": "Ask Mark does not browse or search the public internet. It uses approved portfolio knowledge and routes current-confirmation questions to Mark.",
+      "sources": [
+        "snap_handoff",
+        "snap_bible"
+      ],
+      "terms": [
+        "search the internet",
+        "browse the web",
+        "public internet"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "k_contact",
+      "key": "contact.actions",
+      "kind": "action",
+      "category": "contact",
+      "title": "Public contact actions",
+      "content": "Visitors may use the portfolio contact section, email markantonbadong13@gmail.com, view the public résumé, open LinkedIn or GitHub, or use the approved Google Calendar booking link. Ask Mark must not invent availability, pricing, or commitments.",
+      "sources": [
+        "snap_master",
+        "snap_repo"
+      ],
+      "terms": [
+        "contact mark",
+        "email mark",
+        "resume",
+        "book a call"
+      ],
+      "payload": {
+        "email": "markantonbadong13@gmail.com",
+        "contactPath": "/#contact",
+        "resumePath": "/files/Mark-Anton-Badong-Resume.pdf",
+        "bookingUrl": "https://calendar.app.google/2KdUkkmSyNiY3DUv8",
+        "linkedinUrl": "https://linkedin.com/in/markanton13",
+        "githubUrl": "https://github.com/markanton13"
+      }
+    },
+    {
+      "id": "k_project_personalvabot",
+      "key": "project.personalvabot",
+      "kind": "project",
+      "category": "project",
+      "title": "PersonalVABot",
+      "content": "A local-first Windows operations platform connecting client records, projects, task states, attendance, billing, documents, backups, and workflow history. It is a Windows beta, not a public SaaS.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "personalvabot",
+        "personal va bot"
+      ],
+      "payload": {
+        "route": "/projects/personalvabot"
+      }
+    },
+    {
+      "id": "k_project_markhq",
+      "key": "project.markhq",
+      "kind": "project",
+      "category": "project",
+      "title": "MarkHQ Assistant",
+      "content": "A Railway-hosted Discord operations system for private workspaces, onboarding, task pipelines, approvals, documentation, reminders, backups, and health monitoring. It is deployed in production.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "markhq",
+        "discord operations bot"
+      ],
+      "payload": {
+        "route": "/projects/markhq"
+      }
+    },
+    {
+      "id": "k_project_applylang",
+      "key": "project.applylang",
+      "kind": "project",
+      "category": "project",
+      "title": "ApplyLang",
+      "content": "A completed Discord workflow for reusable career sources, application records, résumé snapshots, truth-safe prompt packages, follow-ups, and career tracking. A future web platform remains planned.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "applylang",
+        "career operations bot"
+      ],
+      "payload": {
+        "route": "/projects/applylang"
+      }
+    },
+    {
+      "id": "k_project_learning_library",
+      "key": "project.learning_library",
+      "kind": "project",
+      "category": "project",
+      "title": "Learning Library",
+      "content": "A live Cloudflare portfolio demonstration combining ten interactive guides with access control, test payments, rewarded unlocks, recovery, analytics, backups, device limits, and launch safeguards.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "learning library",
+        "interactive guides"
+      ],
+      "payload": {
+        "route": "/projects/learning-library"
+      }
+    },
+    {
+      "id": "k_project_funnel_lab",
+      "key": "project.funnel_lab",
+      "kind": "project",
+      "category": "project",
+      "title": "Landing & Funnel Portfolio Lab",
+      "content": "A live collection of seven responsive landing-page and funnel experiences across SaaS, coaching, local services, digital products, dental, fitness, and construction.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "funnel lab",
+        "landing pages",
+        "funnels"
+      ],
+      "payload": {
+        "route": "/projects/funnel-lab"
+      }
+    },
+    {
+      "id": "k_project_leaveflow",
+      "key": "project.leaveflow",
+      "kind": "project",
+      "category": "project",
+      "title": "LeaveFlow",
+      "content": "A functional React, Node.js, Express, and MySQL leave-management system connecting employee requests, manager decisions, balances, calendars, status history, and administration.",
+      "sources": [
+        "snap_repo",
+        "snap_master"
+      ],
+      "terms": [
+        "leaveflow",
+        "leave management app"
+      ],
+      "payload": {
+        "route": "/projects/leaveflow"
+      }
+    }
+  ],
+  "release": {
+    "id": "release_0001",
+    "releaseNo": 1,
+    "title": "Initial canonical approved knowledge"
+  }
+}

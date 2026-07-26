@@ -2,18 +2,17 @@
 
 This directory contains the isolated Cloudflare Worker and D1 foundation for Ask Mark.
 
-## Batch 2A scope
+## Completed checkpoints
 
-This first batch establishes only the database model for:
+Batch 2A established and locally validated the versioned schema, publication model,
+review trail, and audit foundation.
 
-- system settings and registered canonical sources
-- immutable source snapshots
-- knowledge items and immutable knowledge versions
-- provenance, matcher terms, and knowledge relations
-- publication releases and atomic active-release selection
-- review decisions and append-only audit events
+Batch 2B adds a reviewed canonical seed manifest, deterministic hashes, provenance,
+matcher terms, a local-only importer, an explicit local reset command, and a
+disposable seed validation test.
 
-It does **not** add public query endpoints, visitor submissions, Workers AI, moderation intake, or production deployment.
+It does **not** add public query endpoints, visitor submissions, Workers AI,
+moderation intake, a remote D1 database, or production deployment.
 
 ## Locked rules
 
@@ -21,26 +20,28 @@ It does **not** add public query endpoints, visitor submissions, Workers AI, mod
 - Visitor statements never become active knowledge automatically.
 - Approved content is versioned; prior versions are never overwritten.
 - Publication activates an immutable release snapshot.
-- Rollback reactivates a prior release and preserves the audit trail.
 - The existing browser matcher remains the deterministic fallback.
-- Ask Mark uses a D1 database separate from the portfolio analytics database.
-- No paid service, paid vector database, Resend dependency, or public-web search is introduced.
+- Ask Mark uses a D1 database separate from portfolio analytics.
+- No paid service, Resend dependency, vector database, or public-web search is introduced.
+- The seed excludes Mark's phone number and private information.
+- The importer refuses to overwrite an already populated database.
 
-## Planned migration order
+## Local commands
 
-1. `0001_system_sources.sql`
-2. `0002_knowledge_core.sql`
-3. `0003_publication.sql`
-4. `0004_review_audit.sql`
+```powershell
+npm run check:ask-mark-schema
+npm run check:ask-mark-seed
+npm run askmark:d1:reset:local
+npm run askmark:d1:list:local
+```
 
-The migrations are additive and forward-only. No destructive migration should be introduced without a separately approved backup and rollback plan.
+`askmark:d1:reset:local` deletes only the ignored local state under
+`workers/ask-mark/.wrangler/state`, reapplies migrations, and imports the approved seed.
 
 ## Next checkpoint
 
-After reviewing these migrations:
+Batch 2C will add the first read-only Worker endpoints:
 
-1. Create the D1 database locally or through Wrangler.
-2. Add the real non-secret Wrangler binding configuration.
-3. Replay all migrations from an empty local database.
-4. Add schema-validation tests.
-5. Begin the canonical source importer in Batch 2B.
+- `GET /v1/health`
+- `GET /v1/bootstrap`
+- `POST /v1/query`

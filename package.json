@@ -10,9 +10,12 @@
     "preview": "vite preview",
     "check:ask-mark": "node scripts/check-ask-mark.mjs",
     "check:ask-mark-schema": "node scripts/check-ask-mark-schema.mjs",
+    "check:ask-mark-seed": "node scripts/check-ask-mark-seed.mjs",
     "askmark:d1:migrate:local": "wrangler d1 migrations apply ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
     "askmark:d1:list:local": "wrangler d1 migrations list ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
-    "check": "npm run lint && npm run check:ask-mark && npm run check:ask-mark-schema && npm run build"
+    "askmark:d1:seed:local": "node scripts/import-ask-mark-seed.mjs --persist-to workers/ask-mark/.wrangler/state",
+    "askmark:d1:reset:local": "node scripts/reset-ask-mark-local.mjs",
+    "check": "npm run lint && npm run check:ask-mark && npm run check:ask-mark-schema && npm run check:ask-mark-seed && npm run build"
   },
   "dependencies": {
     "react": "^19.2.7",
