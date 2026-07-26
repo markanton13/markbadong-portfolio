@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import '../index.css'
 import '../styles/site.css'
 import { initializeTracking } from '../lib/analytics.js'
+import { LazyAskMarkAssistant } from '../components/assistant/LazyAskMarkAssistant.jsx'
+
 
 export function mountPage(PageComponent) {
   initializeTracking()
@@ -12,7 +14,10 @@ export function mountPage(PageComponent) {
 
   createRoot(root).render(
     <StrictMode>
-      <PageComponent />
+      <>
+        <PageComponent />
+        <LazyAskMarkAssistant />
+      </>
     </StrictMode>,
   )
 }

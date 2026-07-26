@@ -32,6 +32,9 @@ const FunnelLabCaseStudy = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })),
 )
+const AskMarkAssistant = lazy(() =>
+  import('./components/assistant/AskMarkAssistant').then((module) => ({ default: module.AskMarkAssistant })),
+)
 
 function HomePage() {
   return (
@@ -86,14 +89,25 @@ function renderLazyPage(PageComponent) { return <Suspense fallback={null}><PageC
 
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
-  if (pathname === '/projects/personalvabot') return renderLazyPage(PersonalVABotCaseStudy)
-  if (pathname === '/projects/markhq') return renderLazyPage(MarkHQCaseStudy)
-  if (pathname === '/projects/leaveflow') return renderLazyPage(LeaveFlowCaseStudy)
-  if (pathname === '/projects/applylang') return renderLazyPage(ApplyLangCaseStudy)
-  if (pathname === '/projects/learning-library') return renderLazyPage(LearningLibraryCaseStudy)
-  if (pathname === '/projects/funnel-lab') return renderLazyPage(FunnelLabCaseStudy)
-  if (pathname === '/') return <HomePage />
-  return renderLazyPage(NotFoundPage)
+  let page
+
+  if (pathname === '/projects/personalvabot') page = renderLazyPage(PersonalVABotCaseStudy)
+  else if (pathname === '/projects/markhq') page = renderLazyPage(MarkHQCaseStudy)
+  else if (pathname === '/projects/leaveflow') page = renderLazyPage(LeaveFlowCaseStudy)
+  else if (pathname === '/projects/applylang') page = renderLazyPage(ApplyLangCaseStudy)
+  else if (pathname === '/projects/learning-library') page = renderLazyPage(LearningLibraryCaseStudy)
+  else if (pathname === '/projects/funnel-lab') page = renderLazyPage(FunnelLabCaseStudy)
+  else if (pathname === '/') page = <HomePage />
+  else page = renderLazyPage(NotFoundPage)
+
+  return (
+    <>
+      {page}
+      <Suspense fallback={null}>
+        <AskMarkAssistant />
+      </Suspense>
+    </>
+  )
 }
 
 export default App
