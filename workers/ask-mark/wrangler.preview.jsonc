@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "ask-mark-api-preview",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-24",
+  "account_id": "e6e74a0a69aaa74728bcfdecb65b41be",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "ASK_MARK_DB",
+      "database_name": "ask-mark-knowledge-preview",
+      "database_id": "98af64c8-f604-45c7-bc63-a367d2bda1b0",
+      "migrations_dir": "migrations",
+      "migrations_table": "d1_migrations"
+    }
+  ]
+}
