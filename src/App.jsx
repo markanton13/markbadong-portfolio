@@ -26,6 +26,9 @@ const ApplyLangCaseStudy = lazy(() =>
 const LearningLibraryCaseStudy = lazy(() =>
   import('./pages/LearningLibraryCaseStudy').then((module) => ({ default: module.LearningLibraryCaseStudy })),
 )
+const FunnelLabCaseStudy = lazy(() =>
+  import('./pages/FunnelLabCaseStudy').then((module) => ({ default: module.FunnelLabCaseStudy })),
+)
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -88,6 +91,7 @@ function App() {
   if (pathname === '/projects/leaveflow') return renderLazyPage(LeaveFlowCaseStudy)
   if (pathname === '/projects/applylang') return renderLazyPage(ApplyLangCaseStudy)
   if (pathname === '/projects/learning-library') return renderLazyPage(LearningLibraryCaseStudy)
+  if (pathname === '/projects/funnel-lab') return renderLazyPage(FunnelLabCaseStudy)
   if (pathname === '/') return <HomePage />
   return renderLazyPage(NotFoundPage)
 }

@@ -170,6 +170,17 @@ export const pageSeo = {
       'Learning Library case study showing interactive guides, premium access, recovery, analytics, and serverless operations.',
     keywords: ['Learning Library', 'Cloudflare Workers', 'Cloudflare D1', 'serverless', 'PayMongo', 'Resend', 'rewarded access', 'passwordless recovery'],
   }),
+  funnelLab: caseStudy({
+    key: 'funnel-lab',
+    name: 'Landing & Funnel Portfolio Lab',
+    title: 'Landing & Funnel Portfolio Lab Case Study | Mark Anton',
+    description:
+      'Landing & Funnel Portfolio Lab is a live collection of seven interactive conversion experiences with distinct visual systems, responsive flows, Cloudflare deployment, and Resend inquiry delivery.',
+    image: '/images/seo/funnel-lab-og.png',
+    imageAlt:
+      'Landing and Funnel Portfolio Lab case study by Mark Anton, featuring seven distinct conversion demos.',
+    keywords: ['landing pages', 'sales funnels', 'conversion design', 'responsive frontend', 'Cloudflare Pages', 'Pages Functions', 'Resend', 'portfolio lab'],
+  }),
   notFound: {
     title: 'Page Not Found | Mark Anton',
     description:

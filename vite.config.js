@@ -16,6 +16,7 @@ export default defineConfig({
         applylang: resolve(projectRoot, 'projects/applylang.html'),
         leaveflow: resolve(projectRoot, 'projects/leaveflow.html'),
         learningLibrary: resolve(projectRoot, 'projects/learning-library.html'),
+        funnelLab: resolve(projectRoot, 'projects/funnel-lab.html'),
       },
     },
   },

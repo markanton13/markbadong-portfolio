@@ -20,6 +20,8 @@ const PROJECT_BY_ROUTE = Object.freeze({
   '/projects/markhq': 'markhq',
   '/projects/leaveflow': 'leaveflow',
   '/projects/applylang': 'applylang',
+  '/projects/learning-library': 'learning-library',
+  '/projects/funnel-lab': 'funnel-lab',
 })
 
 const APPROVED_ROUTES = new Set([

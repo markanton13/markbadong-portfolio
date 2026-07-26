@@ -1934,3 +1934,94 @@ h1 em { font-style: normal; color: var(--blue); }
   }
 }
 /* Adaptive mobile booking handoff — end */
+
+
+/* Landing & Funnel Portfolio Lab case study */
+.project-card-funnel-lab .project-visual-real img {
+  object-position: center top;
+}
+
+.funnel-case-gallery {
+  margin-top: 74px;
+}
+
+.funnel-case-gallery .case-figure img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.funnel-style-grid,
+.funnel-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.funnel-style-grid article,
+.funnel-pipeline-grid article {
+  min-height: 260px;
+  padding: 36px;
+  background: var(--white);
+}
+
+.funnel-style-grid article > span,
+.funnel-pipeline-grid article > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.funnel-style-grid h3,
+.funnel-pipeline-grid h3 {
+  margin: 48px 0 14px;
+  font-size: 27px;
+}
+
+.funnel-style-grid p,
+.funnel-pipeline-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.funnel-range-section .funnel-style-grid {
+  border-color: rgba(255,255,255,.15);
+  background: rgba(255,255,255,.15);
+}
+
+.funnel-range-section .funnel-style-grid article {
+  background: rgba(255,255,255,.045);
+}
+
+.funnel-range-section .funnel-style-grid article > span {
+  color: #aebdf1;
+}
+
+.funnel-range-section .funnel-style-grid p {
+  color: rgba(255,255,255,.65);
+}
+
+.funnel-dark-gallery {
+  margin-top: 64px;
+}
+
+@media (max-width: 720px) {
+  .funnel-style-grid,
+  .funnel-pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .funnel-style-grid article,
+  .funnel-pipeline-grid article {
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .funnel-style-grid h3,
+  .funnel-pipeline-grid h3 {
+    margin-top: 32px;
+  }
+}

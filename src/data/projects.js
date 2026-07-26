@@ -70,6 +70,25 @@ export const featuredProjects = [
     releaseLabel: 'Live platform',
   },
   {
+    slug: 'funnel-lab',
+    name: 'Landing & Funnel Portfolio Lab',
+    eyebrow: 'Interactive conversion design portfolio',
+    summary:
+      'A live collection of seven feature-complete landing pages and funnels across SaaS, coaching, local services, digital products, dental, fitness, and construction.',
+    outcome:
+      'Deployed on Cloudflare Pages with distinct visual systems, responsive interactions, real booking paths, and a serverless Resend inquiry pipeline.',
+    role: 'Creator, frontend developer, conversion UX, deployment, QA',
+    tools: ['HTML', 'CSS', 'JavaScript', 'Cloudflare'],
+    status: 'Live portfolio lab',
+    metric: '7 industries · 7 conversion journeys',
+    image: '/images/projects/funnel-lab/gallery-overview.webp',
+    imageAlt: 'Landing and Funnel Portfolio Lab gallery showing seven interactive industry demos and real project inquiry paths.',
+    caseStudyUrl: '/projects/funnel-lab',
+    githubUrl: 'https://github.com/markanton13/landing-funnel-portfolio-lab',
+    releaseUrl: 'https://funnels.markbadong.com',
+    releaseLabel: 'Live gallery',
+  },
+  {
     slug: 'childcare-culture',
     name: 'Childcare Culture & Co.',
     eyebrow: 'GoHighLevel client website',
