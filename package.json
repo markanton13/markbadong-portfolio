@@ -23,7 +23,10 @@
         "check:ask-mark-preview": "node scripts/check-ask-mark-preview.mjs",
         "askmark:preview:deploy": "wrangler deploy --config workers/ask-mark/wrangler.preview.jsonc",
         "askmark:preview:migrations:list": "wrangler d1 migrations list ask-mark-knowledge-preview --remote --config workers/ask-mark/wrangler.preview.jsonc",
-        "askmark:preview:migrate": "wrangler d1 migrations apply ask-mark-knowledge-preview --remote --config workers/ask-mark/wrangler.preview.jsonc"
+        "askmark:preview:migrate": "wrangler d1 migrations apply ask-mark-knowledge-preview --remote --config workers/ask-mark/wrangler.preview.jsonc",
+        "dev:ask-mark-preview": "vite --mode askmark-preview --host 127.0.0.1 --port 5173 --strictPort",
+        "build:ask-mark-preview": "vite build --mode askmark-preview",
+        "preview:ask-mark-preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
     },
     "dependencies": {
         "react": "^19.2.7",

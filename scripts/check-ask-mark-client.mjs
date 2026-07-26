@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict'
+import assert from 'node:assert/strict'
 import {
   getAskMarkResponse,
   resolveAskMarkApiConfig,
@@ -7,6 +7,27 @@ import {
 const localEnvironment = {
   DEV: true,
   VITE_ASK_MARK_API_BASE_URL: 'http://127.0.0.1:8787/',
+}
+
+const remotePreviewBaseUrl =
+  'https://ask-mark-api-preview.markantonbadong13.workers.dev'
+
+const previewDevelopmentEnvironment = {
+  DEV: true,
+  MODE: 'askmark-preview',
+  VITE_ASK_MARK_API_MODE: 'remote-preview',
+  VITE_ASK_MARK_API_BASE_URL: `${remotePreviewBaseUrl}/`,
+  VITE_ASK_MARK_API_ALLOWED_HOST:
+    'ask-mark-api-preview.markantonbadong13.workers.dev',
+}
+
+const previewBuildEnvironment = {
+  DEV: false,
+  MODE: 'askmark-preview',
+  VITE_ASK_MARK_API_MODE: 'remote-preview',
+  VITE_ASK_MARK_API_BASE_URL: remotePreviewBaseUrl,
+  VITE_ASK_MARK_API_ALLOWED_HOST:
+    'ask-mark-api-preview.markantonbadong13.workers.dev',
 }
 
 const localConfig = resolveAskMarkApiConfig(localEnvironment)
@@ -23,11 +44,44 @@ assert.equal(
   false,
 )
 
+const previewDevelopmentConfig = resolveAskMarkApiConfig(
+  previewDevelopmentEnvironment,
+)
+const previewBuildConfig = resolveAskMarkApiConfig(
+  previewBuildEnvironment,
+)
+
+assert.equal(previewDevelopmentConfig.enabled, true)
+assert.equal(previewDevelopmentConfig.baseUrl, remotePreviewBaseUrl)
+assert.equal(previewBuildConfig.enabled, true)
+assert.equal(previewBuildConfig.baseUrl, remotePreviewBaseUrl)
+
 assert.equal(
   resolveAskMarkApiConfig({
     DEV: true,
+    MODE: 'askmark-preview',
+    VITE_ASK_MARK_API_MODE: 'remote-preview',
     VITE_ASK_MARK_API_BASE_URL:
       'https://askmark.markbadong.com',
+  }).enabled,
+  false,
+)
+
+assert.equal(
+  resolveAskMarkApiConfig({
+    DEV: true,
+    MODE: 'production',
+    VITE_ASK_MARK_API_MODE: 'remote-preview',
+    VITE_ASK_MARK_API_BASE_URL: remotePreviewBaseUrl,
+  }).enabled,
+  false,
+)
+
+assert.equal(
+  resolveAskMarkApiConfig({
+    DEV: false,
+    MODE: 'production',
+    VITE_ASK_MARK_API_BASE_URL: remotePreviewBaseUrl,
   }).enabled,
   false,
 )
@@ -192,5 +246,5 @@ assert.equal(disabled.answer, fallback.answer)
 assert.equal(disabled.delivery, 'static')
 
 process.stdout.write(
-  'Ask Mark frontend client checks passed: local-only config, approved D1 mapping, unmatched fallback, offline fallback, timeout fallback, and static-only mode.\n',
+  'Ask Mark frontend client checks passed: local development, allowlisted remote preview, approved D1 mapping, unmatched fallback, offline fallback, timeout fallback, and static-only production mode.\n',
 )

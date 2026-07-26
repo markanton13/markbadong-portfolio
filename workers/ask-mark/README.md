@@ -64,8 +64,12 @@ development-only D1 bridge. Normal npm run dev remains static-only.
 
 ## Next checkpoint
 
-Batch 2F will connect the portfolio frontend to the remote preview API through an explicit preview-only build mode, while the normal production build remains unchanged.
+Batch 2G will prepare the production API release gate and custom-domain routing without switching live portfolio traffic until final approval.
 
 ## Remote preview
 
 The isolated Cloudflare preview environment, validation commands, and recovery process are documented in [REMOTE-PREVIEW.md](./REMOTE-PREVIEW.md).
+
+## Remote preview frontend
+
+The explicit frontend mode, build isolation rules, and fallback validation are documented in [FRONTEND-REMOTE-PREVIEW.md](./FRONTEND-REMOTE-PREVIEW.md).

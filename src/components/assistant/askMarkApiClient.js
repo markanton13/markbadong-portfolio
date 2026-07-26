@@ -1,5 +1,6 @@
-﻿const DEFAULT_TIMEOUT_MS = 2200
-
+const DEFAULT_TIMEOUT_MS = 2200
+const REMOTE_PREVIEW_MODE = 'remote-preview'
+const REMOTE_PREVIEW_VITE_MODE = 'askmark-preview'
 const LOOPBACK_HOSTS = new Set([
   '127.0.0.1',
   'localhost',
@@ -20,8 +21,23 @@ export function resolveAskMarkApiConfig(
     typeof environment?.VITE_ASK_MARK_API_BASE_URL === 'string'
       ? environment.VITE_ASK_MARK_API_BASE_URL.trim()
       : ''
+  const apiMode =
+    typeof environment?.VITE_ASK_MARK_API_MODE === 'string'
+      ? environment.VITE_ASK_MARK_API_MODE.trim()
+      : ''
+  const viteMode =
+    typeof environment?.MODE === 'string'
+      ? environment.MODE.trim()
+      : ''
 
-  if (environment?.DEV !== true || !configuredUrl) {
+  const allowedHost =
+    typeof environment?.VITE_ASK_MARK_API_ALLOWED_HOST === 'string'
+      ? environment.VITE_ASK_MARK_API_ALLOWED_HOST
+          .trim()
+          .toLowerCase()
+      : ''
+
+  if (!configuredUrl) {
     return {
       enabled: false,
       baseUrl: null,
@@ -30,20 +46,43 @@ export function resolveAskMarkApiConfig(
 
   try {
     const url = new URL(configuredUrl)
+    const normalizedUrl = url.toString().replace(/\/+$/, '')
 
-    if (
-      url.protocol !== 'http:' ||
-      !LOOPBACK_HOSTS.has(url.hostname)
-    ) {
+    const isLocalDevelopment =
+      environment?.DEV === true &&
+      url.protocol === 'http:' &&
+      LOOPBACK_HOSTS.has(url.hostname)
+
+    if (isLocalDevelopment) {
       return {
-        enabled: false,
-        baseUrl: null,
+        enabled: true,
+        baseUrl: normalizedUrl,
+      }
+    }
+
+    const isRemotePreview =
+      apiMode === REMOTE_PREVIEW_MODE &&
+      viteMode === REMOTE_PREVIEW_VITE_MODE &&
+      allowedHost &&
+      url.protocol === 'https:' &&
+      url.hostname.toLowerCase() === allowedHost &&
+      url.username === '' &&
+      url.password === '' &&
+      url.port === '' &&
+      url.pathname === '/' &&
+      url.search === '' &&
+      url.hash === ''
+
+    if (isRemotePreview) {
+      return {
+        enabled: true,
+        baseUrl: normalizedUrl,
       }
     }
 
     return {
-      enabled: true,
-      baseUrl: url.toString().replace(/\/+$/, ''),
+      enabled: false,
+      baseUrl: null,
     }
   } catch {
     return {
