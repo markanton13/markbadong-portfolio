@@ -73,3 +73,11 @@ The isolated Cloudflare preview environment, validation commands, and recovery p
 ## Remote preview frontend
 
 The explicit frontend mode, build isolation rules, and fallback validation are documented in [FRONTEND-REMOTE-PREVIEW.md](./FRONTEND-REMOTE-PREVIEW.md).
+
+## Production release
+
+Batch 2G deployed and validated the isolated read-only production API.
+The live portfolio frontend remains disconnected, and no custom route or domain was created.
+See [PRODUCTION.md](./PRODUCTION.md).
+
+Batch 2H remains frozen pending a separate reviewed production frontend cutover.
