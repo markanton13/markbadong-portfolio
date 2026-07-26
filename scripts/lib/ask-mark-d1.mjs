@@ -8,7 +8,13 @@ export const root = path.resolve(here, '..', '..')
 export const worker = path.join(root, 'workers', 'ask-mark')
 export const config = path.join(worker, 'wrangler.jsonc')
 export const database = 'ask-mark-knowledge-local'
-const cli = path.join(root, 'node_modules', 'wrangler', 'bin', 'wrangler.js')
+export const wranglerCli = path.join(
+  root,
+  'node_modules',
+  'wrangler',
+  'bin',
+  'wrangler.js',
+)
 
 export function fail(message, details = '') {
   if (details) console.error(details.trim())
@@ -16,8 +22,8 @@ export function fail(message, details = '') {
 }
 
 export function run(args, capture = false) {
-  if (!existsSync(cli)) fail('Wrangler is not installed. Run npm install first.')
-  const result = spawnSync(process.execPath, [cli, ...args], {
+  if (!existsSync(wranglerCli)) fail('Wrangler is not installed. Run npm install first.')
+  const result = spawnSync(process.execPath, [wranglerCli, ...args], {
     cwd: root, encoding: 'utf8', windowsHide: true,
     env: { ...process.env, CI: '1', WRANGLER_SEND_METRICS: 'false' },
     stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
