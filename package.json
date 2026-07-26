@@ -1,34 +1,36 @@
 {
-  "name": "markbadong-portfolio",
-  "private": true,
-  "version": "0.1.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "oxlint src",
-    "preview": "vite preview",
-    "check:ask-mark": "node scripts/check-ask-mark.mjs",
-    "check:ask-mark-schema": "node scripts/check-ask-mark-schema.mjs",
-    "check:ask-mark-seed": "node scripts/check-ask-mark-seed.mjs",
-    "check:ask-mark-api": "node scripts/check-ask-mark-api.mjs",
-    "askmark:d1:migrate:local": "wrangler d1 migrations apply ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
-    "askmark:d1:list:local": "wrangler d1 migrations list ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
-    "askmark:d1:seed:local": "node scripts/import-ask-mark-seed.mjs --persist-to workers/ask-mark/.wrangler/state",
-    "askmark:d1:reset:local": "node scripts/reset-ask-mark-local.mjs",
-    "askmark:api:dev": "wrangler dev --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc --ip 127.0.0.1 --port 8787",
-    "check": "npm run lint && npm run check:ask-mark && npm run check:ask-mark-schema && npm run check:ask-mark-seed && npm run check:ask-mark-api && npm run build"
-  },
-  "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "oxlint": "^1.71.0",
-    "vite": "^8.1.1",
-    "wrangler": "4.114.0"
-  }
+    "name":  "markbadong-portfolio",
+    "private":  true,
+    "version":  "0.1.0",
+    "type":  "module",
+    "scripts":  {
+                    "dev":  "vite",
+                    "build":  "vite build",
+                    "lint":  "oxlint src",
+                    "preview":  "vite preview",
+                    "check:ask-mark":  "node scripts/check-ask-mark.mjs",
+                    "check:ask-mark-schema":  "node scripts/check-ask-mark-schema.mjs",
+                    "check:ask-mark-seed":  "node scripts/check-ask-mark-seed.mjs",
+                    "check:ask-mark-api":  "node scripts/check-ask-mark-api.mjs",
+                    "askmark:d1:migrate:local":  "wrangler d1 migrations apply ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
+                    "askmark:d1:list:local":  "wrangler d1 migrations list ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
+                    "askmark:d1:seed:local":  "node scripts/import-ask-mark-seed.mjs --persist-to workers/ask-mark/.wrangler/state",
+                    "askmark:d1:reset:local":  "node scripts/reset-ask-mark-local.mjs",
+                    "askmark:api:dev":  "wrangler dev --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc --ip 127.0.0.1 --port 8787",
+                    "check":  "npm run lint \u0026\u0026 npm run check:ask-mark \u0026\u0026 npm run check:ask-mark-client \u0026\u0026 npm run check:ask-mark-schema \u0026\u0026 npm run check:ask-mark-seed \u0026\u0026 npm run check:ask-mark-api \u0026\u0026 npm run build",
+                    "dev:ask-mark":  "vite --mode askmark --host 127.0.0.1 --port 5173 --strictPort",
+                    "check:ask-mark-client":  "node scripts/check-ask-mark-client.mjs"
+                },
+    "dependencies":  {
+                         "react":  "^19.2.7",
+                         "react-dom":  "^19.2.7"
+                     },
+    "devDependencies":  {
+                            "@types/react":  "^19.2.17",
+                            "@types/react-dom":  "^19.2.3",
+                            "@vitejs/plugin-react":  "^6.0.3",
+                            "oxlint":  "^1.71.0",
+                            "vite":  "^8.1.1",
+                            "wrangler":  "4.114.0"
+                        }
 }

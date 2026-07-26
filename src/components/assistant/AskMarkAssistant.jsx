@@ -7,6 +7,7 @@ import {
   getPromptResponse,
   getPromptsForRoute,
 } from './assistantMockData'
+import { getAskMarkResponse } from './askMarkApiClient'
 import '../../styles/assistant.css'
 
 const WELCOME_MESSAGE = {
@@ -65,6 +66,7 @@ export function AskMarkAssistant() {
   const composerRef = useRef(null)
   const messageListRef = useRef(null)
   const requestTimerRef = useRef(null)
+  const requestSequenceRef = useRef(0)
 
   const isOpen = panelState === 'open'
   const isMinimized = panelState === 'minimized'
@@ -103,6 +105,8 @@ export function AskMarkAssistant() {
 
   useEffect(
     () => () => {
+      requestSequenceRef.current += 1
+
       if (requestTimerRef.current) {
         window.clearTimeout(requestTimerRef.current)
       }
@@ -126,6 +130,9 @@ export function AskMarkAssistant() {
     const cleaned = question.trim()
     if (!cleaned || isLoading) return
 
+    const requestSequence = requestSequenceRef.current + 1
+    requestSequenceRef.current = requestSequence
+
     const userMessage = {
       id: createMessageId('visitor'),
       role: 'user',
@@ -137,14 +144,29 @@ export function AskMarkAssistant() {
     setLastQuestion(cleaned)
     setIsLoading(true)
 
-    requestTimerRef.current = window.setTimeout(() => {
+    requestTimerRef.current = window.setTimeout(async () => {
       try {
-        const response = promptId
+        const fallbackResponse = promptId
           ? getPromptResponse(promptId)
-          : getMockResponse(cleaned, pathname, conversationContext)
+          : getMockResponse(
+              cleaned,
+              pathname,
+              conversationContext,
+            )
 
-        if (!response) {
-          throw new Error('No approved mock response was available.')
+        if (!fallbackResponse) {
+          throw new Error(
+            'No approved static response was available.',
+          )
+        }
+
+        const response = await getAskMarkResponse(
+          cleaned,
+          fallbackResponse,
+        )
+
+        if (requestSequence !== requestSequenceRef.current) {
+          return
         }
 
         const projectSource = response.sources?.find((item) =>
@@ -173,9 +195,14 @@ export function AskMarkAssistant() {
             actions: response.actions,
             followUps: response.followUps,
             category: response.category,
+            delivery: response.delivery,
           },
         ])
       } catch {
+        if (requestSequence !== requestSequenceRef.current) {
+          return
+        }
+
         setMessages((current) => [
           ...current,
           {
@@ -195,10 +222,12 @@ export function AskMarkAssistant() {
           },
         ])
       } finally {
-        setIsLoading(false)
-        requestTimerRef.current = null
+        if (requestSequence === requestSequenceRef.current) {
+          setIsLoading(false)
+          requestTimerRef.current = null
+        }
       }
-    }, 720)
+    }, 260)
   }
 
   const handlePrompt = (prompt) => {
@@ -219,6 +248,8 @@ export function AskMarkAssistant() {
   }
 
   const clearConversation = () => {
+    requestSequenceRef.current += 1
+
     if (requestTimerRef.current) {
       window.clearTimeout(requestTimerRef.current)
       requestTimerRef.current = null

@@ -21,6 +21,11 @@ The API reads only from the active approved D1 release. It does not write visito
 messages to D1, call Workers AI, search the public web, or change the portfolio
 frontend.
 
+Batch 2D connects the visible React concierge through an explicit local
+development mode. Approved API matches are preferred; disabled, offline,
+timed-out, invalid, or unmatched requests automatically use the frozen
+browser matcher.
+
 ## Locked rules
 
 - Ask Mark answers only from approved sources.
@@ -33,17 +38,19 @@ frontend.
 - The seed excludes Mark's phone number and private information.
 - The importer refuses to overwrite an already populated database.
 - Public API responses expose approved answer content and safe action metadata only.
-- Query messages are processed in memory and are not persisted by Batch 2C.
+- Query messages are processed in memory and are not persisted by Batch 2D.
 
 ## Local commands
 
 ```powershell
+npm run check:ask-mark-client
 npm run check:ask-mark-schema
 npm run check:ask-mark-seed
 npm run check:ask-mark-api
 npm run askmark:d1:reset:local
 npm run askmark:d1:list:local
 npm run askmark:api:dev
+npm run dev:ask-mark
 ```
 
 `askmark:d1:reset:local` deletes only the ignored local state under
@@ -52,7 +59,9 @@ npm run askmark:api:dev
 `askmark:api:dev` serves the Worker only on `127.0.0.1:8787` using the persistent
 local D1 state.
 
+dev:ask-mark serves the portfolio on 127.0.0.1:5173 and enables the
+development-only D1 bridge. Normal npm run dev remains static-only.
+
 ## Next checkpoint
 
-Batch 2D will connect a development-only frontend API client while preserving the
-frozen browser matcher as the automatic network-failure fallback.
+Batch 2E will provision and validate an isolated remote preview D1 database and Worker deployment before any production portfolio traffic is switched to the new API.
