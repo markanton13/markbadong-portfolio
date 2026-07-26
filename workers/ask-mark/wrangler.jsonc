@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "ask-mark-foundation-local",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-27",
+  "workers_dev": false,
+  "d1_databases": [
+    {
+      "binding": "ASK_MARK_DB",
+      "database_name": "ask-mark-knowledge-local",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "preview_database_id": "ask-mark-knowledge-preview",
+      "migrations_dir": "migrations",
+      "migrations_table": "d1_migrations"
+    }
+  ]
+}

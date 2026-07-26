@@ -27,3 +27,7 @@ _patch-backups/
 # Local review tooling and generated review packages
 review-packages/
 make-review-zip*.ps1
+
+# Cloudflare Wrangler local state and disposable schema checks
+**/.wrangler/
+**/.wrangler-schema-check/

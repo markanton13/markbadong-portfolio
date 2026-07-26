@@ -9,7 +9,10 @@
     "lint": "oxlint src",
     "preview": "vite preview",
     "check:ask-mark": "node scripts/check-ask-mark.mjs",
-    "check": "npm run lint && npm run check:ask-mark && npm run build"
+    "check:ask-mark-schema": "node scripts/check-ask-mark-schema.mjs",
+    "askmark:d1:migrate:local": "wrangler d1 migrations apply ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
+    "askmark:d1:list:local": "wrangler d1 migrations list ask-mark-knowledge-local --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc",
+    "check": "npm run lint && npm run check:ask-mark && npm run check:ask-mark-schema && npm run build"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -20,6 +23,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "wrangler": "4.114.0"
   }
 }
