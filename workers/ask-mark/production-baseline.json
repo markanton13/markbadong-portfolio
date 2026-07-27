@@ -1,0 +1,93 @@
+{
+    "schemaVersion":  "1.0.0",
+    "capturedAt":  "2026-07-27",
+    "repository":  {
+                       "owner":  "markanton13",
+                       "name":  "markbadong-portfolio",
+                       "productionBranch":  "main",
+                       "commit":  "28561e898c7344e2c466d7c08bb2c19eb68dd874",
+                       "protectedTags":  {
+                                             "productionFrontend":  "ask-mark-production-frontend-live-2026-07-27",
+                                             "pagesCutover":  "ask-mark-pages-cutover-ready-2026-07-27",
+                                             "preCutover":  "ask-mark-pre-cutover-main-2026-07-27",
+                                             "productionApi":  "ask-mark-production-api-validated-2026-07-27"
+                                         }
+                   },
+    "pages":  {
+                  "projectName":  "markbadong-portfolio",
+                  "deploymentId":  "3ab72969-6bbf-48f8-84a1-8451429a37f6",
+                  "deploymentUrl":  "https://3ab72969.markbadong-portfolio.pages.dev",
+                  "pagesUrl":  "https://markbadong-portfolio.pages.dev",
+                  "customDomain":  "https://markbadong.com",
+                  "productionBranch":  "main",
+                  "buildCommand":  "npm run build",
+                  "outputDirectory":  "dist",
+                  "rootDirectory":  "",
+                  "buildImageMajorVersion":  3,
+                  "productionVariables":  {
+                                              "NODE_VERSION":  "22",
+                                              "VITE_TRACKER_ENABLED":  "true"
+                                          }
+              },
+    "worker":  {
+                   "name":  "ask-mark-api-production",
+                   "baseUrl":  "https://ask-mark-api-production.markantonbadong13.workers.dev",
+                   "deploymentId":  "ff960e3d-b6f7-46ab-bd37-335dc6de5332",
+                   "versionId":  "4cda19fe-0ca8-48a3-a131-5633983d0305",
+                   "apiVersion":  "2C.1",
+                   "mode":  "deterministic-d1",
+                   "release":  {
+                                   "id":  "release_0001",
+                                   "number":  1,
+                                   "knowledgeCount":  26,
+                                   "seedVersion":  "2B.1"
+                               }
+               },
+    "d1":  {
+               "databaseName":  "ask-mark-knowledge-production",
+               "databaseId":  "88b44848-8ff3-4a95-8fbf-112cb2e26cbd",
+               "schemaVersion":  "2A.1",
+               "seedVersion":  "2B.1",
+               "activeReleaseId":  "release_0001",
+               "migrationCount":  4,
+               "applicationTables":  [
+                                         "audit_events",
+                                         "knowledge_items",
+                                         "knowledge_match_terms",
+                                         "knowledge_provenance",
+                                         "knowledge_relations",
+                                         "knowledge_versions",
+                                         "publication_events",
+                                         "publication_release_items",
+                                         "publication_releases",
+                                         "review_decisions",
+                                         "source_records",
+                                         "source_snapshots",
+                                         "system_settings"
+                                     ],
+               "views":  [
+                             "v_active_knowledge"
+                         ],
+               "counts":  {
+                              "sources":  4,
+                              "snapshots":  4,
+                              "knowledge":  26,
+                              "approved":  26,
+                              "provenance":  52,
+                              "matcherTerms":  82,
+                              "publishedReleases":  1,
+                              "releaseItems":  26,
+                              "active":  26,
+                              "unsafe":  0
+                          },
+               "runtimeSha256":  {
+                                     "value":  "2905BF114A6C483D917C01B33A230E0B78D259B4C938CA9345803FE6F165F447",
+                                     "reproducible":  false,
+                                     "note":  "Historical validated Batch 2G attestation; reconstruction procedure was not preserved."
+                                 }
+           },
+    "boundaries":  {
+                       "previewWorkerUrl":  "https://ask-mark-api-preview.markantonbadong13.workers.dev",
+                       "unapprovedOrigin":  "https://example.com"
+                   }
+}

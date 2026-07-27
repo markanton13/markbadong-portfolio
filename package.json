@@ -30,7 +30,8 @@
         "preview:ask-mark-preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
         "dev:ask-mark-production": "vite --mode askmark-production --host 127.0.0.1 --port 5173 --strictPort",
         "build:ask-mark-production": "vite build --mode askmark-production",
-        "preview:ask-mark-production": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
+        "preview:ask-mark-production": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
+        "check:ask-mark-production": "node scripts/check-ask-mark-production.mjs"
     },
     "dependencies": {
         "react": "^19.2.7",
