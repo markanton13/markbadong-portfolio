@@ -1,6 +1,20 @@
 const DEFAULT_TIMEOUT_MS = 2200
-const REMOTE_PREVIEW_MODE = 'remote-preview'
-const REMOTE_PREVIEW_VITE_MODE = 'askmark-preview'
+const REMOTE_MODE_RULES = new Map([
+  [
+    'remote-preview',
+    {
+      viteMode: 'askmark-preview',
+      host: 'ask-mark-api-preview.markantonbadong13.workers.dev',
+    },
+  ],
+  [
+    'remote-production',
+    {
+      viteMode: 'askmark-production',
+      host: 'ask-mark-api-production.markantonbadong13.workers.dev',
+    },
+  ],
+])
 const LOOPBACK_HOSTS = new Set([
   '127.0.0.1',
   'localhost',
@@ -60,12 +74,13 @@ export function resolveAskMarkApiConfig(
       }
     }
 
-    const isRemotePreview =
-      apiMode === REMOTE_PREVIEW_MODE &&
-      viteMode === REMOTE_PREVIEW_VITE_MODE &&
-      allowedHost &&
+    const remoteRule = REMOTE_MODE_RULES.get(apiMode)
+    const isAllowedRemote =
+      remoteRule &&
+      viteMode === remoteRule.viteMode &&
+      allowedHost === remoteRule.host &&
       url.protocol === 'https:' &&
-      url.hostname.toLowerCase() === allowedHost &&
+      url.hostname.toLowerCase() === remoteRule.host &&
       url.username === '' &&
       url.password === '' &&
       url.port === '' &&
@@ -73,7 +88,7 @@ export function resolveAskMarkApiConfig(
       url.search === '' &&
       url.hash === ''
 
-    if (isRemotePreview) {
+    if (isAllowedRemote) {
       return {
         enabled: true,
         baseUrl: normalizedUrl,

@@ -26,7 +26,10 @@
         "askmark:preview:migrate": "wrangler d1 migrations apply ask-mark-knowledge-preview --remote --config workers/ask-mark/wrangler.preview.jsonc",
         "dev:ask-mark-preview": "vite --mode askmark-preview --host 127.0.0.1 --port 5173 --strictPort",
         "build:ask-mark-preview": "vite build --mode askmark-preview",
-        "preview:ask-mark-preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
+        "preview:ask-mark-preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+        "dev:ask-mark-production": "vite --mode askmark-production --host 127.0.0.1 --port 5173 --strictPort",
+        "build:ask-mark-production": "vite build --mode askmark-production",
+        "preview:ask-mark-production": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
     },
     "dependencies": {
         "react": "^19.2.7",

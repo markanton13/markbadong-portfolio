@@ -30,6 +30,27 @@ const previewBuildEnvironment = {
     'ask-mark-api-preview.markantonbadong13.workers.dev',
 }
 
+const remoteProductionBaseUrl =
+  'https://ask-mark-api-production.markantonbadong13.workers.dev'
+
+const productionDevelopmentEnvironment = {
+  DEV: true,
+  MODE: 'askmark-production',
+  VITE_ASK_MARK_API_MODE: 'remote-production',
+  VITE_ASK_MARK_API_BASE_URL: remoteProductionBaseUrl + '/',
+  VITE_ASK_MARK_API_ALLOWED_HOST:
+    'ask-mark-api-production.markantonbadong13.workers.dev',
+}
+
+const productionBuildEnvironment = {
+  DEV: false,
+  MODE: 'askmark-production',
+  VITE_ASK_MARK_API_MODE: 'remote-production',
+  VITE_ASK_MARK_API_BASE_URL: remoteProductionBaseUrl,
+  VITE_ASK_MARK_API_ALLOWED_HOST:
+    'ask-mark-api-production.markantonbadong13.workers.dev',
+}
+
 const localConfig = resolveAskMarkApiConfig(localEnvironment)
 
 assert.equal(localConfig.enabled, true)
@@ -55,6 +76,21 @@ assert.equal(previewDevelopmentConfig.enabled, true)
 assert.equal(previewDevelopmentConfig.baseUrl, remotePreviewBaseUrl)
 assert.equal(previewBuildConfig.enabled, true)
 assert.equal(previewBuildConfig.baseUrl, remotePreviewBaseUrl)
+
+const productionDevelopmentConfig = resolveAskMarkApiConfig(
+  productionDevelopmentEnvironment,
+)
+const productionBuildConfig = resolveAskMarkApiConfig(
+  productionBuildEnvironment,
+)
+
+assert.equal(productionDevelopmentConfig.enabled, true)
+assert.equal(
+  productionDevelopmentConfig.baseUrl,
+  remoteProductionBaseUrl,
+)
+assert.equal(productionBuildConfig.enabled, true)
+assert.equal(productionBuildConfig.baseUrl, remoteProductionBaseUrl)
 
 assert.equal(
   resolveAskMarkApiConfig({
@@ -82,6 +118,40 @@ assert.equal(
     DEV: false,
     MODE: 'production',
     VITE_ASK_MARK_API_BASE_URL: remotePreviewBaseUrl,
+  }).enabled,
+  false,
+)
+
+assert.equal(
+  resolveAskMarkApiConfig({
+    DEV: false,
+    MODE: 'production',
+    VITE_ASK_MARK_API_MODE: 'remote-production',
+    VITE_ASK_MARK_API_BASE_URL: remoteProductionBaseUrl,
+    VITE_ASK_MARK_API_ALLOWED_HOST:
+      'ask-mark-api-production.markantonbadong13.workers.dev',
+  }).enabled,
+  false,
+)
+
+assert.equal(
+  resolveAskMarkApiConfig({
+    DEV: false,
+    MODE: 'askmark-production',
+    VITE_ASK_MARK_API_MODE: 'remote-preview',
+    VITE_ASK_MARK_API_BASE_URL: remotePreviewBaseUrl,
+    VITE_ASK_MARK_API_ALLOWED_HOST:
+      'ask-mark-api-preview.markantonbadong13.workers.dev',
+  }).enabled,
+  false,
+)
+
+assert.equal(
+  resolveAskMarkApiConfig({
+    DEV: false,
+    MODE: 'askmark-production',
+    VITE_ASK_MARK_API_MODE: 'remote-production',
+    VITE_ASK_MARK_API_BASE_URL: remoteProductionBaseUrl,
   }).enabled,
   false,
 )
@@ -246,5 +316,5 @@ assert.equal(disabled.answer, fallback.answer)
 assert.equal(disabled.delivery, 'static')
 
 process.stdout.write(
-  'Ask Mark frontend client checks passed: local development, allowlisted remote preview, approved D1 mapping, unmatched fallback, offline fallback, timeout fallback, and static-only production mode.\n',
+  'Ask Mark frontend client checks passed: local development, isolated remote preview, isolated remote production candidate, approved D1 mapping, unmatched fallback, offline fallback, timeout fallback, and static-only normal production mode.\n',
 )
