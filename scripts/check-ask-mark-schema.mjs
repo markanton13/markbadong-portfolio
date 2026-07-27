@@ -24,6 +24,9 @@ const expectedTables = [
   'source_records',
   'source_snapshots',
   'system_settings',
+  'visitor_rate_limit_buckets',
+  'visitor_submission_events',
+  'visitor_submissions',
 ]
 
 const wranglerCli = path.join(
@@ -219,12 +222,12 @@ try {
     fail(`Expected one active-knowledge view, found ${actualViewCount}.`)
   }
 
-  if (actualMigrationCount !== 4) {
-    fail(`Expected four recorded migrations, found ${actualMigrationCount}.`)
+  if (actualMigrationCount !== 5) {
+    fail(`Expected five recorded migrations, found ${actualMigrationCount}.`)
   }
 
-  if (row.schema_version !== '2A.1') {
-    fail(`Expected schema version 2A.1, found ${row.schema_version ?? 'none'}.`)
+  if (row.schema_version !== '4A.1') {
+    fail(`Expected schema version 4A.1, found ${row.schema_version ?? 'none'}.`)
   }
 
   validationSucceeded = true

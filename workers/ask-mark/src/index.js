@@ -4,6 +4,10 @@ import {
   queryApprovedKnowledge,
 } from './lib/knowledge.js'
 import {
+  handleLocalIntakeSubmission,
+  isLocalIntakeEnabled,
+} from './lib/intake.js'
+import {
   errorResponse,
   jsonResponse,
   noContentResponse,
@@ -14,6 +18,15 @@ const MAX_MESSAGE_LENGTH = 500
 function routeKey(request) {
   const url = new URL(request.url)
   return `${request.method.toUpperCase()} ${url.pathname}`
+}
+
+function notFoundResponse(request) {
+  return errorResponse(
+    request,
+    404,
+    'not_found',
+    'The requested Ask Mark endpoint does not exist.',
+  )
 }
 
 async function handleQuery(request, env) {
@@ -94,6 +107,26 @@ async function handleRequest(request, env) {
     case 'POST /v1/query':
       return handleQuery(request, env)
 
+    case 'POST /v1/intake/submissions':
+      return isLocalIntakeEnabled(env)
+        ? handleLocalIntakeSubmission(request, env)
+        : notFoundResponse(request)
+
+    case 'GET /v1/intake/submissions':
+      if (!isLocalIntakeEnabled(env)) {
+        return notFoundResponse(request)
+      }
+
+      return errorResponse(
+        request,
+        405,
+        'method_not_allowed',
+        'That HTTP method is not supported for this endpoint.',
+        {
+          Allow: 'POST, OPTIONS',
+        },
+      )
+
     case 'GET /v1/query':
     case 'POST /v1/health':
     case 'POST /v1/bootstrap':
@@ -111,12 +144,7 @@ async function handleRequest(request, env) {
       )
 
     default:
-      return errorResponse(
-        request,
-        404,
-        'not_found',
-        'The requested Ask Mark endpoint does not exist.',
-      )
+      return notFoundResponse(request)
   }
 }
 
