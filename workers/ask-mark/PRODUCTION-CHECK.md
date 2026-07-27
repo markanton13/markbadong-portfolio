@@ -18,21 +18,35 @@ Public mode verifies:
 - grounded MarkHQ routing
 - privacy, no-web, unsupported-request, and validation boundaries
 
-## Planned authenticated check
+## Authenticated check
 
-Authenticated mode is intentionally unavailable in this public-only
-checkpoint. A later reviewed patch will add:
+Authenticated mode is available as an explicit opt-in. The default command
+remains public-only and does not invoke Wrangler or query production D1.
 
-Run:
+Confirm that Wrangler is authenticated:
+
+    node node_modules/wrangler/bin/wrangler.js whoami
+
+Then run:
 
     npm run check:ask-mark-production -- --authenticated
 
-Authenticated mode additionally verifies:
+Authenticated mode first runs every public production check, then additionally
+verifies:
 
-- the active Worker deployment and 100 percent version allocation
-- production D1 schema, migration, release, and count parity
-- provenance and matcher coverage
-- foreign-key and SQLite quick checks
+- the active Worker deployment ID and deployment strategy
+- the single active Worker version and 100 percent traffic allocation
+- the production D1 database name, UUID, and table count
+- application table, active view, migration, and schema-version parity
+- active release, approved seed, published release, and release-item parity
+- source, snapshot, knowledge, approval, provenance, matcher, active, and
+  unsafe-record counts
+- foreign-key integrity through `PRAGMA foreign_key_check`
+- SQLite integrity through `PRAGMA quick_check`
+
+Authenticated results are compared with the frozen values in
+`production-baseline.json`. The checker fails closed when any identity,
+release, schema, count, safety, or integrity assertion differs.
 
 ## Safety requirements
 
@@ -40,7 +54,7 @@ Authenticated mode additionally verifies:
 - It remains separate from `npm run check` because it contacts production.
 - Authenticated D1 checks may execute only one SELECT statement or an approved
   PRAGMA foreign_key_check or PRAGMA quick_check diagnostic.
-- Every D1 result must report zero rows written and changed_db false.
+- Every D1 result must report zero rows written, zero changes, and changed_db false.
 - The full preview Worker URL must not be active in the production bundle.
 - The preview hostname may remain in the shared inactive client allowlist.
 

@@ -1,6 +1,9 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  checkAuthenticatedProduction,
+} from "./lib/check-ask-mark-production-authenticated.mjs"
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(here, "..")
@@ -322,9 +325,13 @@ async function checkQueries() {
 }
 
 async function run() {
+  const authenticated =
+    cliArguments.length === 1 &&
+    cliArguments[0] === "--authenticated"
+
   assert(
-    cliArguments.length === 0,
-    "Authenticated mode is planned but not implemented in this public-only checkpoint.",
+    cliArguments.length === 0 || authenticated,
+    "Usage: npm run check:ask-mark-production -- [--authenticated]",
   )
 
   console.log("Checking Ask Mark production public baseline...")
@@ -340,6 +347,18 @@ async function run() {
 
   console.log("")
   console.log("Ask Mark production public checks passed.")
+
+  if (authenticated) {
+    console.log("")
+    console.log(
+      "Checking authenticated Worker and D1 baseline...",
+    )
+    checkAuthenticatedProduction({ baseline, root })
+    console.log("")
+    console.log(
+      "Ask Mark production authenticated checks passed.",
+    )
+  }
 }
 
 run().catch((error) => {
