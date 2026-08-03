@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { AskMarkIntakeForm } from './AskMarkIntakeForm'
 import { AssistantMessage } from './AssistantMessage'
 import { AssistantSuggestionChips } from './AssistantSuggestionChips'
 import { AssistantTypingIndicator } from './AssistantTypingIndicator'
@@ -8,6 +9,7 @@ import {
   getPromptsForRoute,
 } from './assistantMockData'
 import { getAskMarkResponse } from './askMarkApiClient'
+import { resolveAskMarkIntakeConfig } from './askMarkIntakeClient.js'
 import '../../styles/assistant.css'
 
 const WELCOME_MESSAGE = {
@@ -53,16 +55,22 @@ function SendIcon() {
   )
 }
 
-export function AskMarkAssistant() {
+export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   const pathname = window.location.pathname
   const prompts = useMemo(() => getPromptsForRoute(pathname), [pathname])
+  const intakeEnabled = useMemo(
+    () => resolveAskMarkIntakeConfig(environment).enabled,
+    [environment],
+  )
   const [panelState, setPanelState] = useState('closed')
+  const [panelView, setPanelView] = useState('assistant')
   const [messages, setMessages] = useState([WELCOME_MESSAGE])
   const [draft, setDraft] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [lastQuestion, setLastQuestion] = useState('')
   const [conversationContext, setConversationContext] = useState(null)
   const launcherRef = useRef(null)
+  const intakeEntryRef = useRef(null)
   const composerRef = useRef(null)
   const messageListRef = useRef(null)
   const requestTimerRef = useRef(null)
@@ -70,18 +78,22 @@ export function AskMarkAssistant() {
 
   const isOpen = panelState === 'open'
   const isMinimized = panelState === 'minimized'
+  const isIntakeView = panelView === 'intake' && intakeEnabled
   const hasVisitorMessage = messages.some((message) => message.role === 'user')
 
   useEffect(() => {
-    if (!isOpen) return undefined
+    if (!isOpen || isIntakeView) return undefined
 
-    const focusTimer = window.setTimeout(() => composerRef.current?.focus(), 80)
+    const focusTimer = window.setTimeout(
+      () => composerRef.current?.focus(),
+      80,
+    )
     return () => window.clearTimeout(focusTimer)
-  }, [isOpen])
+  }, [isIntakeView, isOpen])
 
   useEffect(() => {
     const list = messageListRef.current
-    if (!list || !isOpen) return
+    if (!list || !isOpen || isIntakeView) return
 
     list.scrollTo({
       top: list.scrollHeight,
@@ -89,11 +101,12 @@ export function AskMarkAssistant() {
         ? 'auto'
         : 'smooth',
     })
-  }, [messages, isLoading, isOpen])
+  }, [isIntakeView, messages, isLoading, isOpen])
 
   useEffect(() => {
     const onKeyDown = (event) => {
       if (event.key === 'Escape' && panelState !== 'closed') {
+        setPanelView('assistant')
         setPanelState('closed')
         window.setTimeout(() => launcherRef.current?.focus(), 0)
       }
@@ -117,11 +130,13 @@ export function AskMarkAssistant() {
   const openPanel = () => setPanelState('open')
 
   const closePanel = () => {
+    setPanelView('assistant')
     setPanelState('closed')
     window.setTimeout(() => launcherRef.current?.focus(), 0)
   }
 
   const minimizePanel = () => {
+    setPanelView('assistant')
     setPanelState('minimized')
     window.setTimeout(() => launcherRef.current?.focus(), 0)
   }
@@ -268,6 +283,19 @@ export function AskMarkAssistant() {
     submitQuestion(lastQuestion)
   }
 
+  const openIntakeView = () => {
+    if (!intakeEnabled || isLoading) return
+    setPanelView('intake')
+  }
+
+  const returnToAssistant = () => {
+    setPanelView('assistant')
+    window.setTimeout(
+      () => intakeEntryRef.current?.focus(),
+      0,
+    )
+  }
+
   return (
     <aside className="ask-mark-root" aria-label="Ask Mark portfolio assistant">
       {isMinimized && (
@@ -320,8 +348,16 @@ export function AskMarkAssistant() {
           </div>
         </header>
 
-        <div
-          className="ask-mark-messages"
+        {isIntakeView ? (
+          <div className="ask-mark-intake-view">
+            <AskMarkIntakeForm
+              onCancel={returnToAssistant}
+            />
+          </div>
+        ) : (
+          <>
+            <div
+              className="ask-mark-messages"
           ref={messageListRef}
           role="log"
           aria-live="polite"
@@ -393,10 +429,24 @@ export function AskMarkAssistant() {
             </button>
           </div>
 
+          {intakeEnabled && (
+            <button
+              ref={intakeEntryRef}
+              className="ask-mark-intake-entry"
+              type="button"
+              onClick={openIntakeView}
+              disabled={isLoading}
+            >
+              Submit a question, correction, or feedback
+            </button>
+          )}
+
           <p>
             Avoid submitting confidential or sensitive information.
           </p>
-        </footer>
+            </footer>
+          </>
+        )}
       </section>
 
       <div className="ask-mark-launcher-wrap">
