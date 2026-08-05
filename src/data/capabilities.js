@@ -1,9 +1,9 @@
 export const capabilities = [
   {
     number: '01',
-    title: 'Operations & VA Support',
+    title: 'Operations & Client Support',
     description:
-      'Organized execution across documentation, task tracking, client coordination, research, reporting, and repeatable administrative workflows.',
+      'Task and deadline coordination, stakeholder communication, documentation, reporting, follow-up tracking, and reliable operational handoff.',
   },
   {
     number: '02',
@@ -19,9 +19,9 @@ export const capabilities = [
   },
   {
     number: '04',
-    title: 'Web & CRM Implementation',
+    title: 'GoHighLevel, Web & CRM',
     description:
-      'Responsive web systems, internal applications, GoHighLevel builds, forms, calendars, lead flows, and accessible conversion-focused interfaces.',
+      'Responsive GoHighLevel websites and funnels, custom fields, forms, surveys, calendars, pipelines, workflows, HTML/CSS, and external CRM integrations.',
   },
   {
     number: '05',
@@ -31,8 +31,8 @@ export const capabilities = [
   },
   {
     number: '06',
-    title: 'Integrations & Access Operations',
+    title: 'Short-Form Video & Content',
     description:
-      'Payment webhooks, transactional email, Turnstile verification, rewarded-access flows, passwordless recovery, device limits, and launch controls.',
+      'Vertical reel editing, clip sequencing, pacing, captions, highlighted text, music, sound effects, voice-over synchronization, revisions, and delivery.',
   },
 ]

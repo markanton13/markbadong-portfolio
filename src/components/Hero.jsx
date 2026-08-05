@@ -115,12 +115,12 @@ export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow">Virtual Assistant · Operations · Automation · Systems</p>
+        <p className="eyebrow">Operations · Automation · Systems · Client Delivery</p>
         <h1 id="hero-title">
           I turn scattered work into <em>clear, working systems.</em>
         </h1>
         <p className="hero-intro">
-          I help teams and clients organize operations, improve workflows, build practical automations, and ship digital tools that are easier to use and manage.
+          I combine 8+ years of operations, training, QA, and support experience with hands-on GoHighLevel, automation, web systems, and short-form content delivery.
         </p>
 
         <div className="hero-actions">
@@ -161,25 +161,25 @@ export function Hero() {
       </div>
 
       <aside className="hero-proof" aria-label="Professional summary">
-        <p className="proof-label">Current focus</p>
-        <p className="proof-main">Systems-minded support for modern remote work.</p>
+        <p className="proof-label">Professional focus</p>
+        <p className="proof-main">Operations, Automation &amp; Systems Specialist.</p>
 
         <div className="proof-grid">
           <div>
-            <strong>Production</strong>
-            <span>deployed bots &amp; tools</span>
+            <strong>8+ years</strong>
+            <span>operations, training &amp; support</span>
           </div>
           <div>
-            <strong>Full-stack</strong>
-            <span>workflow applications</span>
+            <strong>End-to-end GHL</strong>
+            <span>funnels, CRM &amp; workflows</span>
           </div>
           <div>
-            <strong>Enterprise</strong>
-            <span>training &amp; operations</span>
+            <strong>90% faster</strong>
+            <span>supported assessment workflow</span>
           </div>
           <div>
-            <strong>Client work</strong>
-            <span>web &amp; CRM delivery</span>
+            <strong>Approved work</strong>
+            <span>web, CRM &amp; 3 reels</span>
           </div>
         </div>
       </aside>
