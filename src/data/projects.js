@@ -109,14 +109,14 @@ export const featuredProjects = [
     name: 'Childcare Culture & Co.',
     eyebrow: 'GoHighLevel client website',
     summary:
-      'An in-progress GoHighLevel website rebuild translating an early childhood leadership brand into a responsive, conversion-focused page system with custom navigation, program pages, and mobile-ready layouts.',
+      'A live six-page GoHighLevel client website translating an early childhood leadership brand into a responsive page system with custom navigation, branded sections, mobile-specific layouts, and reusable HTML/CSS.',
     outcome:
-      'Home, About, 90-Day Experience, and Culture Club foundations are built; final visual polish, remaining pages, forms, booking flows, and full QA are still in progress.',
+      'Home, About, 90-Day Experience, Culture Club, Speaking, and Contact are live, with controlled draft-based refinements, responsive QA, and basic SEO support handled with the project lead.',
     role: 'GoHighLevel implementation, responsive layout systems, custom HTML/CSS, UX and mobile QA',
     tools: ['GoHighLevel', 'HTML', 'CSS', 'Responsive QA'],
-    status: 'Client project · In progress',
-    metric: '4 page foundations · responsive system',
-    caseStudyLabel: 'Case study after final QA',
+    status: 'Live client work',
+    metric: '6 live pages · responsive QA',
+    caseStudyLabel: 'Client work summary',
   },
   {
     slug: 'leaveflow',

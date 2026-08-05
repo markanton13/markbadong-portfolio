@@ -10,6 +10,7 @@ const person = {
   image: `${siteUrl}/images/seo/mark-anton-portfolio-og.png`,
   jobTitle: 'Operations, Automation & Systems Specialist',
   email: 'mailto:markantonbadong13@gmail.com',
+  telephone: ['+639568695475', '+639683281273'],
   sameAs: [
     'https://github.com/markanton13',
     'https://www.linkedin.com/in/markanton13',
@@ -92,7 +93,7 @@ export const pageSeo = {
   home: {
     title: 'Mark Anton | Operations, Automation & Systems',
     description:
-      'Mark Anton is an operations, automation, QA, training, and systems specialist building practical workflows, digital tools, serverless platforms, and responsive web systems.',
+      'Mark Anton is an operations, automation, and systems specialist with 8+ years of experience across training, QA, support, GoHighLevel, workflow automation, client websites, and short-form content.',
     path: '/',
     type: 'website',
     image: '/images/seo/mark-anton-portfolio-og.png',
@@ -110,7 +111,7 @@ export const pageSeo = {
           url: `${siteUrl}/`,
           name: 'Mark Anton | Operations, Automation & Systems',
           description:
-            'Portfolio of Mark Anton Badong, an operations, automation, QA, training, CRM, and practical systems specialist based in the Philippines.',
+            'Portfolio of Mark Anton Badong, an operations, automation, and systems specialist with 8+ years of experience and verified client work in GoHighLevel websites, CRM workflows, and short-form video.',
           mainEntity: { '@id': `${siteUrl}/#person` },
           isPartOf: { '@id': `${siteUrl}/#website` },
           inLanguage: 'en',

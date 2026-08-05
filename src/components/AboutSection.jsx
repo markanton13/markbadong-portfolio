@@ -27,7 +27,7 @@ export function AboutSection() {
 
         <div className="about-direction-card">
           <span>Current direction</span>
-          <strong>Virtual assistance, remote operations, CRM, QA, automation, and practical web systems.</strong>
+          <strong>Operations, workflow support, GoHighLevel, QA, automation, client websites, and short-form content.</strong>
         </div>
       </div>
 
@@ -36,11 +36,11 @@ export function AboutSection() {
         <h2>A systems builder shaped by operations—not just code.</h2>
 
         <p className="about-lead">
-          My path has moved through customer support, geospatial data operations, enterprise process training, and hands-on systems building. That mix taught me to look beyond the screen and understand the real work, people, and decisions behind every tool.
+          My path spans customer and technical support, geospatial data operations, quality assurance, enterprise process training, client website implementation, CRM automation, and short-form content production. That mix taught me to understand the real work, people, policies, and decisions behind every deliverable.
         </p>
 
         <p>
-          I started building around the problems I kept seeing: scattered tasks, repetitive admin, unclear ownership, difficult handoffs, and information spread across too many places. Today, I combine workflow design, automation, QA, documentation, and practical development to make work clearer and easier to manage.
+          Today, I translate scattered requirements and operational problems into clear SOPs, trackers, dashboards, automations, role-based workflows, responsive client experiences, and practical internal tools—while keeping testing, documentation, and final quality under my ownership.
         </p>
 
         <blockquote className="about-quote">
@@ -72,7 +72,7 @@ export function AboutSection() {
           </div>
           <div>
             <dt>Best fit</dt>
-            <dd>Virtual assistance, remote operations, and systems roles</dd>
+            <dd>Operations, CRM, QA, automation, and client-delivery roles</dd>
           </div>
           <div>
             <dt>Working style</dt>
