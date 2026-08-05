@@ -25,6 +25,7 @@ const expectedTables = [
   'source_snapshots',
   'system_settings',
   'visitor_rate_limit_buckets',
+  'visitor_submission_moderation_actions',
   'visitor_submission_events',
   'visitor_submissions',
 ]
@@ -222,12 +223,12 @@ try {
     fail(`Expected one active-knowledge view, found ${actualViewCount}.`)
   }
 
-  if (actualMigrationCount !== 5) {
-    fail(`Expected five recorded migrations, found ${actualMigrationCount}.`)
+  if (actualMigrationCount !== 6) {
+    fail(`Expected six recorded migrations, found ${actualMigrationCount}.`)
   }
 
-  if (row.schema_version !== '4A.1') {
-    fail(`Expected schema version 4A.1, found ${row.schema_version ?? 'none'}.`)
+  if (row.schema_version !== '4C.1') {
+    fail(`Expected schema version 4C.1, found ${row.schema_version ?? 'none'}.`)
   }
 
   validationSucceeded = true

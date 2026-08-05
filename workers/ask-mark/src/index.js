@@ -8,6 +8,11 @@ import {
   isLocalIntakeEnabled,
 } from './lib/intake.js'
 import {
+  handleLocalModerationRequest,
+  isLocalModerationEnabled,
+  isModerationPath,
+} from './lib/moderation.js'
+import {
   errorResponse,
   jsonResponse,
   noContentResponse,
@@ -85,6 +90,13 @@ async function handleQuery(request, env) {
 }
 
 async function handleRequest(request, env) {
+  if (
+    isModerationPath(request) &&
+    isLocalModerationEnabled(env)
+  ) {
+    return handleLocalModerationRequest(request, env)
+  }
+
   if (request.method.toUpperCase() === 'OPTIONS') {
     return noContentResponse(request)
   }

@@ -140,13 +140,13 @@ try {
   )
 
   expect(
-    Number(schemaRow.migration_count) === 5,
-    'Expected five migrations; found ' + schemaRow.migration_count + '.',
+    Number(schemaRow.migration_count) === 6,
+    'Expected six migrations; found ' + schemaRow.migration_count + '.',
   )
 
   expect(
-    schemaRow.schema_version === '4A.1',
-    'Expected schema 4A.1; found ' +
+    schemaRow.schema_version === '4C.1',
+    'Expected schema 4C.1; found ' +
       (schemaRow.schema_version ?? 'none') +
       '.',
   )
@@ -309,7 +309,7 @@ try {
   console.log(
     'Ask Mark intake schema checks passed: 3 isolated tables, ' +
       '6 named indexes, per-window deduplication uniqueness, a capped ' +
-      'rate bucket, 5 migrations, schema 4A.1, valid lifecycle rows, ' +
+      'rate bucket, 6 migrations, schema 4C.1, valid lifecycle rows, ' +
       'and zero active-knowledge coupling.',
   )
 } finally {
