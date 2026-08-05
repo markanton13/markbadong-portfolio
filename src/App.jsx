@@ -29,6 +29,9 @@ const LearningLibraryCaseStudy = lazy(() =>
 const FunnelLabCaseStudy = lazy(() =>
   import('./pages/FunnelLabCaseStudy').then((module) => ({ default: module.FunnelLabCaseStudy })),
 )
+const ShortFormVideoCaseStudy = lazy(() =>
+  import('./pages/ShortFormVideoCaseStudy').then((module) => ({ default: module.ShortFormVideoCaseStudy })),
+)
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -71,7 +74,7 @@ function HomePage() {
           <AboutSection />
           <TestimonialsCarousel />
           <section id="contact" className="contact-section">
-            <div className="contact-copy"><p className="eyebrow">Let’s work together</p><h2>Need someone who can support the work—and improve the system behind it?</h2><p>I’m open to remote opportunities in virtual assistance, operations, CRM, automation, quality assurance, and practical web systems.</p><div className="contact-availability" aria-label="Location and availability"><span>Quezon City, Philippines</span><span>Open to remote opportunities</span></div></div>
+            <div className="contact-copy"><p className="eyebrow">Let’s work together</p><h2>Need someone who can support the work—and improve the system behind it?</h2><p>I’m open to remote opportunities in virtual assistance, operations, CRM, automation, quality assurance, short-form video editing, and practical web systems.</p><div className="contact-availability" aria-label="Location and availability"><span>Quezon City, Philippines</span><span>Open to remote opportunities</span></div></div>
             <div className="contact-panel" aria-label="Professional contact options">
               <div className="contact-primary"><span>Primary email</span><strong>markantonbadong@gmail.com</strong><small>Best for job opportunities, project inquiries, and collaborations.</small><div className="contact-email-actions"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong@gmail.com" target="_blank" rel="noreferrer">Compose in Gmail <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong@gmail.com') } }}>Copy address</button></div></div>
               <div className="contact-direct-grid"><div className="contact-secondary"><span>Alternate email</span><strong>markantonbadong13@gmail.com</strong><div className="contact-email-actions"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong13@gmail.com" target="_blank" rel="noreferrer">Compose in Gmail <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong13@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong13@gmail.com') } }}>Copy address</button></div></div><div className="contact-messaging"><span>Messaging</span><strong>@markanton13</strong><small>WhatsApp · Telegram · Discord</small><a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Open Telegram <span aria-hidden="true">↗</span></a></div></div>
@@ -97,6 +100,7 @@ function App() {
   else if (pathname === '/projects/applylang') page = renderLazyPage(ApplyLangCaseStudy)
   else if (pathname === '/projects/learning-library') page = renderLazyPage(LearningLibraryCaseStudy)
   else if (pathname === '/projects/funnel-lab') page = renderLazyPage(FunnelLabCaseStudy)
+  else if (pathname === '/projects/short-form-video') page = renderLazyPage(ShortFormVideoCaseStudy)
   else if (pathname === '/') page = <HomePage />
   else page = renderLazyPage(NotFoundPage)
 

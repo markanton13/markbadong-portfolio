@@ -4,6 +4,12 @@
   "main": "src/index.js",
   "compatibility_date": "2026-07-24",
   "workers_dev": false,
+  "vars": {
+    "ASK_MARK_INTAKE_MODE": "local-only",
+    "ASK_MARK_INTAKE_HASH_KEY": "ask-mark-local-development-key-not-for-deployment-v1",
+    "ASK_MARK_MODERATION_MODE": "local-only",
+    "ASK_MARK_MODERATION_KEY": "ask-mark-local-moderation-key-not-for-deployment-v1"
+  },
   "d1_databases": [
     {
       "binding": "ASK_MARK_DB",

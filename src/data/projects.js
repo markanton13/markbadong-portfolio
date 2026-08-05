@@ -89,6 +89,22 @@ export const featuredProjects = [
     releaseLabel: 'Live gallery',
   },
   {
+    slug: 'short-form-video',
+    name: 'Short-Form Video Editing',
+    eyebrow: 'Approved vertical campaign work',
+    summary:
+      'Three promotional reels for a childcare-industry campaign, combining AI-assisted visuals, voiceover synchronization, dynamic captions, music, pacing, and strong final calls to action.',
+    outcome:
+      'All three reels were approved after brief interpretation, editing, caption styling, music selection, revisions, and final vertical delivery.',
+    role: 'Video editor, AI-assisted visual producer, caption design, QA',
+    tools: ['CapCut Pro', 'Google Flow', 'ElevenLabs', 'Canva'],
+    status: '3 approved client reels',
+    metric: '14–33 sec · 1080 × 1920',
+    image: '/images/projects/short-form-video/short-form-video-overview.webp',
+    imageAlt: 'Short-form video editing portfolio overview showing three approved vertical promotional reels.',
+    caseStudyUrl: '/projects/short-form-video',
+  },
+  {
     slug: 'childcare-culture',
     name: 'Childcare Culture & Co.',
     eyebrow: 'GoHighLevel client website',

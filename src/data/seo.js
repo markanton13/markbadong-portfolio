@@ -29,6 +29,9 @@ const person = {
     'Cloudflare D1',
     'Payment webhooks',
     'Passwordless recovery',
+    'Short-form video editing',
+    'CapCut Pro',
+    'Vertical social video',
   ],
 }
 
@@ -180,6 +183,17 @@ export const pageSeo = {
     imageAlt:
       'Landing and Funnel Portfolio Lab case study by Mark Anton, featuring seven distinct conversion demos.',
     keywords: ['landing pages', 'sales funnels', 'conversion design', 'responsive frontend', 'Cloudflare Pages', 'Pages Functions', 'Resend', 'portfolio lab'],
+  }),
+  shortFormVideo: caseStudy({
+    key: 'short-form-video',
+    name: 'Short-Form Video Editing',
+    title: 'Short-Form Video Editing Case Study | Mark Anton',
+    description:
+      'Short-form video editing case study featuring three approved vertical campaign reels with AI-assisted visuals, captions, voiceover timing, music, pacing, and stakeholder revisions.',
+    image: '/images/seo/short-form-video-og.png',
+    imageAlt:
+      'Short-form video editing case study by Mark Anton, featuring three approved vertical promotional reels.',
+    keywords: ['short-form video editing', 'Instagram Reels', 'CapCut Pro', 'vertical video', 'caption design', 'AI-assisted visuals', 'voiceover editing'],
   }),
   notFound: {
     title: 'Page Not Found | Mark Anton',
