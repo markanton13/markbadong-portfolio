@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 
 const navItems = [
+  ['World', '#markverse-entry'],
   ['Work', '#work'],
+  ['Career', '#career'],
   ['Capabilities', '#capabilities'],
   ['About', '#about'],
   ['Contact', '#contact'],
 ]
 
-export function Header({ mode = 'home' }) {
+export function Header({ mode = 'home', onViewChange }) {
   const [open, setOpen] = useState(false)
   const toggleRef = useRef(null)
   const navRef = useRef(null)
-  const isHome = mode === 'home'
+  const isHome = mode !== 'case-study'
+  const isWorldView = mode === 'markverse'
   const linkTo = (hash) => (isHome ? hash : `/${hash}`)
 
   useEffect(() => {
@@ -47,10 +50,10 @@ export function Header({ mode = 'home' }) {
   }, [open])
 
   return (
-    <header className="site-header">
+    <header className={`site-header${isHome ? ' site-header-markverse' : ''}`}>
       <a className="brand" href={isHome ? '#top' : '/'} aria-label="Mark Anton home">
         <span className="brand-mark" aria-hidden="true">MB</span>
-        <span>Mark Anton</span>
+        <span>{isHome ? 'MARKVERSE' : 'Mark Anton'}</span>
       </a>
 
       <button
@@ -73,7 +76,17 @@ export function Header({ mode = 'home' }) {
         aria-label="Primary navigation"
       >
         {navItems.map(([label, href]) => (
-          <a key={href} href={linkTo(href)} onClick={() => setOpen(false)}>{label}</a>
+          <a
+            key={href}
+            href={linkTo(href)}
+            onClick={(event) => {
+              setOpen(false)
+              if (label === 'World' && onViewChange && !isWorldView) {
+                event.preventDefault()
+                onViewChange('world')
+              }
+            }}
+          >{label}</a>
         ))}
         <a
           href="/files/Mark-Anton-Badong-Resume.pdf"
@@ -83,7 +96,13 @@ export function Header({ mode = 'home' }) {
         >
           Résumé
         </a>
-        <a className="nav-cta" href={linkTo('#contact')} onClick={() => setOpen(false)}>Work with me</a>
+        {onViewChange ? (
+          <button className="nav-cta" type="button" onClick={() => { setOpen(false); onViewChange(isWorldView ? 'professional' : 'world') }}>
+            {isWorldView ? 'Professional View' : 'World View'}
+          </button>
+        ) : (
+          <a className="nav-cta" href={linkTo('#contact')} onClick={() => setOpen(false)}>Work with me</a>
+        )}
       </nav>
     </header>
   )

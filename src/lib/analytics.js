@@ -164,6 +164,14 @@ function resolveAnchorInteraction(anchor) {
   const hostname = url.hostname.toLowerCase()
   const ownOrigin = url.origin === window.location.origin
 
+  if (url.protocol === 'mailto:') {
+    return {
+      eventName: 'email_click',
+      targetLabel: 'primary-email',
+      targetCategory: 'email',
+    }
+  }
+
   if (pathname.endsWith('/mark-anton-badong-resume.pdf')) {
     const isDownload = anchor.hasAttribute('download')
 
@@ -194,16 +202,9 @@ function resolveAnchorInteraction(anchor) {
   }
 
   if (hostname === 'mail.google.com') {
-    const recipient = url.searchParams.get('to')
-    const targetLabel = recipient === 'markantonbadong@gmail.com'
-      ? 'primary-email'
-      : recipient === 'markantonbadong13@gmail.com'
-        ? 'alternate-email'
-        : sourceLocation(anchor, 'email')
-
     return {
       eventName: 'email_click',
-      targetLabel,
+      targetLabel: sourceLocation(anchor, 'email'),
       targetCategory: 'email',
     }
   }

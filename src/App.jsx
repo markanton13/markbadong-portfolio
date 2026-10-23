@@ -1,7 +1,11 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { AboutSection } from './components/AboutSection'
+import { CareerTimeline } from './components/markverse/CareerTimeline'
+import { ClientStudioSection } from './components/markverse/ClientStudioSection'
+import { SkillConstellation } from './components/markverse/SkillConstellation'
+import { WorldEntry } from './components/markverse/WorldEntry'
 import { ProjectCard } from './components/ProjectCard'
 import { SectionHeading } from './components/SectionHeading'
 import { TestimonialsCarousel } from './components/TestimonialsCarousel'
@@ -10,6 +14,7 @@ import { PageMeta } from './components/PageMeta'
 import { featuredProjects, supportingProjects } from './data/projects'
 import { capabilities } from './data/capabilities'
 import './styles/site.css'
+import './styles/markverse.css'
 
 const PersonalVABotCaseStudy = lazy(() =>
   import('./pages/PersonalVABotCaseStudy').then((module) => ({ default: module.PersonalVABotCaseStudy })),
@@ -39,21 +44,45 @@ const AskMarkAssistant = lazy(() =>
   import('./components/assistant/AskMarkAssistant').then((module) => ({ default: module.AskMarkAssistant })),
 )
 
+function readPortfolioView() {
+  return new URLSearchParams(window.location.search).get('view') === 'professional' ? 'professional' : 'world'
+}
+
 function HomePage() {
+  const [portfolioView, setPortfolioView] = useState(readPortfolioView)
+  const changePortfolioView = useCallback((nextView) => {
+    if (nextView === portfolioView) return
+    const url = new URL(window.location.href)
+    if (nextView === 'professional') url.searchParams.set('view', 'professional')
+    else url.searchParams.delete('view')
+    url.hash = nextView === 'professional' ? 'professional' : 'markverse-entry'
+    window.history.pushState({ portfolioView: nextView }, '', url)
+    setPortfolioView(nextView)
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+  }, [portfolioView])
+
+  useEffect(() => {
+    const handlePopState = () => setPortfolioView(readPortfolioView())
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
   return (
     <>
       <PageMeta pageKey="home" />
       <a className="skip-link" href="#main-content">Skip to main content</a>
-      <div id="top" className="page-shell">
-        <Header />
+      <div id="top" className="page-shell markverse-home">
+        <Header mode={portfolioView === 'world' ? 'markverse' : 'professional'} onViewChange={changePortfolioView} />
         <main id="main-content">
-          <Hero />
+          {portfolioView === 'world'
+            ? <WorldEntry onViewChange={changePortfolioView} />
+            : <Hero onViewChange={changePortfolioView} />}
           <section className="trust-strip" aria-label="Core strengths">
-            <span>8+ years of experience</span><span>GoHighLevel</span><span>Workflow automation</span><span>Quality assurance</span><span>Training & SOPs</span>
+            <span>8+ years in operations & support</span><span>Current title: Training Lead</span><span>GoHighLevel & CRM systems</span><span>Cloudflare & interactive systems</span><span>Quality assurance</span>
           </section>
           <section id="work" className="section section-work">
-            <SectionHeading eyebrow="Selected work" title="Client delivery, operational systems, and proof that works." copy="My strongest work combines real operations experience, practical technology, responsive implementation, careful testing, and reliable handoff." />
-            <div className="projects-list">
+            <SectionHeading eyebrow="Selected work" title="Client delivery, operational systems, and proof that works." copy="Explore production systems, a Windows beta, completed products, portfolio demos, and client work with publication limits. Each project is labeled by its actual status." />
+            <div className="projects-list markverse-project-grid">
               {featuredProjects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}
             </div>
             <div className="supporting-work"><p className="eyebrow">Also in the portfolio</p><div>{supportingProjects.map((project) => <span key={project}>{project}</span>)}</div></div>
@@ -61,7 +90,10 @@ function HomePage() {
           <section id="capabilities" className="section section-capabilities">
             <SectionHeading eyebrow="Capabilities" title="A versatile operator with technical depth." copy="I bridge day-to-day execution and systems improvement—so the work gets done while the process gets better." />
             <div className="capability-grid">{capabilities.map((capability) => <article key={capability.number} className="capability-card"><span>{capability.number}</span><h3>{capability.title}</h3><p>{capability.description}</p></article>)}</div>
+            <SkillConstellation />
           </section>
+          <ClientStudioSection />
+          <CareerTimeline />
           <section className="section process-section">
             <SectionHeading eyebrow="How I work" title="Clear thinking. Visible progress. Reliable handoff." />
             <ol className="process-list">
@@ -76,8 +108,8 @@ function HomePage() {
           <section id="contact" className="contact-section">
             <div className="contact-copy"><p className="eyebrow">Let’s work together</p><h2>Need someone who can support the work—and improve the system behind it?</h2><p>I’m open to remote opportunities in operations, virtual assistance, GoHighLevel and CRM implementation, workflow automation, QA, client websites, and short-form video editing.</p><div className="contact-availability" aria-label="Location and availability"><span>Quezon City, Philippines</span><span>Open to remote opportunities</span></div></div>
             <div className="contact-panel" aria-label="Professional contact options">
-              <div className="contact-primary"><span>Primary email</span><strong>markantonbadong@gmail.com</strong><small>Best for job opportunities, project inquiries, and collaborations.</small><div className="contact-email-actions"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong@gmail.com" target="_blank" rel="noreferrer">Compose in Gmail <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong@gmail.com') } }}>Copy address</button></div></div>
-              <div className="contact-direct-grid"><div className="contact-secondary"><span>Preferred phone</span><strong>0956 869 5475</strong><small>Secondary: 0968 328 1273</small><div className="contact-email-actions"><a href="tel:+639568695475">Call primary <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('0956 869 5475') } catch { window.prompt('Copy this phone number:', '0956 869 5475') } }}>Copy number</button></div></div><div className="contact-secondary"><span>Alternate email</span><strong>markantonbadong13@gmail.com</strong><div className="contact-email-actions"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=markantonbadong13@gmail.com" target="_blank" rel="noreferrer">Compose in Gmail <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong13@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong13@gmail.com') } }}>Copy address</button></div></div><div className="contact-messaging"><span>Messaging</span><strong>@markanton13</strong><small>WhatsApp · Telegram · Discord</small><a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Open Telegram <span aria-hidden="true">↗</span></a></div></div>
+              <div className="contact-primary"><span>Primary email</span><strong>markantonbadong@gmail.com</strong><small>Best for job opportunities, project inquiries, and collaborations.</small><div className="contact-email-actions"><a href="mailto:markantonbadong@gmail.com">Email Mark <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong@gmail.com') } }}>Copy address</button></div></div>
+              <div className="contact-direct-grid"><div className="contact-secondary"><span>Preferred phone</span><strong>0956 869 5475</strong><small>Secondary: 0968 328 1273</small><div className="contact-email-actions"><a href="tel:+639568695475">Call primary <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('0956 869 5475') } catch { window.prompt('Copy this phone number:', '0956 869 5475') } }}>Copy number</button></div></div><div className="contact-messaging"><span>Messaging</span><strong>@markanton13</strong><small>WhatsApp · Telegram · Discord</small><a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Open Telegram <span aria-hidden="true">↗</span></a></div></div>
               <div className="contact-link-grid"><a href="https://linkedin.com/in/markanton13" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>Professional profile</strong></a><a href="https://github.com/markanton13" target="_blank" rel="noreferrer"><span>GitHub</span><strong>Repositories and proof</strong></a><a href="/files/Mark-Anton-Badong-Resume.pdf" download="Mark-Anton-Badong-Resume.pdf"><span>Résumé</span><strong>Download résumé</strong></a></div>
             </div>
           </section>

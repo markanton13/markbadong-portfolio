@@ -22,7 +22,7 @@ function CaseFigure({ src, alt, caption, className = '', eager = false }) {
 const architectureLayers = [
   {
     title: 'Public learning experience',
-    copy: 'Ten interactive guides are delivered through Cloudflare Pages, with registry-driven free and premium access rules.',
+    copy: 'Eleven QA-passed public guides are delivered through Cloudflare Pages: ten free during the pilot and one premium-pilot guide.',
   },
   {
     title: 'Serverless access control',
@@ -122,7 +122,7 @@ export function LearningLibraryCaseStudy() {
                   The original goal was to organize interactive training material. The finished system also handles premium access, time-limited passes, recovery, provider integrations, and private administration.
                 </p>
                 <p>
-                  The live catalog currently contains ten guides. Nine remain public and one premium guide demonstrates the full access lifecycle through Google test rewarded ads, PayMongo test checkout, vouchers, and passwordless recovery.
+                  The catalog contains 11 QA-passed public guides: 10 are free during the pilot and one is a premium-pilot guide. Test rewarded ads, test checkout, vouchers, and passwordless recovery demonstrate access paths; this does not claim live payment activation or commercial conversions.
                 </p>
                 <p>
                   The project intentionally stays in portfolio mode: real transactions and real ad monetization are locked, while the complete technical workflow remains available for evaluation.
@@ -130,7 +130,7 @@ export function LearningLibraryCaseStudy() {
               </div>
 
               <dl className="case-facts">
-                <div><dt>Content</dt><dd>10 registered interactive guides</dd></div>
+                <div><dt>Content</dt><dd>11 public guides: 10 free in pilot, 1 premium pilot</dd></div>
                 <div><dt>Runtime</dt><dd>Cloudflare Pages, Workers, and D1</dd></div>
                 <div><dt>Access</dt><dd>Free, voucher, purchase, rewarded ad, and owner passes</dd></div>
                 <div><dt>Operations</dt><dd>Analytics, support, backups, health, and launch controls</dd></div>

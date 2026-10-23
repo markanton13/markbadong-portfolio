@@ -617,6 +617,7 @@ const restrictedPatterns = [
   /\b(relationship|dating|girlfriend|boyfriend|married|marriage)\b/i,
   /\b(mark s health|his health|medical condition|health condition|diagnosis|diagnosed|mental health condition|medication|medicine he takes|medical record)\b/i,
   /\b(confidential|internal client|private employer|nda)\b/i,
+  /\b(private client records?|client financial data|participant records?|internal client data)\b/i,
   /\b(available today|available now|start tomorrow|finish tomorrow|guarantee|promise|contractual commitment)\b/i,
   /\b(gender|sex|sexuality|sexual orientation|religion)\b/i,
 ]
@@ -978,6 +979,31 @@ export function getMockResponse(question, pathname, context = null) {
   }
 
   if (
+    /\b(technical skills|skills has mark demonstrated|what technologies|tools and technologies|automation skills|web development skills)\b/i.test(
+      normalizedQuestion,
+    )
+  ) {
+    return buildProfileResponse('demonstratedSkills', [
+      action('Explore projects', assistantLinks.work),
+    ])
+  }
+
+  if (
+    /\b(what projects has mark built|which projects has mark built|what are mark s projects|show me all projects|list all projects|all of mark s projects)\b/i.test(
+      normalizedQuestion,
+    )
+  ) {
+    const projectNames = projectKnowledge.map((project) => project.label).join(', ')
+    return {
+      category: 'project_inventory',
+      context: { type: 'topic', id: 'portfolio.projects', label: 'Featured projects' },
+      answer: `The featured portfolio includes ${projectNames}. Their roles and statuses vary across personal products, client work, and portfolio demos; each card describes its own evidence and current status.`,
+      sources: [source('Explore the project collection', assistantLinks.work)],
+      actions: [action('Explore projects', assistantLinks.work)],
+    }
+  }
+
+  if (
     /\b(capital one|verizon|comcast|customer support|technical support|support programs|support experience)\b/i.test(
       normalizedQuestion,
     ) &&
@@ -989,11 +1015,40 @@ export function getMockResponse(question, pathname, context = null) {
   }
 
   if (
-    /\b(work history|employment history|professional history|career history|working experience|work experience|professional experience|previous roles|past roles|former roles|current role|current job|current company|previous companies|past companies|companies worked|companies has mark worked|employers|where did mark work|where has mark worked|what companies|career background|years of experience|how many years|employment background)\b/i.test(
+    /\b(work history|employment history|professional history|career history|working experience|work experience|professional experience|previous roles|past roles|former roles|current role|current professional role|current job|current company|current position at wipro|previous companies|past companies|companies worked|companies has mark worked|employers|where did mark work|where has mark worked|what companies|career background|years of experience|how many years|employment background)\b/i.test(
       normalizedQuestion,
     )
   ) {
     return buildProfileResponse('careerHistory', resumeAndContactActions())
+  }
+
+  if (
+    /\b(which projects are real client work|which projects are client work|which projects are demos or personal experiments|which projects are demos|client work|paid client engagement|client project)\b/i.test(
+      normalizedQuestion,
+    )
+  ) {
+    return {
+      category: 'project_types',
+      context: { type: 'topic', id: 'portfolio.project_types', label: 'Project and client-work distinctions' },
+      answer: profileKnowledge.projectTypes.summary,
+      sources: [source('Explore projects', assistantLinks.work)],
+      actions: [action('Explore projects', assistantLinks.work)],
+    }
+  }
+
+  if (
+    /\b(what projects has mark built|which projects has mark built|what are mark s projects|show me all projects|list all projects|all of mark s projects)\b/i.test(
+      normalizedQuestion,
+    )
+  ) {
+    const projectNames = projectKnowledge.map((project) => project.label).join(', ')
+    return {
+      category: 'project_inventory',
+      context: { type: 'topic', id: 'portfolio.projects', label: 'Featured projects' },
+      answer: `The featured portfolio includes ${projectNames}. Their roles and statuses vary across personal products, client work, and portfolio demos; each card describes its own evidence and current status.`,
+      sources: [source('Explore the project collection', assistantLinks.work)],
+      actions: [action('Explore projects', assistantLinks.work)],
+    }
   }
 
   const projectMatch = detectEntity(cleaned, projectKnowledge, 0.78)

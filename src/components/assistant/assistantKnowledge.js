@@ -1,3 +1,5 @@
+import stageFKnowledge from '../../data/askMarkPublicKnowledge.json' with { type: 'json' }
+
 export const assistantLinks = {
   contact: '/#contact',
   resume: '/files/Mark-Anton-Badong-Resume.pdf',
@@ -25,15 +27,13 @@ export const profileKnowledge = {
     title: 'Professional experience',
     summary:
       'Mark has 8+ years of combined professional experience across process training, geospatial data operations, quality-focused work, technical support, customer support, documentation, reporting, and workflow improvement.',
-    direction:
-      'His résumé currently lists Process Trainer at Wipro supporting Google from 2023 to present; Geospatial Data Operator at Wipro supporting Google from 2022 to 2023; and Customer and Technical Support across Capital One, Verizon, and Comcast programs from 2017 to 2021. These company names describe the programs or accounts he supported and should not be rewritten as direct employment by Google, Capital One, Verizon, or Comcast.',
+    direction: stageFKnowledge.careerHistory,
   },
   wiproExperience: {
     title: 'Wipro and Google-support experience',
     summary:
-      'At Wipro supporting Google, Mark progressed from Geospatial Data Operator to Process Trainer. His work includes geospatial data validation, policy-compliance review, onboarding, refresher training, policy guidance, SOPs, learning materials, assessments, reporting, issue investigation, and coordination with trainees, operations leaders, and quality stakeholders.',
-    direction:
-      'Verified proof points include Train-the-Trainer certification, a 5/5 L&D session evaluation, and an assessment/reporting workflow that produced up to a 90% efficiency gain in the supported process.',
+      'At Wipro supporting Google, Mark progressed from AA – Production Specialist to Senior Executive – Trainer and is currently Training Lead. His documented earlier work includes geospatial data validation, policy-compliance review, onboarding, refresher training, policy guidance, SOPs, learning materials, assessments, reporting, issue investigation, and coordination with trainees, operations leaders, and quality stakeholders. Do not infer new Training Lead responsibilities from the title.',
+    direction: stageFKnowledge.proofPointsRecord.content,
   },
   geospatialExperience: {
     title: 'Geospatial Data Operator experience',
@@ -43,11 +43,23 @@ export const profileKnowledge = {
       'He used proprietary GIS tools including Atlas and Calypso, investigated discrepancies, documented findings, and maintained data accuracy, consistency, compliance, and reliable downstream handoff.',
   },
   trainerExperience: {
-    title: 'Process Trainer experience',
+    title: 'Senior Executive – Trainer experience',
     summary:
-      'As a Process Trainer at Wipro supporting Google from 2023 to present, Mark designs and delivers onboarding, refresher, and policy-support workflows for geospatial operations.',
+      'As a Senior Executive – Trainer at Wipro supporting Google from 2023 to 2026, Mark worked as a Process Trainer for geospatial operations.',
     direction:
       'He translates Roads & Traffic Law and operational policies into practical guidance, SOPs, learning materials, assessments, and review standards. His work also includes reports, Google Apps Script and Google Sheets workflows, data-quality reviews, issue investigation, corrective action, and stakeholder coordination.',
+  },
+  trainingLeadExperience: {
+    title: 'Current Wipro title',
+    summary: stageFKnowledge.trainingLeadRecord.content,
+  },
+  demonstratedSkills: {
+    title: 'Demonstrated technical and operational skills',
+    summary: stageFKnowledge.skills,
+  },
+  projectTypes: {
+    title: 'Project and client-work distinctions',
+    summary: stageFKnowledge.projectTypesRecord.content,
   },
   supportExperience: {
     title: 'Customer and technical support experience',
@@ -180,7 +192,7 @@ export const projectKnowledge = [
       'interactive guides',
     ],
     summary:
-      'The Learning Library is a live Cloudflare platform combining ten interactive guides with access control, test payments, rewarded unlocks, recovery, analytics, backups, device limits, and launch safeguards.',
+      'The Learning Library is a live Cloudflare portfolio demonstration with 11 QA-passed public guides: 10 are free during the pilot and one is a premium-pilot guide. It also demonstrates access control, test payment and rewarded-access integrations, recovery, analytics, backups, device limits, and launch safeguards; this is not a claim of live commercial payment activation or conversions.',
     status: 'It is presented as a live portfolio demonstration.',
     sourcePath: '/projects/learning-library',
     githubUrl: 'https://github.com/markanton13/learning-library-public-proof',
@@ -214,25 +226,11 @@ export const projectKnowledge = [
     sourcePath: '/projects/leaveflow',
     githubUrl: 'https://github.com/markanton13/leaveflow',
   },
-  {
-    id: 'childcare-culture',
-    label: 'Childcare Culture & Co.',
-    aliases: [
-      'childcare culture',
-      'childcare culture and co',
-      'childcare culture & co',
-      'culture co',
-      'culture and co',
-      'cccc',
-      'childcare website',
-      'ghl client project',
-    ],
-    summary:
-      'Childcare Culture & Co. is Mark’s ongoing GoHighLevel client website implementation. His work includes responsive page systems, custom navigation, program-page layouts, custom HTML and CSS, mobile optimization, and QA around forms and booking paths.',
-    status:
-      'The project is still in progress, so it must not be presented as fully completed, fully launched, or as having unapproved business results.',
-    sourcePath: '/#work',
-  },
+  ...stageFKnowledge.projects.map((project) =>
+    Object.fromEntries(
+      Object.entries(project).filter(([key]) => key !== 'worker'),
+    ),
+  ),
 ]
 
 export const roleKnowledge = [

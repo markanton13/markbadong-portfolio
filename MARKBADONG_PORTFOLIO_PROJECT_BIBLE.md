@@ -59,7 +59,7 @@ The strongest public message is:
 - **Domain:** `markbadong.com`
 - **GitHub:** `https://github.com/markanton13`
 - **Primary portfolio email:** `markantonbadong@gmail.com`
-- **Alternate portfolio email:** `markantonbadong13@gmail.com`
+- **Previous portfolio email (historical; not for current public surfaces):** `markantonbadong13@gmail.com`
 
 ### Visual direction
 
@@ -466,21 +466,17 @@ Phase 4A is complete because:
 - the prompt package contained one frozen résumé snapshot and one frozen Master Career Profile snapshot;
 - the workflow persisted correctly.
 
-### Wipro date rule
+### Wipro title correction — October 22, 2026
 
-Until the official relieving date:
-
-```text
-Process Trainer | Wipro — 2023–Present
-```
-
-After August 14, 2026:
+Mark confirmed his current official title as **Training Lead**. Previous progression:
 
 ```text
-Process Trainer | Wipro — 2023–Aug 2026
+AA – Production Specialist | Wipro — 2022–2023
+Senior Executive – Trainer | Wipro — 2023–2026
+Training Lead | Wipro — Current (effective date and new responsibilities unverified)
 ```
 
-Update all résumé sources, the Master Career Profile, ApplyLang canonical sources, and the public PDF together.
+The historical August 2026 separation plan is superseded; do not represent it as an actual departure or invent an employment gap. The public ATS résumé still lists the prior Senior Executive – Trainer title and should be synchronized only from an editable, owner-approved résumé source. Do not infer Training Lead duties from the title.
 
 ---
 
@@ -727,7 +723,7 @@ Use this at the beginning of the next portfolio thread:
 The public portfolio exposes the following verified professional contact details:
 
 - **Primary email:** `markantonbadong@gmail.com`
-- **Alternate email:** `markantonbadong13@gmail.com`
+- The previous address is retained only as a historical reference and is not presented as a current public contact method.
 - **LinkedIn:** `https://linkedin.com/in/markanton13`
 - **GitHub:** `https://github.com/markanton13`
 - **Telegram:** `https://t.me/markanton13`

@@ -1,5 +1,23 @@
 export const featuredProjects = [
   {
+    slug: 'ask-mark',
+    name: 'Ask Mark',
+    eyebrow: 'Flagship · source-grounded portfolio assistant',
+    summary:
+      'An interactive portfolio Q&A experience that guides visitors to approved answers and evidence about Mark’s experience, skills, and projects.',
+    outcome:
+      'The interface has curated static responses; its separately managed Worker/D1 path uses term-scored retrieval over approved answer records. Remote API availability depends on the selected build mode.',
+    role: 'Independent project · product design, implementation, and QA',
+    tools: ['React', 'Curated knowledge retrieval', 'Cloudflare Workers', 'D1'],
+    status: 'Live portfolio feature',
+    metric: 'Interactive assistant · approved portfolio sources',
+    image: '/images/ask-mark/ask-mark-mascot.webp',
+    imageAlt: 'Ask Mark mascot illustration used by the portfolio assistant.',
+    assistantAction: true,
+    featured: true,
+    caseStudyLabel: null,
+  },
+  {
     slug: 'personalvabot',
     name: 'PersonalVABot',
     eyebrow: 'Local-first operations platform',
@@ -55,13 +73,13 @@ export const featuredProjects = [
     name: 'Learning Library',
     eyebrow: 'Serverless interactive learning platform',
     summary:
-      'A Cloudflare-based learning system combining ten interactive guides with premium access control, test payments, rewarded unlocks, passwordless recovery, analytics, and launch operations.',
+      'A Cloudflare-based learning system with 11 QA-passed public guides: 10 free during the pilot and one premium-pilot guide, alongside access control, test integrations, recovery, analytics, and launch operations.',
     outcome:
       'Deployed as a live portfolio demo with verified end-to-end purchase, rewarded access, recovery, device-limit, immutable-clock, analytics, backup, and emergency-pause workflows.',
     role: 'Creator, system designer, access architecture, QA',
     tools: ['Cloudflare Workers', 'D1', 'PayMongo', 'Resend'],
     status: 'Live portfolio demo',
-    metric: '10 guides · 15 D1 tables',
+    metric: '11 public · 10 free · 1 premium pilot',
     image: '/images/projects/learning-library/library-overview.svg',
     imageAlt: 'Learning Library overview showing interactive guides, premium access, recovery, and operations controls.',
     caseStudyUrl: '/projects/learning-library',
@@ -107,16 +125,18 @@ export const featuredProjects = [
   {
     slug: 'childcare-culture',
     name: 'Childcare Culture & Co.',
-    eyebrow: 'GoHighLevel client website',
+    eyebrow: 'Independent contractor · GoHighLevel & Systems Specialist',
     summary:
-      'A live six-page GoHighLevel client website translating an early childhood leadership brand into a responsive page system with custom navigation, branded sections, mobile-specific layouts, and reusable HTML/CSS.',
+      'An independent client engagement spanning GoHighLevel website development, CRM systems, automation, and technical QA for Childcare Culture & Co.',
     outcome:
-      'Home, About, 90-Day Experience, Culture Club, Speaking, and Contact are live, with controlled draft-based refinements, responsive QA, and basic SEO support handled with the project lead.',
-    role: 'GoHighLevel implementation, responsive layout systems, custom HTML/CSS, UX and mobile QA',
-    tools: ['GoHighLevel', 'HTML', 'CSS', 'Responsive QA'],
-    status: 'Live client work',
-    metric: '6 live pages · responsive QA',
-    caseStudyLabel: 'Client work summary',
+      'Work includes a six-page responsive website, CRM and program-system configuration, selected workflow testing, and approved short-form video delivery. Individual features have different implementation and verification states.',
+    role: 'GoHighLevel & Systems Specialist · Independent Contractor',
+    tools: ['GoHighLevel', 'CRM systems', 'Workflow automation', 'HTML', 'CSS', 'Technical QA'],
+    status: 'Independent client work · status varies',
+    metric: 'Six-page website · connected systems work',
+    detailUrl: '#client-studio',
+    detailLabel: 'Explore client work',
+    caseStudyLabel: null,
   },
   {
     slug: 'leaveflow',
@@ -135,6 +155,53 @@ export const featuredProjects = [
     caseStudyUrl: '/projects/leaveflow',
     githubUrl: 'https://github.com/markanton13/leaveflow',
     demoUrl: '/projects/leaveflow#leaveflow-demo',
+  },
+  {
+    slug: 'tambayan-royale',
+    name: 'Tambayan Royale Arcade',
+    eyebrow: 'Personal passion project · browser games',
+    summary:
+      'An experimental browser arcade exploring games, multiplayer interactions, player experiences, and shared fictional chips with no cash value.',
+    outcome:
+      'The public entry page is available. Individual games, authenticated flows, and multiplayer behavior remain under active QA.',
+    role: 'Personal project · creative engineering',
+    tools: ['Browser games', 'Interactive systems', 'Cloudflare'],
+    status: 'Staging / active QA',
+    metric: 'Experimental personal project',
+    externalUrl: 'https://arcade.markbadong.com',
+    externalLabel: 'Visit Tambayan Royale',
+    caseStudyLabel: null,
+  },
+  {
+    slug: 'tambayan-royale-play',
+    name: 'Tambayan Royale Play',
+    eyebrow: 'Personal project · interactive 3D experiences',
+    summary:
+      'A developing browser experience with a 3D social lobby, avatar greeting, Who’s the Spy? entry surface, and game directory. Chess Club and Word Garden are marked Coming Soon.',
+    outcome:
+      'The public page exposes these entry surfaces; authenticated account flows and complete multiplayer gameplay were not verified.',
+    role: 'Personal project · interactive experience development',
+    tools: ['Three.js', 'Browser experiences', 'Game interfaces'],
+    status: 'Developing public preview',
+    metric: 'Capabilities vary by game',
+    externalUrl: 'https://play.markbadong.com',
+    externalLabel: 'Visit Tambayan Royale Play',
+    caseStudyLabel: null,
+  },
+  {
+    slug: 'ledger',
+    name: 'Ledger',
+    eyebrow: 'Personal productivity app · invoicing workflow',
+    summary:
+      'A practical invoicing and receipt web application. Mark reports one friend actively uses Ledger for invoicing and shared positive feedback about its usefulness and ease of use.',
+    outcome:
+      'The public application shell is access-gated. The reported feedback is qualitative and describes one user; private invoices and financial details are not included.',
+    role: 'Personal project · practical web application',
+    tools: ['Web application', 'Invoicing workflow'],
+    status: 'Early real-world use · access-gated',
+    externalUrl: 'https://ledger.markbadong.com',
+    externalLabel: 'Open Ledger',
+    caseStudyLabel: null,
   },
 ]
 

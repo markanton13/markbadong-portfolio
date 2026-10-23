@@ -31,3 +31,8 @@ make-review-zip*.ps1
 # Cloudflare Wrangler local state and disposable schema checks
 **/.wrangler/
 **/.wrangler-schema-check/
+workers/ask-mark/.wrangler-*-check/
+
+# Local-only review materials and private case-study evidence
+docs/markverse/local-review/Mark_Anton_Badong_Public_Resume_Oct_2026_Email_Updated.docx
+docs/markverse/local-review/private-case-study-evidence/

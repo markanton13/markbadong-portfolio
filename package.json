@@ -7,6 +7,11 @@
         "dev": "vite",
         "build": "node scripts/build-pages.mjs",
         "lint": "oxlint src",
+        "check:markverse-districts": "node scripts/check-markverse-districts.mjs",
+        "check:markverse-inventory": "node scripts/check-markverse-project-inventory.mjs",
+        "check:markverse-client-studio": "node scripts/check-markverse-client-studio.mjs",
+        "check:learning-library-inventory": "node scripts/check-learning-library-inventory.mjs",
+        "check:operations-hq-scene": "node scripts/check-operations-hq-scene.mjs",
         "preview": "vite preview",
         "check:ask-mark": "node scripts/check-ask-mark.mjs",
         "check:ask-mark-schema": "node scripts/check-ask-mark-schema.mjs",
@@ -31,7 +36,7 @@
         "askmark:d1:seed:local": "node scripts/import-ask-mark-seed.mjs --persist-to workers/ask-mark/.wrangler/state",
         "askmark:d1:reset:local": "node scripts/reset-ask-mark-local.mjs",
         "askmark:api:dev": "wrangler dev --local --persist-to workers/ask-mark/.wrangler/state --config workers/ask-mark/wrangler.jsonc --ip 127.0.0.1 --port 8787",
-        "check": "npm run lint && npm run check:ask-mark && npm run check:ask-mark-client && npm run check:ask-mark-pages-build && npm run check:ask-mark-schema && npm run check:ask-mark-intake && npm run check:ask-mark-moderation && npm run check:ask-mark-seed && npm run check:ask-mark-api && npm run build",
+        "check": "npm run lint && npm run check:markverse-districts && npm run check:markverse-inventory && npm run check:markverse-client-studio && npm run check:learning-library-inventory && npm run check:operations-hq-scene && npm run check:ask-mark && npm run check:ask-mark-client && npm run check:ask-mark-pages-build && npm run check:ask-mark-schema && npm run check:ask-mark-intake && npm run check:ask-mark-moderation && npm run check:ask-mark-seed && npm run check:ask-mark-api && npm run build",
         "dev:ask-mark": "vite --mode askmark --host 127.0.0.1 --port 5173 --strictPort",
         "check:ask-mark-client": "node scripts/check-ask-mark-client.mjs",
         "check:ask-mark-pages-build": "node scripts/check-ask-mark-pages-build.mjs",
@@ -49,7 +54,8 @@
     },
     "dependencies": {
         "react": "^19.2.7",
-        "react-dom": "^19.2.7"
+        "react-dom": "^19.2.7",
+        "three": "0.186.0"
     },
     "devDependencies": {
         "@types/react": "^19.2.17",

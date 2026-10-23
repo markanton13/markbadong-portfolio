@@ -78,7 +78,7 @@ Complete Discord career operations system for reusable career sources, frozen ap
 
 ### Learning Library
 
-Cloudflare Pages, Workers, and D1 interactive learning platform with 10 guides, registry-driven access, test payment and rewarded-access flows, passwordless recovery, analytics, backups, and launch controls.
+Cloudflare Pages, Workers, and D1 interactive learning platform with 11 QA-passed public guides (10 free during the pilot and one premium-pilot guide), registry-driven access, test payment and rewarded-access flows, passwordless recovery, analytics, backups, and launch controls.
 
 ### LeaveFlow
 
