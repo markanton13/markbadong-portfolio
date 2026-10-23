@@ -9,8 +9,8 @@ const person = {
   url: `${siteUrl}/`,
   image: `${siteUrl}/images/seo/mark-anton-portfolio-og.png`,
   jobTitle: 'Operations, Automation & Systems Specialist',
-  email: 'mailto:markantonbadong13@gmail.com',
-  telephone: ['+639568695475', '+639683281273'],
+  email: 'mailto:markantonbadong@gmail.com',
+  telephone: '+639568695475',
   sameAs: [
     'https://github.com/markanton13',
     'https://www.linkedin.com/in/markanton13',
@@ -93,7 +93,7 @@ export const pageSeo = {
   home: {
     title: 'Mark Anton | Operations, Automation & Systems',
     description:
-      'Mark Anton is an operations, automation, and systems specialist with 8+ years of experience across training, QA, support, GoHighLevel, workflow automation, client websites, and short-form content.',
+      'Mark Anton is an operations, automation, and systems specialist and current Wipro Training Lead, with experience across support, geospatial quality, client systems, serverless apps, and interactive development.',
     path: '/',
     type: 'website',
     image: '/images/seo/mark-anton-portfolio-og.png',

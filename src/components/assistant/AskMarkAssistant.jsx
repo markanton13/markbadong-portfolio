@@ -70,6 +70,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   const [lastQuestion, setLastQuestion] = useState('')
   const [conversationContext, setConversationContext] = useState(null)
   const launcherRef = useRef(null)
+  const returnFocusRef = useRef(null)
   const intakeEntryRef = useRef(null)
   const composerRef = useRef(null)
   const messageListRef = useRef(null)
@@ -80,6 +81,19 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   const isMinimized = panelState === 'minimized'
   const isIntakeView = panelView === 'intake' && intakeEnabled
   const hasVisitorMessage = messages.some((message) => message.role === 'user')
+
+  useEffect(() => {
+    const openFromProjectCard = (event) => {
+      if (event.detail?.trigger instanceof HTMLElement) {
+        returnFocusRef.current = event.detail.trigger
+      }
+      setPanelView('assistant')
+      setPanelState('open')
+    }
+
+    window.addEventListener('ask-mark:open', openFromProjectCard)
+    return () => window.removeEventListener('ask-mark:open', openFromProjectCard)
+  }, [])
 
   useEffect(() => {
     if (!isOpen || isIntakeView) return undefined
@@ -108,7 +122,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
       if (event.key === 'Escape' && panelState !== 'closed') {
         setPanelView('assistant')
         setPanelState('closed')
-        window.setTimeout(() => launcherRef.current?.focus(), 0)
+        window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
       }
     }
 
@@ -132,13 +146,13 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   const closePanel = () => {
     setPanelView('assistant')
     setPanelState('closed')
-    window.setTimeout(() => launcherRef.current?.focus(), 0)
+    window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
   }
 
   const minimizePanel = () => {
     setPanelView('assistant')
     setPanelState('minimized')
-    window.setTimeout(() => launcherRef.current?.focus(), 0)
+    window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
   }
 
   const submitQuestion = (question, promptId = null) => {
@@ -462,7 +476,10 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           aria-controls="ask-mark-panel"
           onClick={() => {
             if (isOpen) closePanel()
-            else openPanel()
+            else {
+              returnFocusRef.current = launcherRef.current
+              openPanel()
+            }
           }}
         >
           <img

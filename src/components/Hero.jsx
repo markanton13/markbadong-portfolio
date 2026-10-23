@@ -6,7 +6,7 @@ const BOOKING_SCHEDULE_URL =
 const BOOKING_FALLBACK_URL =
   'https://calendar.app.google/2KdUkkmSyNiY3DUv8'
 
-export function Hero() {
+export function Hero({ onViewChange }) {
   const bookingWrapperRef = useRef(null)
   const bookingTargetRef = useRef(null)
 
@@ -113,7 +113,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section className="hero" id="professional" aria-labelledby="hero-title">
       <div className="hero-copy">
         <p className="eyebrow">Operations · Automation · Systems · Client Delivery</p>
         <h1 id="hero-title">
@@ -124,6 +124,11 @@ export function Hero() {
         </p>
 
         <div className="hero-actions">
+          {onViewChange && (
+            <button className="button button-secondary" type="button" onClick={() => onViewChange('world')}>
+              Explore MARKVERSE World
+            </button>
+          )}
           <a className="button button-primary" href="#work">
             Explore my work
           </a>
@@ -170,12 +175,12 @@ export function Hero() {
             <span>operations, training &amp; support</span>
           </div>
           <div>
-            <strong>End-to-end GHL</strong>
-            <span>funnels, CRM &amp; workflows</span>
+            <strong>Training Lead</strong>
+            <span>current official Wipro title</span>
           </div>
           <div>
-            <strong>90% faster</strong>
-            <span>supported assessment workflow</span>
+            <strong>Systems Delivery</strong>
+            <span>Web, CRM &amp; automation</span>
           </div>
           <div>
             <strong>Approved work</strong>

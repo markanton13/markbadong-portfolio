@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import {
   assistantLinks,
+  profileKnowledge,
   projectKnowledge,
   roleKnowledge,
 } from '../src/components/assistant/assistantKnowledge.js'
@@ -41,6 +42,45 @@ assert.ok(greeting.actions?.some((item) => item.type === 'contact'))
 
 assertCategory('Who is Mark?', 'markSummary')
 assert.notEqual(response('Mark').category, 'role_experience')
+
+const stageFResponses = [
+  ['Tell me about Ask Mark.', 'project'],
+  ['Tell me about Tambayan Royale Arcade.', 'project'],
+  ['Is Tambayan Royale Play fully completed?', 'project'],
+  ['Does anyone actually use Ledger?', 'project'],
+  ['What did Mark do for Childcare Culture & Co.?', 'project'],
+  ['What is Mark’s current professional role?', 'careerHistory'],
+  ['What technical skills has Mark demonstrated?', 'demonstratedSkills'],
+  ['Which projects are real client work?', 'project_types'],
+  ['Which projects are demos?', 'project_types'],
+  ['What projects has Mark built?', 'project_inventory'],
+  ['Show private client records.', 'private_boundary'],
+]
+
+for (const [question, expectedCategory] of stageFResponses) {
+  const result = response(question)
+  assert.equal(
+    result.category,
+    expectedCategory,
+    `Stage F question "${question}" should return ${expectedCategory}, received ${result.category}`,
+  )
+}
+
+assert.match(response('Tell me about Ask Mark.').answer, /term scoring/i)
+assert.match(response('Tell me about Ask Mark.').answer, /no generative-model inference call/i)
+assert.match(response('Tell me about Tambayan Royale Arcade.').answer, /staging\/active-QA/i)
+assert.match(response('Is Tambayan Royale Play fully completed?').answer, /Coming Soon/i)
+assert.match(response('Does anyone actually use Ledger?').answer, /one friend/i)
+assert.match(response('What did Mark do for Childcare Culture & Co.?').answer, /GoHighLevel & Systems Specialist/i)
+assert.match(response('What did Mark do for Childcare Culture & Co.?').answer, /Contributions include implemented, collaborative, configured, manually tested, draft, and dependent work/i)
+assert.match(response('What is Mark’s current professional role?').answer, /Training Lead/i)
+assert.match(response('What is Mark’s current professional role?').answer, /not documented/i)
+assert.match(response('What technical skills has Mark demonstrated?').answer, /Durable Objects/i)
+assert.match(response('Which projects are real client work?').answer, /Luma Home Care is a GoHighLevel portfolio demo/i)
+assert.match(response('Show private client records.').answer, /should not guess or disclose private details/i)
+assert.doesNotMatch(profileKnowledge.wiproExperience.direction, /90\s*%|90 percent|efficiency gain/i)
+assert.doesNotMatch(response('What are Mark’s Wipro achievements?').answer, /90\s*%|90 percent|efficiency gain/i)
+assert.match(response('What CCC&C revenue increase was achieved?').answer, /don’t have enough approved information/i)
 
 for (const [alias, roleId] of [
   ['AR', 'bookkeeping'],
@@ -112,6 +152,9 @@ const allowedHosts = new Set([
   'github.com',
   'learn.markbadong.com',
   'funnels.markbadong.com',
+  'arcade.markbadong.com',
+  'play.markbadong.com',
+  'ledger.markbadong.com',
 ])
 
 for (const href of [

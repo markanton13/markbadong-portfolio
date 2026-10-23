@@ -1,0 +1,176 @@
+{
+  "version": "stage-f-3",
+  "learningLibraryRecord": {
+    "id": "k_project_learning_library",
+    "key": "project.learning_library",
+    "kind": "project",
+    "category": "project",
+    "title": "Learning Library",
+    "content": "The Learning Library is a live Cloudflare portfolio demonstration with 11 QA-passed public guides: 10 are free during the pilot and one is a premium-pilot guide. It also demonstrates access control, test payment and rewarded-access integrations, recovery, analytics, backups, device limits, and launch safeguards. This does not claim live commercial payment activation, conversions, or revenue.",
+    "terms": ["learning library", "interactive guides", "11 public guides", "10 free guides", "premium pilot", "guide access", "payment test mode"],
+    "payload": { "route": "/projects/learning-library" },
+    "sources": ["snap_stage_f", "snap_repo"]
+  },
+  "careerHistory": "Mark's career progression is Customer and Technical Support across Capital One, Verizon, and Comcast programs (2017–2021); AA – Production Specialist at Wipro supporting Google (2022–2023); Senior Executive – Trainer at Wipro (2023–2026); and Training Lead as his current official Wipro title, confirmed in October 2026. The exact Training Lead effective date and newly assigned responsibilities are not documented. Program and account names do not mean direct employment by those companies.",
+  "trainingLead": "Mark's current official Wipro title is Training Lead, confirmed in October 2026, following Senior Executive – Trainer. The exact effective date and newly assigned responsibilities are not documented; no additional scope should be inferred from the title.",
+  "skills": "Mark's documented work and projects demonstrate operations and training, geospatial data quality, QA, documentation, workflow improvement, Google Apps Script and Sheets, GoHighLevel and CRM configuration, HTML, CSS, JavaScript, React, Cloudflare Workers, D1, Durable Objects, and Three.js. These are hands-on skills evidenced by professional or project work, not a claim of formal software-engineering employment.",
+  "projects": [
+    {
+      "id": "ask-mark",
+      "label": "Ask Mark",
+      "aliases": ["ask mark", "askmark", "portfolio assistant", "portfolio concierge"],
+      "summary": "Ask Mark is Mark Anton Badong's flagship independently developed AI portfolio assistant. It helps visitors explore approved information about his experience and projects. The repository contains curated static responses and a separate Worker/D1 path that retrieves approved records using term scoring and returns approved answer templates; no generative-model inference call was identified in that Worker query path.",
+      "status": "The portfolio assistant interface and deterministic knowledge service are implemented in the repository. Remote API availability depends on the selected build mode and service environment.",
+      "sourcePath": "/#work",
+      "worker": {
+        "id": "k_project_ask_mark",
+        "key": "project.ask_mark",
+        "kind": "project",
+        "category": "project",
+        "title": "Ask Mark",
+        "content": "Mark Anton Badong's flagship independently developed AI portfolio assistant helps visitors explore approved information about his experience and projects. The repository contains curated static responses and a separate Worker/D1 path that retrieves approved records using term scoring and returns approved answer templates; no generative-model inference call was identified in that Worker query path. Remote API availability depends on the selected build mode and service environment.",
+        "terms": ["ask mark assistant architecture", "ask mark assistant", "portfolio assistant", "portfolio concierge", "ask mark", "askmark", "assistant architecture"],
+        "payload": { "route": "/#work" }
+      }
+    },
+    {
+      "id": "tambayan-royale",
+      "label": "Tambayan Royale Arcade",
+      "aliases": ["tambayan royale arcade", "tambayan royale", "browser arcade", "bingo", "in-between"],
+      "summary": "Tambayan Royale Arcade is a personal passion project exploring browser games and interactive arcade experiences, including Bingo and In-Between. It is not a paid client engagement.",
+      "status": "The public entry is available, while individual experiences and multiplayer behavior remain staging/active-QA work. Do not imply all planned features are complete.",
+      "sourcePath": "/#work",
+      "liveUrl": "https://arcade.markbadong.com",
+      "worker": {
+        "id": "k_project_tambayan_royale",
+        "key": "project.tambayan_royale",
+        "kind": "project",
+        "category": "project",
+        "title": "Tambayan Royale Arcade",
+        "content": "A personal passion project, not a paid client engagement, exploring browser games and interactive arcade experiences including Bingo and In-Between. The public entry is available; individual experiences and multiplayer behavior remain staging/active-QA work, so not all planned features are complete.",
+        "terms": ["tambayan royale arcade", "tambayan royale", "browser arcade", "bingo", "in-between"],
+        "payload": { "route": "/#work" }
+      }
+    },
+    {
+      "id": "tambayan-royale-play",
+      "label": "Tambayan Royale Play",
+      "aliases": ["tambayan royale play", "3d social lobby", "who's the spy", "whos the spy", "chess club", "word garden"],
+      "summary": "Tambayan Royale Play is a personal interactive 3D and game-development project. Its public preview presents a 3D social lobby, avatar greeting, Who's the Spy? entry surface, and game directory.",
+      "status": "Chess Club and Word Garden are marked Coming Soon. Authenticated account flows, shared-account capabilities, and complete multiplayer sessions have not been verified; planned games are not presented as complete.",
+      "sourcePath": "/#work",
+      "liveUrl": "https://play.markbadong.com",
+      "worker": {
+        "id": "k_project_tambayan_royale_play",
+        "key": "project.tambayan_royale_play",
+        "kind": "project",
+        "category": "project",
+        "title": "Tambayan Royale Play",
+        "content": "A personal interactive 3D and game-development project. Its public preview presents a 3D social lobby, avatar greeting, Who's the Spy? entry surface, and game directory. Chess Club and Word Garden are marked Coming Soon. Authenticated account flows, shared-account capabilities, and complete multiplayer sessions have not been verified; planned games are not presented as complete.",
+        "terms": ["tambayan royale play", "3d social lobby", "who's the spy", "whos the spy", "chess club", "word garden", "all games complete", "fully completed"],
+        "payload": { "route": "/#work" }
+      }
+    },
+    {
+      "id": "ledger",
+      "label": "Ledger",
+      "aliases": ["ledger", "invoicing app", "invoicing tool", "receipt application"],
+      "summary": "Ledger is a practical invoicing and receipt-related web application. Mark reports early real-world use by one friend for invoicing and positive qualitative feedback about usefulness and ease of use.",
+      "status": "This is reported early use by one person, not commercial-scale adoption, a paid engagement, or quantified satisfaction. The public application is access-gated; private invoices and financial information are not part of the portfolio.",
+      "sourcePath": "/#work",
+      "liveUrl": "https://ledger.markbadong.com",
+      "worker": {
+        "id": "k_project_ledger",
+        "key": "project.ledger",
+        "kind": "project",
+        "category": "project",
+        "title": "Ledger",
+        "content": "A practical invoicing and receipt-related web application. Mark reports early real-world use by one friend for invoicing and positive qualitative feedback about usefulness and ease of use. This is reported use by one person, not commercial-scale adoption, a paid engagement, or quantified satisfaction. The public application is access-gated; private invoices and financial information are not part of the portfolio.",
+        "terms": ["ledger", "invoicing app", "invoicing tool", "receipt application", "does anyone use ledger"],
+        "payload": { "route": "/#work" }
+      }
+    },
+    {
+      "id": "childcare-culture",
+      "label": "Childcare Culture & Co.",
+      "aliases": ["childcare culture", "childcare culture and co", "childcare culture & co", "culture co", "culture and co", "cccc", "childcare website", "ghl client project"],
+      "summary": "Mark's independent-contractor engagement with Childcare Culture & Co. used the official contracted title GoHighLevel & Systems Specialist. He implemented/refined six responsive GoHighLevel pages with custom HTML/CSS and worked on CRM fields, tags, forms, pipelines, calendars, notifications, follow-ups, and workflow automation. Foundation First work covered a six-phase, 36-question assessment and results infrastructure, including controlled QA of 0–4 scoring, classifications, contact updates, retake cleanup, and workflow logs. He also contributed to Culture Club Community/membership, welcome, and selected subscription-related workflows; Founding Cohort application, acceptance, agreement, assessment, onboarding, and recurring-session processes; 90-Day Experience onboarding components; summit-facing UI and sponsorship workflow structure; and three client-approved promotional reels.",
+      "status": "Contributions include implemented, collaborative, configured, manually tested, draft, and dependent work. Results pages, result emails, and some advanced follow-up journeys are not established as complete. Selected Culture Club tests do not verify all live payment, cancellation, or subscription lifecycle scenarios. Some 90-Day components depended on approved content and business rules; planned sponsor outreach is not a completed campaign or outcome. Do not infer sole architecture or claim every workflow is live. Detailed client case-study publication and private materials remain permission-gated. Luma Home Care is a separate GHL portfolio demo.",
+      "sourcePath": "/#client-studio",
+      "worker": {
+        "id": "k_project_childcare_culture",
+        "key": "project.childcare_culture",
+        "kind": "project",
+        "category": "project",
+        "title": "Childcare Culture & Co. client work",
+        "content": "Mark's independent-contractor engagement used the official contracted title GoHighLevel & Systems Specialist. He implemented/refined six responsive GoHighLevel pages with custom HTML/CSS and worked on CRM fields, tags, forms, pipelines, calendars, notifications, follow-ups, and workflow automation. Foundation First work covered a six-phase, 36-question assessment and results infrastructure, including controlled QA of 0–4 scoring, classifications, contact updates, retake cleanup, and workflow logs. He also contributed to Culture Club Community/membership, welcome, and selected subscription-related workflows; Founding Cohort application, acceptance, agreement, assessment, onboarding, and recurring-session processes; 90-Day Experience onboarding components; summit-facing UI and sponsorship workflow structure; and three client-approved promotional reels. Contributions include implemented, collaborative, configured, manually tested, draft, and dependent work. Results pages, result emails, and some advanced follow-up journeys are not established as complete. Selected Culture Club tests do not verify all live payment, cancellation, or subscription lifecycle scenarios. Some 90-Day components depended on approved content and business rules; planned sponsor outreach is not a completed campaign or outcome. Do not infer sole architecture or claim every workflow is live. Detailed client case-study publication and private materials remain permission-gated. Luma Home Care is a separate GHL portfolio demo.",
+        "terms": ["childcare culture", "childcare culture and co", "childcare culture & co", "culture co", "culture and co", "cccc", "childcare website", "ghl client project", "gohighlevel systems specialist"],
+        "payload": { "route": "/#client-studio" }
+      }
+    }
+  ],
+  "trainingLeadRecord": {
+    "id": "k_training_lead",
+    "key": "experience.training_lead",
+    "kind": "experience",
+    "category": "experience",
+    "title": "Current Wipro title",
+    "content": "Mark's current official Wipro title is Training Lead, confirmed in October 2026, following Senior Executive – Trainer. The exact effective date and newly assigned responsibilities are not documented; no additional scope should be inferred from the title.",
+    "terms": ["training lead", "current wipro title", "current professional role", "current role at wipro"],
+    "payload": {}
+  },
+  "skillsRecord": {
+    "id": "k_skills_summary",
+    "key": "skills.demonstrated",
+    "kind": "skill",
+    "category": "skills",
+    "title": "Demonstrated technical and operational skills",
+    "content": "Mark's documented work and projects demonstrate operations and training, geospatial data quality, QA, documentation, workflow improvement, Google Apps Script and Sheets, GoHighLevel and CRM configuration, HTML, CSS, JavaScript, React, Cloudflare Workers, D1, Durable Objects, and Three.js. These are hands-on skills evidenced by professional or project work, not a claim of formal software-engineering employment.",
+    "terms": ["technical skills", "skills has mark demonstrated", "automation skills", "web development skills", "tools and technologies"],
+    "payload": {}
+  },
+  "projectTypesRecord": {
+    "id": "k_project_types",
+    "key": "portfolio.project_types",
+    "kind": "fact",
+    "category": "project",
+    "title": "Project and client-work distinctions",
+    "content": "Childcare Culture & Co. is a documented independent-contractor client engagement. Short-Form Video Editing is a separate case study for three approved client reels; the public record does not name the client. Luma Home Care is a GoHighLevel portfolio demo, not CCC&C client work. Tambayan Royale Arcade, Tambayan Royale Play, Ledger, Ask Mark, and the other independent products are personal or portfolio projects, not paid CCC&C engagements.",
+    "terms": ["which projects are real client work", "client work", "paid client engagement", "client project", "which projects are personal", "which projects are demos or personal experiments", "which projects are demos", "client outcomes"],
+    "payload": { "route": "/#work" }
+  },
+  "proofPointsRecord": {
+    "id": "k_profile_proof",
+    "key": "profile.proof",
+    "kind": "fact",
+    "category": "profile",
+    "title": "Documented proof points",
+    "content": "Other documented proof points include a 5/5 Wipro L&D session evaluation, PersonalVABot v0.3.12 with 72 templates, and MarkHQ deployed in production on Railway. Mark has also documented an assessment/reporting workflow using Google Sheets and Apps Script, but no independently substantiated percentage result is available; do not state a percentage claim.",
+    "terms": ["proof", "metrics", "90 percent", "5/5"],
+    "payload": {}
+  },
+  "contactRecord": {
+    "id": "k_contact",
+    "key": "contact.actions",
+    "kind": "action",
+    "category": "contact",
+    "title": "Public contact actions",
+    "content": "Visitors may use the portfolio contact section, email Mark at markantonbadong@gmail.com, view the public résumé, open LinkedIn or GitHub, or use the approved Google Calendar booking link. Ask Mark must not invent availability, pricing, or commitments.",
+    "terms": ["contact mark", "email mark", "resume", "book a call"],
+    "payload": {
+      "email": "markantonbadong@gmail.com",
+      "contactPath": "/#contact",
+      "resumePath": "/files/Mark-Anton-Badong-Resume.pdf",
+      "bookingUrl": "https://calendar.app.google/2KdUkkmSyNiY3DUv8",
+      "linkedinUrl": "https://linkedin.com/in/markanton13",
+      "githubUrl": "https://github.com/markanton13"
+    }
+  },
+  "projectInventoryTerms": [
+    "what projects has mark built",
+    "which projects has mark built",
+    "what projects are in mark's portfolio",
+    "list all projects",
+    "portfolio project inventory"
+  ]
+}
