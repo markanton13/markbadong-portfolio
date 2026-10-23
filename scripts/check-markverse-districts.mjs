@@ -19,6 +19,8 @@ const worldEntrySource = readFileSync(new URL('../src/components/markverse/World
 const automationLabSource = readFileSync(new URL('../src/components/markverse/AutomationLab3D.jsx', import.meta.url), 'utf8')
 const operationsHQSource = readFileSync(new URL('../src/components/markverse/districts/OperationsHQ3D.jsx', import.meta.url), 'utf8')
 const markverseCss = readFileSync(new URL('../src/styles/markverse.css', import.meta.url), 'utf8')
+const assistantSource = readFileSync(new URL('../src/components/assistant/AskMarkAssistant.jsx', import.meta.url), 'utf8')
+const assistantCss = readFileSync(new URL('../src/styles/assistant.css', import.meta.url), 'utf8')
 
 const routeCases = [
   { name: 'spawn to open center', start: RESET_POSITION, end: { x: 0, z: 0 }, distance: 2.746177077052027, waypoints: 3 },
@@ -50,6 +52,19 @@ assert.match(worldEntrySource, /<Suspense key=\{activeDistrict\.id\}/, 'Scene ch
 assert.match(worldEntrySource, /<Suspense key=\{activeDistrict\.id\} fallback=\{<SceneLoading districtLabel=\{activeDistrict\.label\} \/>\}>/, 'Lazy loading must show a neutral scene loader, not falsely claim WebGL is unavailable.')
 assert.match(worldEntrySource, /sceneReadyDistrictId !== activeDistrict\.id && <SceneLoading/, 'The loader must stay visible until the selected district renders its first frame.')
 assert.match(worldEntrySource, /fallbackReason \? <SceneFallback \/>/, 'Genuine device fallbacks must remain available.')
+assert.match(worldEntrySource, /className="markverse-mobile-scene-actions"/, 'Mobile scene actions must live outside the 3D viewport.')
+assert.match(worldEntrySource, /automationLabControllerRef\.current\?\.goToTerminalFromControls/, 'Mobile terminal action must preserve the existing avatar approach behavior.')
+assert.match(worldEntrySource, /className="markverse-mobile-scene-help"/, 'Mobile movement help must remain available outside the 3D viewport.')
+assert.match(worldEntrySource, /className="markverse-camera-toggle"/, 'Mobile camera actions must be available through a labeled disclosure.')
+assert.match(worldEntrySource, /aria-controls="markverse-camera-controls"/, 'The camera disclosure must identify its controlled toolbar.')
+assert.match(markverseCss, /@media \(max-width:600px\) \{[\s\S]*?\.markverse-move-button\s*\{[^}]*min-width:\s*44px/, 'Movement controls must retain at least 44px touch targets on mobile.')
+assert.match(markverseCss, /@media \(max-width:600px\) \{[\s\S]*?\.markverse-avatar-toolbar\s*\{[^}]*env\(safe-area-inset-bottom/, 'Floating mobile movement controls must respect the device safe area.')
+assert.match(markverseCss, /\.markverse-avatar-terminal,\.markverse-avatar-reset\s*\{\s*display:\s*none/, 'Secondary actions must not remain inside the mobile scene overlay.')
+assert.match(markverseCss, /@media \(max-width:600px\) \{[\s\S]*?\.markverse-avatar-status\s*\{[^}]*clip-path/, 'Movement status should remain accessible without occupying mobile scene space.')
+assert.match(assistantSource, /markverse-hq-direct-access[\s\S]*markverse-avatar-toolbar[\s\S]*markverse-mobile-scene-actions/, 'Ask Mark launcher collision detection must account for Operations HQ shortcuts and mobile scene controls.')
+assert.match(assistantCss, /data-markverse-position='top-right'[\s\S]*data-markverse-position='top-left'[\s\S]*data-markverse-position='bottom-left'/, 'Ask Mark must have safe mobile fallback positions when its default corner covers a MARKVERSE control.')
+assert.match(automationLabSource, /markverse-avatar-pad[\s\S]{0,300}Move Mark around the Automation Lab/)
+assert.match(operationsHQSource, /markverse-avatar-pad[\s\S]{0,300}Move Mini Mark around Operations HQ/)
 assert.match(markverseCss, /\.markverse-scene-loading-indicator \{ animation:none;/, 'The scene loader must respect reduced motion.')
 assert.match(automationLabSource, /renderer\.render\(scene, camera\)[\s\S]{0,180}onReadyRef\.current\?\.\(\)/, 'Automation Lab reports ready only after a successful rendered frame.')
 assert.match(operationsHQSource, /renderer\.render\(scene, camera\)[\s\S]{0,180}onReadyRef\.current\?\.\(\)/, 'Operations HQ reports ready only after a successful rendered frame.')

@@ -473,6 +473,7 @@
 .markverse-avatar-terminal { padding:0 10px; color:#8df2df; font-size:10px; font-weight:800; }
 .markverse-avatar-status { max-width:210px; margin:0; color:#9aabc7; font-size:9px; line-height:1.35; }
 .markverse-move-button:focus-visible,.markverse-avatar-reset:focus-visible,.markverse-avatar-terminal:focus-visible { outline:2px solid #67e8cf; outline-offset:2px; }
+.markverse-mobile-scene-actions,.markverse-mobile-scene-help,.markverse-camera-toggle { display:none; }
 @media (max-width:600px) {
   .markverse-debug3d { top:6px; right:6px; width:min(300px,calc(100% - 12px)); max-height:46%; padding:7px 8px; font-size:8px; line-height:1.35; }
   .markverse-navigation-debug { top:auto; bottom:102px; left:8px; width:min(128px,36%); padding:5px; font-size:7px; }
@@ -485,6 +486,7 @@
   .markverse-avatar-reset,.markverse-avatar-terminal { width:100%; padding:0 5px; font-size:8px; }
   .markverse-avatar-status { grid-column:1 / -1; max-width:none; text-align:center; font-size:7px; }
 }
+
 @media (prefers-reduced-motion:reduce) {
   .markverse-scene-loading-indicator { animation:none; border-color:#67e8cf; }
   .markverse-move-button,.markverse-avatar-reset { transition:none; }
@@ -558,4 +560,93 @@
   .markverse-hq-direct-groups { grid-template-columns:minmax(0,1fr); gap:12px; }
   .markverse-hq-career-access,.markverse-hq-station-access { grid-template-rows:auto repeat(2,minmax(52px,auto)); }
   .markverse-hq-direct-access button { min-height:52px; padding:8px 10px; }
+}
+
+/* Mobile scene controls stay compact in the viewport; actions and help follow it in document flow. */
+@media (max-width:600px) {
+  .markverse-avatar-toolbar {
+    left:8px;
+    right:auto;
+    bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+    display:flex;
+    width:max-content;
+    max-width:calc(100% - 16px);
+    gap:0;
+    padding:4px;
+    border-color:rgba(150,180,225,.2);
+    background:rgba(6,13,26,.72);
+    box-shadow:0 4px 14px rgba(0,0,0,.22);
+  }
+  .markverse-avatar-pad { display:flex; gap:4px; }
+  .markverse-move-button { width:44px; min-width:44px; height:44px; min-height:44px; padding:0; }
+  .markverse-avatar-terminal,.markverse-avatar-reset { display:none; }
+  .markverse-avatar-status {
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip-path:inset(50%);
+    white-space:nowrap;
+    border:0;
+  }
+  .markverse-scene-hint { display:none; }
+  .markverse-mobile-scene-actions {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin:8px 0 0;
+  }
+  .markverse-mobile-scene-action {
+    display:flex;
+    min-width:0;
+    min-height:44px;
+    align-items:center;
+    justify-content:center;
+    padding:8px 10px;
+    border:1px solid rgba(132,163,225,.25);
+    border-radius:8px;
+    color:#e4efff;
+    background:#111c30;
+    font-family:inherit;
+    font-size:11px;
+    font-weight:700;
+    line-height:1.3;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .markverse-mobile-scene-action:first-child { border-color:rgba(103,232,207,.45); color:#8df2df; }
+  .markverse-mobile-scene-action:focus-visible,.markverse-camera-toggle:focus-visible { outline:2px solid #67e8cf; outline-offset:2px; }
+  .markverse-mobile-scene-help { display:block; margin:6px 2px 0; color:#99aac5; font-size:10px; line-height:1.45; }
+  .markverse-camera-toggle {
+    display:flex;
+    min-height:44px;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    width:100%;
+    padding:0 12px;
+    border:1px solid rgba(132,163,225,.2);
+    border-radius:8px;
+    color:#dce8fb;
+    background:#111c30;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .markverse-camera-toggle span { color:#67e8cf; font-size:16px; }
+  .markverse-scene-actions { gap:7px; }
+  .markverse-camera-controls,.markverse-camera-controls.is-open {
+    display:none;
+    width:100%;
+    justify-content:space-between;
+    flex-wrap:nowrap;
+    gap:4px;
+    margin:0;
+  }
+  .markverse-camera-controls.is-open { display:flex; }
+  .markverse-camera-controls>span { display:none; }
+  .markverse-camera-controls button { flex:1 1 0; min-width:44px; min-height:44px; padding:0 7px; }
 }
