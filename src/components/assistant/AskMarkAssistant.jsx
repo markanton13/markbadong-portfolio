@@ -96,6 +96,95 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   }, [])
 
   useEffect(() => {
+    let frame = 0
+    const mobileQuery = window.matchMedia('(max-width: 700px)')
+    const safeAreaProbe = document.createElement('div')
+    safeAreaProbe.setAttribute('aria-hidden', 'true')
+    safeAreaProbe.style.cssText = [
+      'position:fixed', 'visibility:hidden', 'pointer-events:none',
+      'padding-top:env(safe-area-inset-top)', 'padding-right:env(safe-area-inset-right)',
+      'padding-bottom:env(safe-area-inset-bottom)', 'padding-left:env(safe-area-inset-left)',
+    ].join(';')
+    document.body.appendChild(safeAreaProbe)
+
+    const intersects = (left, top, width, height, target) => {
+      const rect = target.getBoundingClientRect()
+      const gap = 6
+      return rect.width > 0 && rect.height > 0
+        && left < rect.right + gap && left + width > rect.left - gap
+        && top < rect.bottom + gap && top + height > rect.top - gap
+    }
+
+    const updatePosition = () => {
+      frame = 0
+      const root = document.querySelector('.ask-mark-root')
+      const launcher = root?.querySelector('.ask-mark-launcher-wrap')
+      const shortcuts = document.querySelector('.markverse-hq-direct-access')
+      if (!root || !launcher || !mobileQuery.matches || !shortcuts || panelState === 'open') {
+        root?.removeAttribute('data-markverse-position')
+        return
+      }
+
+      const launcherRect = launcher.getBoundingClientRect()
+      const width = launcherRect.width || 64
+      const height = launcherRect.height || 64
+      const viewportWidth = document.documentElement.clientWidth
+      const viewportHeight = document.documentElement.clientHeight
+      const safeArea = getComputedStyle(safeAreaProbe)
+      const inset = {
+        top: Math.max(14, Number.parseFloat(safeArea.paddingTop) || 0),
+        right: Math.max(14, Number.parseFloat(safeArea.paddingRight) || 0),
+        bottom: Math.max(14, Number.parseFloat(safeArea.paddingBottom) || 0),
+        left: Math.max(14, Number.parseFloat(safeArea.paddingLeft) || 0),
+      }
+      const candidates = [
+        { name: '', left: viewportWidth - inset.right - width, top: viewportHeight - inset.bottom - height },
+        { name: 'top-right', left: viewportWidth - inset.right - width, top: inset.top },
+        { name: 'top-left', left: inset.left, top: inset.top },
+        { name: 'bottom-left', left: inset.left, top: viewportHeight - inset.bottom - height },
+      ]
+      const targets = [...document.querySelectorAll([
+        '.markverse-hq-direct-access button',
+        '.markverse-avatar-toolbar button',
+        '.markverse-mobile-scene-actions > *',
+        '.markverse-district-nav select',
+        '.markverse-camera-toggle',
+      ].join(','))].filter((target) => {
+        const style = getComputedStyle(target)
+        return style.display !== 'none' && style.visibility !== 'hidden' && !target.disabled
+      })
+      const targetPosition = candidates.find((candidate) => !targets.some((target) =>
+        intersects(candidate.left, candidate.top, width, height, target)))
+      if (targetPosition?.name) root.dataset.markversePosition = targetPosition.name
+      else root.removeAttribute('data-markverse-position')
+    }
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updatePosition)
+    }
+    const observer = new MutationObserver(scheduleUpdate)
+    observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] })
+    window.addEventListener('scroll', scheduleUpdate, true)
+    window.addEventListener('resize', scheduleUpdate)
+    window.visualViewport?.addEventListener('resize', scheduleUpdate)
+    window.visualViewport?.addEventListener('scroll', scheduleUpdate)
+    mobileQuery.addEventListener?.('change', scheduleUpdate)
+    scheduleUpdate()
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', scheduleUpdate, true)
+      window.removeEventListener('resize', scheduleUpdate)
+      window.visualViewport?.removeEventListener('resize', scheduleUpdate)
+      window.visualViewport?.removeEventListener('scroll', scheduleUpdate)
+      mobileQuery.removeEventListener?.('change', scheduleUpdate)
+      if (frame) window.cancelAnimationFrame(frame)
+      document.querySelector('.ask-mark-root')?.removeAttribute('data-markverse-position')
+      safeAreaProbe.remove()
+    }
+  }, [panelState])
+
+  useEffect(() => {
     if (!isOpen || isIntakeView) return undefined
 
     const focusTimer = window.setTimeout(

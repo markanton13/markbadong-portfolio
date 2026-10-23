@@ -163,6 +163,7 @@ export function WorldEntry({ onViewChange }) {
   const cameraDefault = activeCameraConfig.defaultView
   const SceneFallback = operationsHQPreview ? OperationsHQFallback : AutomationLabFallback
   const [cameraView, setCameraView] = useState(() => ({ ...cameraDefault }))
+  const [mobileCameraOpen, setMobileCameraOpen] = useState(false)
   const cameraViewRef = useRef(cameraView)
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [activeHQContentId, setActiveHQContentId] = useState(null)
@@ -209,6 +210,7 @@ export function WorldEntry({ onViewChange }) {
       setTerminalOpen(false)
       setActiveHQContentId(null)
       setTransitioning(false)
+      setMobileCameraOpen(false)
       setCameraView({ ...getDistrictById(readDistrictId()).cameraConfig.defaultView })
       setNavigationDiagnostics(null)
       latestDiagnosticsRef.current = null
@@ -242,6 +244,7 @@ export function WorldEntry({ onViewChange }) {
     // device-level policy so a healthy destination gets its own initialization.
     setFallbackReason(getFallbackReason())
     setCameraView({ ...nextDistrict.cameraConfig.defaultView })
+    setMobileCameraOpen(false)
     setNavigationDiagnostics(null)
     latestDiagnosticsRef.current = null
     setTravelTarget(null)
@@ -432,6 +435,24 @@ export function WorldEntry({ onViewChange }) {
               {operationsHQLocalReview && !fallbackReason && <div className="markverse-hq-preview-stamp" aria-hidden="true">LOCAL REVIEW · OPERATIONS HQ</div>}
             {debug3d && <pre ref={diagnosticsRef} className="markverse-debug3d" aria-label="Local Three.js performance diagnostics">{formatDebugDiagnostics(latestDiagnosticsRef.current, fallbackReason)}</pre>}
           </div>
+          <div className="markverse-mobile-scene-actions" aria-label={`${activeDistrict.label} quick controls`}>
+            {operationsHQPreview ? <>
+              <a className="markverse-mobile-scene-action" href="#markverse-hq-direct-access">Explore stations</a>
+              <button className="markverse-mobile-scene-action" type="button" onClick={() => operationsHQControllerRef.current?.resetAvatar?.()}>Reset Mini Mark</button>
+            </> : <>
+              <button className="markverse-mobile-scene-action" type="button" onClick={(event) => {
+                const activateTerminal = automationLabControllerRef.current?.goToTerminalFromControls
+                if (activateTerminal) activateTerminal(event.currentTarget)
+                else openTerminal(event.currentTarget)
+              }}>Go to terminal</button>
+              <button className="markverse-mobile-scene-action" type="button" onClick={() => automationLabControllerRef.current?.resetAvatar?.()}>Reset Mark</button>
+            </>}
+          </div>
+          <p className="markverse-mobile-scene-help">
+            {operationsHQPreview
+              ? 'Use the arrow pad or WASD / arrow keys to move. Tap open floor to walk; station shortcuts open information directly.'
+              : 'Use the arrow pad or WASD / arrow keys to move. Tap open floor to walk; drag the room to orbit.'}
+          </p>
           {districtOptions.length > 1 && <nav className="markverse-district-nav" aria-label="MARKVERSE district navigation">
             <label htmlFor="markverse-district-select">Current district</label>
             <select
@@ -447,7 +468,14 @@ export function WorldEntry({ onViewChange }) {
           </nav>}
           <div className="markverse-scene-actions">
             <span className="markverse-room-caption"><b>{String(activeDistrict.order).padStart(2, '0')}</b> {activeDistrict.label.toUpperCase()} <i /> {activeDistrict.summary}</span>
-            <div className="markverse-camera-controls" role="group" aria-label={operationsHQPreview ? 'Operations HQ camera controls' : 'Room camera controls'}>
+            <button
+              className="markverse-camera-toggle"
+              type="button"
+              aria-expanded={mobileCameraOpen}
+              aria-controls="markverse-camera-controls"
+              onClick={() => setMobileCameraOpen((open) => !open)}
+            >Camera controls <span aria-hidden="true">{mobileCameraOpen ? '−' : '+'}</span></button>
+            <div id="markverse-camera-controls" className={`markverse-camera-controls${mobileCameraOpen ? ' is-open' : ''}`} role="group" aria-label={operationsHQPreview ? 'Operations HQ camera controls' : 'Room camera controls'}>
               <span>CAMERA</span>
               <button type="button" disabled={cameraDisabled} onClick={() => changeCamera({ azimuth: cameraView.azimuth - 5 })} aria-label="Rotate camera left">←</button>
               <button type="button" disabled={cameraDisabled} onClick={() => changeCamera({ azimuth: cameraView.azimuth + 5 })} aria-label="Rotate camera right">→</button>
@@ -457,7 +485,7 @@ export function WorldEntry({ onViewChange }) {
             </div>
           </div>
 
-          {operationsHQPreview && <nav className="markverse-hq-direct-access" aria-labelledby="markverse-hq-direct-title">
+          {operationsHQPreview && <nav id="markverse-hq-direct-access" tabIndex="-1" className="markverse-hq-direct-access" aria-labelledby="markverse-hq-direct-title">
             <div className="markverse-hq-direct-heading"><h2 id="markverse-hq-direct-title">Explore Operations HQ</h2><span>Open any area directly, without walking Mini Mark.</span></div>
             <div className="markverse-hq-direct-groups">
               <div className="markverse-hq-career-access" role="group" aria-labelledby="markverse-hq-career-heading">

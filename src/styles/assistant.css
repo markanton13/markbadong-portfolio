@@ -836,6 +836,18 @@
       max(14px, env(safe-area-inset-bottom)) auto;
   }
 
+  .ask-mark-root[data-markverse-position='top-right'] {
+    inset: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) auto auto;
+  }
+
+  .ask-mark-root[data-markverse-position='top-left'] {
+    inset: max(14px, env(safe-area-inset-top)) auto auto max(14px, env(safe-area-inset-left));
+  }
+
+  .ask-mark-root[data-markverse-position='bottom-left'] {
+    inset: auto auto max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  }
+
   .ask-mark-launcher {
     width: 64px;
     height: 64px;
