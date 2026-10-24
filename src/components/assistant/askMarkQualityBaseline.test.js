@@ -169,6 +169,69 @@ test('multi-project comparison represents both approved projects', () => {
   assert.match(response.answer, /MarkHQ/)
 })
 
+test('comparative follow-up uses the projects from the preceding MarkHQ and ApplyLang comparison', () => {
+  const comparison = getMockResponse('Compare MarkHQ and ApplyLang.', '/')
+  const followUp = getMockResponse(
+    'Which one focuses more on operations?',
+    '/',
+    comparison.context,
+  )
+
+  assert.equal(followUp.conversationalFollowUp, true)
+  assert.match(followUp.answer, /MarkHQ Assistant is the closer match for operations/i)
+  assert.match(followUp.answer, /task pipelines/i)
+  assert.match(followUp.answer, /onboarding/i)
+  assert.match(followUp.answer, /approvals/i)
+  assert.match(followUp.answer, /ApplyLang.*career.*application records.*career tracking/is)
+  assert.deepEqual(
+    followUp.sources.map((item) => item.href),
+    ['/projects/markhq', '/projects/applylang'],
+  )
+})
+
+test('comparative follow-up selects the better-supported project instead of defaulting to MarkHQ', () => {
+  const comparison = getMockResponse('Compare MarkHQ and ApplyLang.', '/')
+  const followUp = getMockResponse(
+    'Which one focuses more on career applications?',
+    '/',
+    comparison.context,
+  )
+
+  assert.equal(followUp.conversationalFollowUp, true)
+  assert.match(followUp.answer, /ApplyLang is the closer match for career applications/i)
+  assert.deepEqual(
+    followUp.sources.map((item) => item.href),
+    ['/projects/applylang', '/projects/markhq'],
+  )
+})
+
+test('comparative follow-up asks when approved descriptions do not support a distinction', () => {
+  const comparison = getMockResponse('Compare MarkHQ and ApplyLang.', '/')
+  const followUp = getMockResponse(
+    'Which one focuses more on long-term maintainability?',
+    '/',
+    comparison.context,
+  )
+
+  assert.equal(followUp.conversationalFollowUp, true)
+  assert.equal(followUp.category, 'clarification')
+  assert.match(followUp.answer, /do not clearly distinguish/i)
+  assert.doesNotMatch(followUp.answer, /closer match/i)
+})
+
+test('unrelated question after a project comparison keeps its own routing', () => {
+  const comparison = getMockResponse('Compare MarkHQ and ApplyLang.', '/')
+  const unrelated = getMockResponse(
+    'Does Mark have aerospace engineering experience?',
+    '/',
+    comparison.context,
+  )
+
+  assert.equal(unrelated.category, 'unknown_role')
+  assert.match(unrelated.answer, /not have enough approved information/i)
+  assert.doesNotMatch(unrelated.answer, /MarkHQ|ApplyLang/i)
+})
+
 test('Worker comparison retrieves two published records and grounds one mocked answer in both', async () => {
   const markhq = projectSeed.find((item) => item.key === 'project.markhq')
   const leaveflow = projectSeed.find((item) => item.key === 'project.leaveflow')
