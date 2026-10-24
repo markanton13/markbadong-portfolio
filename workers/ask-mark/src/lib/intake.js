@@ -2,10 +2,8 @@ import {
   IntakeStorageError,
   storeIntakeSubmission,
 } from './intake-storage.js'
-import {
-  INTAKE_BODY_MAX_BYTES,
-  validateIntakeSubmission,
-} from './intake-validation.js'
+import { validateIntakeSubmission } from './intake-validation.js'
+import { readUtf8Body } from './intake-body.js'
 import {
   errorResponse,
   jsonResponse,
@@ -19,10 +17,6 @@ export const INTAKE_RETENTION_MILLISECONDS =
 const MINIMUM_HASH_KEY_LENGTH = 32
 const MAXIMUM_REQUESTER_IDENTITY_LENGTH = 200
 const textEncoder = new TextEncoder()
-const utf8Decoder = new TextDecoder('utf-8', {
-  fatal: true,
-})
-
 function bytesToHex(buffer) {
   return Array.from(new Uint8Array(buffer), (value) =>
     value.toString(16).padStart(2, '0'),
@@ -208,75 +202,6 @@ export async function createIntakeStorageRecord({
     windowExpiresAt,
     submissionExpiresAt,
     createdAt,
-  }
-}
-
-function contentLengthExceedsLimit(request) {
-  const contentLength = request.headers.get('content-length')
-
-  if (!contentLength || !/^\d+$/u.test(contentLength)) {
-    return false
-  }
-
-  return Number(contentLength) > INTAKE_BODY_MAX_BYTES
-}
-
-async function readUtf8Body(request) {
-  if (contentLengthExceedsLimit(request)) {
-    return {
-      ok: false,
-      response: errorResponse(
-        request,
-        413,
-        'payload_too_large',
-        `Request bodies are limited to ${INTAKE_BODY_MAX_BYTES} bytes.`,
-      ),
-    }
-  }
-
-  let bodyBuffer
-
-  try {
-    bodyBuffer = await request.arrayBuffer()
-  } catch {
-    return {
-      ok: false,
-      response: errorResponse(
-        request,
-        400,
-        'invalid_payload',
-        'The request body could not be read.',
-      ),
-    }
-  }
-
-  if (bodyBuffer.byteLength > INTAKE_BODY_MAX_BYTES) {
-    return {
-      ok: false,
-      response: errorResponse(
-        request,
-        413,
-        'payload_too_large',
-        `Request bodies are limited to ${INTAKE_BODY_MAX_BYTES} bytes.`,
-      ),
-    }
-  }
-
-  try {
-    return {
-      ok: true,
-      rawBody: utf8Decoder.decode(bodyBuffer),
-    }
-  } catch {
-    return {
-      ok: false,
-      response: errorResponse(
-        request,
-        400,
-        'invalid_unicode',
-        'The request body must contain valid UTF-8.',
-      ),
-    }
   }
 }
 

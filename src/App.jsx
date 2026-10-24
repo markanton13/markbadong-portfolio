@@ -34,9 +34,6 @@ const LearningLibraryCaseStudy = lazy(() =>
 const FunnelLabCaseStudy = lazy(() =>
   import('./pages/FunnelLabCaseStudy').then((module) => ({ default: module.FunnelLabCaseStudy })),
 )
-const ShortFormVideoCaseStudy = lazy(() =>
-  import('./pages/ShortFormVideoCaseStudy').then((module) => ({ default: module.ShortFormVideoCaseStudy })),
-)
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -106,10 +103,10 @@ function HomePage() {
           <AboutSection />
           <TestimonialsCarousel />
           <section id="contact" className="contact-section">
-            <div className="contact-copy"><p className="eyebrow">Let’s work together</p><h2>Need someone who can support the work—and improve the system behind it?</h2><p>I’m open to remote opportunities in operations, virtual assistance, GoHighLevel and CRM implementation, workflow automation, QA, client websites, and short-form video editing.</p><div className="contact-availability" aria-label="Location and availability"><span>Quezon City, Philippines</span><span>Open to remote opportunities</span></div></div>
+            <div className="contact-copy"><p className="eyebrow">Let’s work together</p><h2>Need someone who can support the work—and improve the system behind it?</h2><p>I’m open to remote opportunities in operations, virtual assistance, GoHighLevel and CRM implementation, workflow automation, QA, client websites, and client websites.</p><div className="contact-availability" aria-label="Location and availability"><span>Quezon City, Philippines</span><span>Open to remote opportunities</span></div></div>
             <div className="contact-panel" aria-label="Professional contact options">
               <div className="contact-primary"><span>Primary email</span><strong>markantonbadong@gmail.com</strong><small>Best for job opportunities, project inquiries, and collaborations.</small><div className="contact-email-actions"><a href="mailto:markantonbadong@gmail.com">Email Mark <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('markantonbadong@gmail.com') } catch { window.prompt('Copy this email address:', 'markantonbadong@gmail.com') } }}>Copy address</button></div></div>
-              <div className="contact-direct-grid"><div className="contact-secondary"><span>Preferred phone</span><strong>0956 869 5475</strong><small>Secondary: 0968 328 1273</small><div className="contact-email-actions"><a href="tel:+639568695475">Call primary <span aria-hidden="true">↗</span></a><button type="button" onClick={async () => { try { await navigator.clipboard.writeText('0956 869 5475') } catch { window.prompt('Copy this phone number:', '0956 869 5475') } }}>Copy number</button></div></div><div className="contact-messaging"><span>Messaging</span><strong>@markanton13</strong><small>WhatsApp · Telegram · Discord</small><a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Open Telegram <span aria-hidden="true">↗</span></a></div></div>
+              <div className="contact-direct-grid"><div className="contact-messaging"><span>Messaging</span><strong>@markanton13</strong><small>WhatsApp · Telegram · Discord</small><a href="https://t.me/markanton13" target="_blank" rel="noreferrer">Open Telegram <span aria-hidden="true">↗</span></a></div></div>
               <div className="contact-link-grid"><a href="https://linkedin.com/in/markanton13" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>Professional profile</strong></a><a href="https://github.com/markanton13" target="_blank" rel="noreferrer"><span>GitHub</span><strong>Repositories and proof</strong></a><a href="/files/Mark-Anton-Badong-Resume.pdf" download="Mark-Anton-Badong-Resume.pdf"><span>Résumé</span><strong>Download résumé</strong></a></div>
             </div>
           </section>
@@ -132,7 +129,6 @@ function App() {
   else if (pathname === '/projects/applylang') page = renderLazyPage(ApplyLangCaseStudy)
   else if (pathname === '/projects/learning-library') page = renderLazyPage(LearningLibraryCaseStudy)
   else if (pathname === '/projects/funnel-lab') page = renderLazyPage(FunnelLabCaseStudy)
-  else if (pathname === '/projects/short-form-video') page = renderLazyPage(ShortFormVideoCaseStudy)
   else if (pathname === '/') page = <HomePage />
   else page = renderLazyPage(NotFoundPage)
 

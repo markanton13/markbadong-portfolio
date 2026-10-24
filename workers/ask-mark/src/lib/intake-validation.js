@@ -1,3 +1,5 @@
+import { containsHighConfidenceSensitiveContent } from './intake-sensitive-content.js'
+
 export const INTAKE_BODY_MAX_BYTES = 4096
 export const INTAKE_MESSAGE_MIN_CODE_POINTS = 10
 export const INTAKE_MESSAGE_MAX_CODE_POINTS = 1000
@@ -382,6 +384,14 @@ export function validateIntakeSubmission({
       413,
       'message_too_long',
       `Messages are limited to ${INTAKE_MESSAGE_MAX_CODE_POINTS} characters.`,
+    )
+  }
+
+  if (containsHighConfidenceSensitiveContent(message)) {
+    return failure(
+      400,
+      'sensitive_content_not_accepted',
+      'Remove contact details, credentials, and confidential information before submitting.',
     )
   }
 

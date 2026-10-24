@@ -8,7 +8,14 @@ import {
   getPromptResponse,
   getPromptsForRoute,
 } from './assistantMockData'
-import { getAskMarkResponse } from './askMarkApiClient'
+import {
+  ASK_MARK_CONTEXT_TTL_MS,
+  createAskMarkKnowledgeContext,
+  createAskMarkRequestLifecycle,
+  getAskMarkKnowledgeKeysFromResponse,
+  getAskMarkTurn,
+  getFreshAskMarkKnowledgeKeys,
+} from './askMarkConversation'
 import { resolveAskMarkIntakeConfig } from './askMarkIntakeClient.js'
 import '../../styles/assistant.css'
 
@@ -16,7 +23,7 @@ const WELCOME_MESSAGE = {
   id: 'welcome',
   role: 'assistant',
   text:
-    'Hi! I’m Mark’s AI portfolio assistant. I can help you explore his projects, skills, experience, and the ways he may support your team or business.',
+    'Hi, I’m Ask Mark. I can answer questions about Mark’s approved projects, skills, and professional background.',
 }
 
 const createMessageId = (prefix) =>
@@ -69,13 +76,22 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   const [isLoading, setIsLoading] = useState(false)
   const [lastQuestion, setLastQuestion] = useState('')
   const [conversationContext, setConversationContext] = useState(null)
+  const [conversationContextUpdatedAt, setConversationContextUpdatedAt] = useState(0)
+  const [approvedKnowledgeContext, setApprovedKnowledgeContext] = useState(null)
+  const [isSlow, setIsSlow] = useState(false)
   const launcherRef = useRef(null)
   const returnFocusRef = useRef(null)
   const intakeEntryRef = useRef(null)
   const composerRef = useRef(null)
   const messageListRef = useRef(null)
+  const isAtBottomRef = useRef(true)
   const requestTimerRef = useRef(null)
-  const requestSequenceRef = useRef(0)
+  const slowTimerRef = useRef(null)
+  const requestLifecycleRef = useRef(null)
+  const cancelActiveRequestRef = useRef(null)
+  if (!requestLifecycleRef.current) {
+    requestLifecycleRef.current = createAskMarkRequestLifecycle()
+  }
 
   const isOpen = panelState === 'open'
   const isMinimized = panelState === 'minimized'
@@ -96,95 +112,6 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   }, [])
 
   useEffect(() => {
-    let frame = 0
-    const mobileQuery = window.matchMedia('(max-width: 700px)')
-    const safeAreaProbe = document.createElement('div')
-    safeAreaProbe.setAttribute('aria-hidden', 'true')
-    safeAreaProbe.style.cssText = [
-      'position:fixed', 'visibility:hidden', 'pointer-events:none',
-      'padding-top:env(safe-area-inset-top)', 'padding-right:env(safe-area-inset-right)',
-      'padding-bottom:env(safe-area-inset-bottom)', 'padding-left:env(safe-area-inset-left)',
-    ].join(';')
-    document.body.appendChild(safeAreaProbe)
-
-    const intersects = (left, top, width, height, target) => {
-      const rect = target.getBoundingClientRect()
-      const gap = 6
-      return rect.width > 0 && rect.height > 0
-        && left < rect.right + gap && left + width > rect.left - gap
-        && top < rect.bottom + gap && top + height > rect.top - gap
-    }
-
-    const updatePosition = () => {
-      frame = 0
-      const root = document.querySelector('.ask-mark-root')
-      const launcher = root?.querySelector('.ask-mark-launcher-wrap')
-      const shortcuts = document.querySelector('.markverse-hq-direct-access')
-      if (!root || !launcher || !mobileQuery.matches || !shortcuts || panelState === 'open') {
-        root?.removeAttribute('data-markverse-position')
-        return
-      }
-
-      const launcherRect = launcher.getBoundingClientRect()
-      const width = launcherRect.width || 64
-      const height = launcherRect.height || 64
-      const viewportWidth = document.documentElement.clientWidth
-      const viewportHeight = document.documentElement.clientHeight
-      const safeArea = getComputedStyle(safeAreaProbe)
-      const inset = {
-        top: Math.max(14, Number.parseFloat(safeArea.paddingTop) || 0),
-        right: Math.max(14, Number.parseFloat(safeArea.paddingRight) || 0),
-        bottom: Math.max(14, Number.parseFloat(safeArea.paddingBottom) || 0),
-        left: Math.max(14, Number.parseFloat(safeArea.paddingLeft) || 0),
-      }
-      const candidates = [
-        { name: '', left: viewportWidth - inset.right - width, top: viewportHeight - inset.bottom - height },
-        { name: 'top-right', left: viewportWidth - inset.right - width, top: inset.top },
-        { name: 'top-left', left: inset.left, top: inset.top },
-        { name: 'bottom-left', left: inset.left, top: viewportHeight - inset.bottom - height },
-      ]
-      const targets = [...document.querySelectorAll([
-        '.markverse-hq-direct-access button',
-        '.markverse-avatar-toolbar button',
-        '.markverse-mobile-scene-actions > *',
-        '.markverse-district-nav select',
-        '.markverse-camera-toggle',
-      ].join(','))].filter((target) => {
-        const style = getComputedStyle(target)
-        return style.display !== 'none' && style.visibility !== 'hidden' && !target.disabled
-      })
-      const targetPosition = candidates.find((candidate) => !targets.some((target) =>
-        intersects(candidate.left, candidate.top, width, height, target)))
-      if (targetPosition?.name) root.dataset.markversePosition = targetPosition.name
-      else root.removeAttribute('data-markverse-position')
-    }
-
-    const scheduleUpdate = () => {
-      if (!frame) frame = window.requestAnimationFrame(updatePosition)
-    }
-    const observer = new MutationObserver(scheduleUpdate)
-    observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] })
-    window.addEventListener('scroll', scheduleUpdate, true)
-    window.addEventListener('resize', scheduleUpdate)
-    window.visualViewport?.addEventListener('resize', scheduleUpdate)
-    window.visualViewport?.addEventListener('scroll', scheduleUpdate)
-    mobileQuery.addEventListener?.('change', scheduleUpdate)
-    scheduleUpdate()
-
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', scheduleUpdate, true)
-      window.removeEventListener('resize', scheduleUpdate)
-      window.visualViewport?.removeEventListener('resize', scheduleUpdate)
-      window.visualViewport?.removeEventListener('scroll', scheduleUpdate)
-      mobileQuery.removeEventListener?.('change', scheduleUpdate)
-      if (frame) window.cancelAnimationFrame(frame)
-      document.querySelector('.ask-mark-root')?.removeAttribute('data-markverse-position')
-      safeAreaProbe.remove()
-    }
-  }, [panelState])
-
-  useEffect(() => {
     if (!isOpen || isIntakeView) return undefined
 
     const focusTimer = window.setTimeout(
@@ -196,7 +123,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
 
   useEffect(() => {
     const list = messageListRef.current
-    if (!list || !isOpen || isIntakeView) return
+    if (!list || !isOpen || isIntakeView || !isAtBottomRef.current) return
 
     list.scrollTo({
       top: list.scrollHeight,
@@ -207,8 +134,30 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   }, [isIntakeView, messages, isLoading, isOpen])
 
   useEffect(() => {
+    const updatedAt = Math.max(
+      conversationContextUpdatedAt,
+      approvedKnowledgeContext?.updatedAt || 0,
+    )
+    if (!updatedAt) return undefined
+    const remaining = ASK_MARK_CONTEXT_TTL_MS - (Date.now() - updatedAt)
+    if (remaining <= 0) {
+      setConversationContext(null)
+      setConversationContextUpdatedAt(0)
+      setApprovedKnowledgeContext(null)
+      return undefined
+    }
+    const expiryTimer = window.setTimeout(() => {
+      setConversationContext(null)
+      setConversationContextUpdatedAt(0)
+      setApprovedKnowledgeContext(null)
+    }, remaining)
+    return () => window.clearTimeout(expiryTimer)
+  }, [approvedKnowledgeContext, conversationContextUpdatedAt])
+
+  useEffect(() => {
     const onKeyDown = (event) => {
       if (event.key === 'Escape' && panelState !== 'closed') {
+        cancelActiveRequestRef.current?.()
         setPanelView('assistant')
         setPanelState('closed')
         window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
@@ -219,26 +168,57 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [panelState])
 
-  useEffect(
-    () => () => {
-      requestSequenceRef.current += 1
-
+  useEffect(() => {
+    const cancelForNavigation = () => {
+      requestLifecycleRef.current.cancel()
       if (requestTimerRef.current) {
         window.clearTimeout(requestTimerRef.current)
       }
-    },
-    [],
-  )
+      if (slowTimerRef.current) window.clearTimeout(slowTimerRef.current)
+    }
+    window.addEventListener('pagehide', cancelForNavigation)
+    return () => {
+      window.removeEventListener('pagehide', cancelForNavigation)
+      cancelForNavigation()
+    }
+  }, [])
+
+  const cancelActiveRequest = (announce = false) => {
+    const wasLoading = requestLifecycleRef.current.cancel() > 0 && isLoading
+    if (requestTimerRef.current) {
+      window.clearTimeout(requestTimerRef.current)
+      requestTimerRef.current = null
+    }
+    if (slowTimerRef.current) {
+      window.clearTimeout(slowTimerRef.current)
+      slowTimerRef.current = null
+    }
+    setIsLoading(false)
+    setIsSlow(false)
+    if (announce && wasLoading) {
+      setMessages((current) => [
+        ...current,
+        {
+          id: createMessageId('cancelled'),
+          role: 'assistant',
+          text: 'I stopped preparing that response. You can ask another question anytime.',
+        },
+      ])
+    }
+  }
+  cancelActiveRequestRef.current = cancelActiveRequest
 
   const openPanel = () => setPanelState('open')
 
   const closePanel = () => {
+    cancelActiveRequest()
     setPanelView('assistant')
     setPanelState('closed')
     window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
   }
 
   const minimizePanel = () => {
+    cancelActiveRequest()
     setPanelView('assistant')
     setPanelState('minimized')
     window.setTimeout(() => (returnFocusRef.current || launcherRef.current)?.focus(), 0)
@@ -248,8 +228,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
     const cleaned = question.trim()
     if (!cleaned || isLoading) return
 
-    const requestSequence = requestSequenceRef.current + 1
-    requestSequenceRef.current = requestSequence
+    const request = requestLifecycleRef.current.begin()
 
     const userMessage = {
       id: createMessageId('visitor'),
@@ -257,10 +236,15 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
       text: cleaned,
     }
 
+    isAtBottomRef.current = true
     setMessages((current) => [...current, userMessage])
     setDraft('')
     setLastQuestion(cleaned)
     setIsLoading(true)
+    setIsSlow(false)
+    slowTimerRef.current = window.setTimeout(() => {
+      if (requestLifecycleRef.current.isCurrent(request.sequence)) setIsSlow(true)
+    }, 2200)
 
     requestTimerRef.current = window.setTimeout(async () => {
       try {
@@ -269,7 +253,9 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           : getMockResponse(
               cleaned,
               pathname,
-              conversationContext,
+              Date.now() - conversationContextUpdatedAt <= ASK_MARK_CONTEXT_TTL_MS
+                ? conversationContext
+                : null,
             )
 
         if (!fallbackResponse) {
@@ -278,12 +264,17 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           )
         }
 
-        const response = await getAskMarkResponse(
+        const response = await getAskMarkTurn(
           cleaned,
           fallbackResponse,
+          {
+            environment,
+            knowledgeKeys: getFreshAskMarkKnowledgeKeys(approvedKnowledgeContext),
+            signal: request.signal,
+          },
         )
 
-        if (requestSequence !== requestSequenceRef.current) {
+        if (!requestLifecycleRef.current.isCurrent(request.sequence)) {
           return
         }
 
@@ -293,15 +284,21 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
 
         if (response.context === null) {
           setConversationContext(null)
+          setConversationContextUpdatedAt(0)
         } else if (response.context) {
           setConversationContext(response.context)
+          setConversationContextUpdatedAt(Date.now())
         } else if (projectSource) {
           setConversationContext({
             type: 'project',
             id: projectSource.href.replace('/projects/', ''),
             label: projectSource.label,
           })
+          setConversationContextUpdatedAt(Date.now())
         }
+        setApprovedKnowledgeContext(
+          createAskMarkKnowledgeContext(getAskMarkKnowledgeKeysFromResponse(response)),
+        )
 
         setMessages((current) => [
           ...current,
@@ -317,7 +314,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           },
         ])
       } catch {
-        if (requestSequence !== requestSequenceRef.current) {
+        if (!requestLifecycleRef.current.isCurrent(request.sequence)) {
           return
         }
 
@@ -340,9 +337,11 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           },
         ])
       } finally {
-        if (requestSequence === requestSequenceRef.current) {
+        if (requestLifecycleRef.current.isCurrent(request.sequence)) {
           setIsLoading(false)
+          setIsSlow(false)
           requestTimerRef.current = null
+          requestLifecycleRef.current.finish(request.sequence)
         }
       }
     }, 260)
@@ -359,24 +358,33 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
   }
 
   const handleComposerKeyDown = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (
+      event.key === 'Enter' &&
+      !event.shiftKey &&
+      !event.nativeEvent?.isComposing &&
+      event.nativeEvent?.keyCode !== 229
+    ) {
       event.preventDefault()
       submitQuestion(draft)
     }
   }
 
+  const handleMessageScroll = (event) => {
+    const element = event.currentTarget
+    isAtBottomRef.current =
+      element.scrollHeight - element.scrollTop - element.clientHeight < 80
+  }
+
   const clearConversation = () => {
-    requestSequenceRef.current += 1
+    cancelActiveRequest()
 
-    if (requestTimerRef.current) {
-      window.clearTimeout(requestTimerRef.current)
-      requestTimerRef.current = null
-    }
-
+    isAtBottomRef.current = true
     setMessages([WELCOME_MESSAGE])
     setDraft('')
     setLastQuestion('')
     setConversationContext(null)
+    setConversationContextUpdatedAt(0)
+    setApprovedKnowledgeContext(null)
     setIsLoading(false)
     window.setTimeout(() => composerRef.current?.focus(), 0)
   }
@@ -412,7 +420,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
             />
             <span>
               <strong>Ask Mark</strong>
-              <small>Conversation saved</small>
+              <small>Conversation paused</small>
             </span>
           </button>
           <IconButton label="Close Ask Mark" onClick={closePanel}>
@@ -424,7 +432,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
       <section
         id="ask-mark-panel"
         className={`ask-mark-panel${isOpen ? ' is-open' : ''}`}
-        aria-label="Ask Mark AI portfolio concierge"
+        aria-label="Ask Mark portfolio assistant"
         aria-hidden={!isOpen}
       >
         <header className="ask-mark-header">
@@ -437,7 +445,7 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
             />
             <div>
               <strong>Ask Mark</strong>
-              <span><i aria-hidden="true" /> AI Portfolio Concierge</span>
+              <span><i aria-hidden="true" /> Portfolio assistant</span>
             </div>
           </div>
 
@@ -461,43 +469,47 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
           <>
             <div
               className="ask-mark-messages"
-          ref={messageListRef}
-          role="log"
-          aria-live="polite"
-          aria-relevant="additions"
-        >
-          <div className="ask-mark-notice">
-            Answers use information published and approved by Mark.
-          </div>
+              ref={messageListRef}
+              onScroll={handleMessageScroll}
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+            >
+              <div className="ask-mark-notice">
+                Answers use information published and approved by Mark.
+              </div>
 
-          {messages.map((message) => (
-            <AssistantMessage
-              key={message.id}
-              message={message}
-              onFollowUp={(followUp) =>
-                submitQuestion(followUp.question, followUp.promptId)
-              }
-            />
-          ))}
+              {messages.map((message) => (
+                <AssistantMessage
+                  key={message.id}
+                  message={message}
+                  onFollowUp={(followUp) =>
+                    submitQuestion(followUp.question, followUp.promptId)
+                  }
+                />
+              ))}
 
-          {!hasVisitorMessage && (
-            <AssistantSuggestionChips
-              prompts={prompts}
-              onSelect={handlePrompt}
-              disabled={isLoading}
-            />
-          )}
+              {!hasVisitorMessage && (
+                <AssistantSuggestionChips
+                  prompts={prompts}
+                  onSelect={handlePrompt}
+                  disabled={isLoading}
+                />
+              )}
 
-          {isLoading && <AssistantTypingIndicator />}
+              {isLoading && <AssistantTypingIndicator />}
+              {isSlow && isLoading && (
+                <p className="ask-mark-waiting" role="status" aria-live="polite">
+                  This is taking a little longer. You can keep waiting or cancel.
+                </p>
+              )}
 
-          {!isLoading &&
-            messages.at(-1)?.isError &&
-            lastQuestion && (
-              <button className="ask-mark-retry" type="button" onClick={retryLastQuestion}>
-                Retry the last question
-              </button>
-            )}
-        </div>
+              {!isLoading && messages.at(-1)?.isError && lastQuestion && (
+                <button className="ask-mark-retry" type="button" onClick={retryLastQuestion}>
+                  Retry the last question
+                </button>
+              )}
+            </div>
 
         <footer className="ask-mark-composer">
           <form onSubmit={handleSubmit}>
@@ -510,11 +522,16 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
               value={draft}
               onChange={(event) => setDraft(event.target.value.slice(0, 500))}
               onKeyDown={handleComposerKeyDown}
+              enterKeyHint="send"
+              aria-describedby="ask-mark-input-hint"
               placeholder="Ask about Mark’s projects, skills, or experience…"
               rows="1"
               maxLength="500"
               disabled={isLoading}
             />
+            <span id="ask-mark-input-hint" className="ask-mark-sr-only">
+              Press Enter to send. Press Shift and Enter to add a line.
+            </span>
             <button
               className="ask-mark-send"
               type="submit"
@@ -527,7 +544,12 @@ export function AskMarkAssistant({ environment = import.meta.env } = {}) {
 
           <div className="ask-mark-composer__meta">
             <span>{draft.length}/500</span>
-            <button type="button" onClick={clearConversation} disabled={isLoading}>
+            {isLoading && (
+              <button className="ask-mark-cancel" type="button" onClick={() => cancelActiveRequest(true)}>
+                Cancel response
+              </button>
+            )}
+            <button type="button" onClick={clearConversation}>
               Clear conversation
             </button>
           </div>

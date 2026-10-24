@@ -1,17 +1,15 @@
-import { rmSync } from 'node:fs'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import {
   localArgs,
   migrate,
   query,
   run,
-  worker,
 } from './lib/ask-mark-d1.mjs'
 
-const stateDirectory = path.join(
-  worker,
-  '.wrangler-intake-schema-check',
-)
+const runRoot = mkdtempSync(path.join(tmpdir(), 'ask-mark-intake-schema-'))
+const stateDirectory = path.join(runRoot, 'd1-state')
 
 const expectedTables = [
   'visitor_rate_limit_buckets',
@@ -45,8 +43,6 @@ function compact(parts) {
 }
 
 let validationSucceeded = false
-
-rmSync(stateDirectory, { recursive: true, force: true })
 
 try {
   migrate(stateDirectory)
@@ -314,11 +310,11 @@ try {
   )
 } finally {
   if (validationSucceeded) {
-    rmSync(stateDirectory, { recursive: true, force: true })
+    rmSync(runRoot, { recursive: true, force: true })
   } else {
     console.error(
       'Disposable local state was retained for inspection at ' +
-        stateDirectory,
+        runRoot,
     )
   }
 }

@@ -1,6 +1,7 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { createServer } from 'node:net'
-import { rmSync } from 'node:fs'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import {
   config,
@@ -12,7 +13,11 @@ import {
 } from './lib/ask-mark-d1.mjs'
 import { importSeed } from './import-ask-mark-seed.mjs'
 
-const state = path.join(worker, '.wrangler-api-check')
+process.env.WRANGLER_WRITE_LOGS = 'false'
+
+// Every invocation owns one unique disposable D1 directory. Never touch the
+// shared Wrangler persistence directory or a prior test's scratch data.
+const state = mkdtempSync(path.join(tmpdir(), 'ask-mark-api-check-'))
 
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds))
@@ -138,8 +143,6 @@ async function stopWorkerProcess(child) {
   }
 }
 
-await removeDisposableState({ strict: true })
-
 let workerProcess
 let validationSucceeded = false
 let stdout = ''
@@ -147,7 +150,7 @@ let stderr = ''
 
 try {
   migrate(state)
-  importSeed({ state })
+  importSeed({ state, scratch: path.join(state, 'seed-import-scratch') })
 
   const port = await freePort()
   const baseUrl = `http://127.0.0.1:${port}`
@@ -297,15 +300,8 @@ try {
   )
 } finally {
   await stopWorkerProcess(workerProcess)
-
-  if (validationSucceeded) {
-    // Windows may retain a released file handle briefly after workerd exits.
-    await removeDisposableState()
-  } else {
-    console.error(`Disposable API state retained at ${state}`)
-
-    if (stdout || stderr) {
-      console.error(`${stdout}\n${stderr}`.trim())
-    }
-  }
+  // Windows may retain a released file handle briefly after workerd exits.
+  const removed = await removeDisposableState({ strict: validationSucceeded })
+  if (!removed) console.error(`Invocation-owned disposable API state retained at ${state}`)
+  if (!validationSucceeded && (stdout || stderr)) console.error(`${stdout}\n${stderr}`.trim())
 }

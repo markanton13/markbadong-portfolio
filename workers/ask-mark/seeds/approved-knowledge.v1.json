@@ -492,7 +492,7 @@
       "kind": "project",
       "category": "project",
       "title": "Learning Library",
-      "content": "A live Cloudflare portfolio demonstration combining ten interactive guides with access control, test payments, rewarded unlocks, recovery, analytics, backups, device limits, and launch safeguards.",
+      "content": "The Learning Library is a live Cloudflare portfolio demonstration with 11 QA-passed public guides: 10 are free during the pilot and one is a premium-pilot guide. It also demonstrates access control, test payment and rewarded-access integrations, recovery, analytics, backups, device limits, and launch safeguards. This does not claim live commercial payment activation, conversions, or revenue.",
       "sources": [
         "snap_repo",
         "snap_master"

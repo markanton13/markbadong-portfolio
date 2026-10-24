@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { readFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import {
   config,
@@ -14,10 +15,8 @@ import {
   wranglerCli,
 } from './lib/ask-mark-d1.mjs'
 
-const stateDirectory = path.join(
-  worker,
-  '.wrangler-moderation-schema-check',
-)
+const runRoot = mkdtempSync(path.join(tmpdir(), 'ask-mark-moderation-schema-'))
+const stateDirectory = path.join(runRoot, 'd1-state')
 const migrationPath = path.join(
   worker,
   'migrations',
@@ -113,7 +112,6 @@ for (const prohibited of [
   )
 }
 
-rmSync(stateDirectory, { recursive: true, force: true })
 let validationSucceeded = false
 
 try {
@@ -369,11 +367,11 @@ try {
   )
 } finally {
   if (validationSucceeded) {
-    rmSync(stateDirectory, { recursive: true, force: true })
+    rmSync(runRoot, { recursive: true, force: true })
   } else {
     console.error(
       'Disposable moderation schema state was retained at ' +
-        stateDirectory,
+        runRoot,
     )
   }
 }

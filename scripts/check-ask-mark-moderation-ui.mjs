@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict'
 import {
   existsSync,
+  mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
 } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
@@ -20,10 +22,8 @@ const viteCli = path.join(
   'bin',
   'vite.js',
 )
-const moderationOutput = path.join(
-  root,
-  '.moderation-ui-build-check',
-)
+const runRoot = mkdtempSync(path.join(tmpdir(), 'ask-mark-moderation-ui-'))
+const moderationOutput = path.join(runRoot, 'moderation')
 const publicModes = [
   'askmark',
   'askmark-preview',
@@ -31,10 +31,7 @@ const publicModes = [
 ]
 const publicOutputs = publicModes.map(
   (mode) =>
-    path.join(
-      root,
-      `.moderation-public-build-check-${mode}`,
-    ),
+    path.join(runRoot, `public-${mode}`),
 )
 
 const requiredFiles = [
@@ -249,16 +246,6 @@ for (const prohibited of [
   )
 }
 
-for (const directory of [
-  moderationOutput,
-  ...publicOutputs,
-]) {
-  rmSync(directory, {
-    recursive: true,
-    force: true,
-  })
-}
-
 let validationSucceeded = false
 
 try {
@@ -345,15 +332,7 @@ try {
     ].join(' '),
   )
 } finally {
-  for (const directory of [
-    moderationOutput,
-    ...publicOutputs,
-  ]) {
-    rmSync(directory, {
-      recursive: true,
-      force: true,
-    })
-  }
+  rmSync(runRoot, { recursive: true, force: true })
 
   if (!validationSucceeded) {
     console.error(

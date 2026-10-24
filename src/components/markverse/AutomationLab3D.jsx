@@ -1003,7 +1003,6 @@ function setCameraView(camera, state, aspect, config = CAMERA_CONFIG) {
 export function AutomationLab3D({ cameraView, onCameraChange, onOpenTerminal, onFallback, onReady, onPortalApproach, sceneControllerRef, debug3d = false, debugNav = false, onDiagnostics, terminalOpen = false }) {
   const hostRef = useRef(null)
   const stateRef = useRef(null)
-  const terminalReturnTargetRef = useRef(null)
   const cameraViewRef = useRef(cameraView)
   const onCameraChangeRef = useRef(onCameraChange)
   const onOpenTerminalRef = useRef(onOpenTerminal)
@@ -1090,7 +1089,6 @@ export function AutomationLab3D({ cameraView, onCameraChange, onOpenTerminal, on
       setCameraView(camera, cameraViewRef.current, width / height, CAMERA_CONFIG)
       labState = buildLab(scene, renderer)
       labState.camera = camera
-      labState.goToTerminalFromControls = goToTerminal
       stateRef.current = labState
       if (sceneControllerRef) sceneControllerRef.current = labState
       const gl = renderer.getContext()
@@ -1380,11 +1378,7 @@ export function AutomationLab3D({ cameraView, onCameraChange, onOpenTerminal, on
           activeGpuQuery = gl.createQuery()
           gl.beginQuery(gpuTimerExtension.TIME_ELAPSED_EXT, activeGpuQuery)
         }
-        labState.update(now / 1000, () => {
-          const returnTarget = terminalReturnTargetRef.current || renderer.domElement
-          terminalReturnTargetRef.current = null
-          onOpenTerminalRef.current?.(returnTarget)
-        }, setMovementStatus, (destinationId, returnTarget) => onPortalApproachRef.current?.(destinationId, returnTarget))
+        labState.update(now / 1000, () => onOpenTerminalRef.current?.(renderer.domElement), setMovementStatus, (destinationId, returnTarget) => onPortalApproachRef.current?.(destinationId, returnTarget))
         renderer.render(scene, camera)
         if (!sceneReady) {
           sceneReady = true
@@ -1462,16 +1456,11 @@ export function AutomationLab3D({ cameraView, onCameraChange, onOpenTerminal, on
 
   if (failed) return <AutomationLabFallback />
   const setDirection = (key, active) => stateRef.current?.setMoveDirection(key, active)
-  const goToTerminal = (returnTarget = null) => {
-    terminalReturnTargetRef.current = returnTarget
+  const goToTerminal = () => {
     const canvas = hostRef.current?.querySelector('canvas')
     const routed = stateRef.current?.requestTerminal()
     setMovementStatus(routed ? 'Mark is walking to the project terminal.' : 'No clear route; opening project details directly.')
-    if (!routed) {
-      const target = returnTarget || canvas
-      terminalReturnTargetRef.current = null
-      onOpenTerminalRef.current?.(target)
-    }
+    if (!routed) onOpenTerminalRef.current?.(canvas)
   }
   const moveOneStep = (x, z) => {
     const state = stateRef.current
@@ -1506,7 +1495,7 @@ export function AutomationLab3D({ cameraView, onCameraChange, onOpenTerminal, on
           {directionalButton('Move Mark back', '↓', 'arrowdown', 0, 1)}
           {directionalButton('Move Mark right', '→', 'arrowright', 1, 0)}
         </div>
-        <button type="button" className="markverse-avatar-terminal" onClick={(event) => goToTerminal(event.currentTarget)}>Go to terminal</button>
+        <button type="button" className="markverse-avatar-terminal" onClick={goToTerminal}>Go to terminal</button>
         <button type="button" className="markverse-avatar-reset" onClick={() => { stateRef.current?.resetAvatar(); setMovementStatus('Mark returned to the starting position.') }}>Reset Mark</button>
         <p className="markverse-avatar-status" role="status" aria-live="polite">{movementStatus}</p>
       </div>

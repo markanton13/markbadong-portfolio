@@ -35,7 +35,7 @@ function wholeWordMatch(message, term) {
   if (!term) return false
 
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return new RegExp(`(^|\\s)${escaped}(?=\\s|$)`, 'i').test(message)
+  return new RegExp(`(^|\\s|[^a-z0-9])${escaped}(?=\\s|$|[^a-z0-9])`, 'i').test(message)
 }
 
 function termScore(message, term) {
@@ -260,7 +260,11 @@ export async function getBootstrap(db) {
   }
 }
 
-export async function queryApprovedKnowledge(db, rawMessage) {
+export async function queryApprovedKnowledge(
+  db,
+  rawMessage,
+  { contextKey = null, contextKeys = [] } = {},
+) {
   const message = normalizeText(rawMessage)
   const [release, rows, terms] = await Promise.all([
     releaseContext(db),
@@ -274,6 +278,7 @@ export async function queryApprovedKnowledge(db, rawMessage) {
 
   let winningTerm = null
   let winningScore = 0
+  const scoresByItem = new Map()
 
   for (const term of terms) {
     const row = rowsById.get(term.knowledge_item_id)
@@ -292,25 +297,152 @@ export async function queryApprovedKnowledge(db, rawMessage) {
       score += 2_500
     }
 
+    if (score > 0) {
+      const previous = scoresByItem.get(term.knowledge_item_id)
+      if (!previous || score > previous.score) {
+        scoresByItem.set(term.knowledge_item_id, {
+          score,
+          term,
+          position: message.indexOf(term.normalized_term),
+        })
+      }
+    }
+
     if (score > winningScore) {
       winningScore = score
       winningTerm = term
     }
   }
 
-  if (!winningTerm) {
+  const boundaryMatch = winningTerm && (() => {
+    const row = rowsById.get(winningTerm.knowledge_item_id)
+    return row?.kind === 'privacy_boundary' || row?.kind === 'unsupported_boundary'
+  })()
+
+  const explicitProjects = rows
+    .filter((row) => row.kind === 'project')
+    .map((row) => {
+      const keyAlias = row.item_key.replace(/^project\./, '').replace(/[_-]/g, ' ')
+      const identities = [row.title, keyAlias, keyAlias.replace(/\s/g, '')]
+        .map(normalizeText)
+        .filter(Boolean)
+      const positions = identities
+        .filter((identity) => wholeWordMatch(message, identity))
+        .map((identity) => message.indexOf(identity))
+      return positions.length ? { row, position: Math.min(...positions) } : null
+    })
+    .filter(Boolean)
+    .sort((left, right) => left.position - right.position)
+
+  const normalizedContextKeys = Array.isArray(contextKeys)
+    ? contextKeys.slice(0, 4)
+    : []
+  if (typeof contextKey === 'string') normalizedContextKeys.push(contextKey)
+  const contextItems = [...new Set(normalizedContextKeys)]
+    .filter((key) => typeof key === 'string' && /^[a-z0-9][a-z0-9._-]{0,95}$/i.test(key))
+    .map((key) => rows.find((item) => item.item_key === key && item.kind === 'project'))
+    .filter(Boolean)
+    .slice(0, 2)
+
+  const refersToPluralContext = /\b(?:these|those|both|they|them)\b|\bwhich of (?:these|those)\b/i.test(message)
+  const refersToSingleContext = /\b(?:that project|that one|it|tell me more|more about that|what about that)\b/i.test(message)
+
+  if (!boundaryMatch && explicitProjects.length > 2 && /\b(?:compare|between|which of|these projects)\b/i.test(message)) {
     return {
       ok: true,
       service: SERVICE_NAME,
       apiVersion: API_VERSION,
       mode: 'deterministic-d1',
       matched: false,
+      clarificationRequired: true,
       release,
-      answer:
-        'I do not have approved evidence for that question yet. I can help with Mark’s verified background, projects, role fit, résumé, contact details, or booking options.',
+      answer: 'I can compare up to two approved projects at a time. Which two would you like me to compare?',
       item: null,
+      items: [],
       actions: FALLBACK_ACTIONS,
     }
+  }
+
+  let selectedRows = []
+  if (!boundaryMatch && explicitProjects.length >= 2) {
+    selectedRows = explicitProjects.slice(0, 2).map(({ row }) => row)
+  } else if (!boundaryMatch && explicitProjects.length === 1) {
+    selectedRows = [explicitProjects[0].row]
+  } else if (!boundaryMatch && explicitProjects.length === 0 && contextItems.length === 0 && (refersToPluralContext || refersToSingleContext)) {
+    return {
+      ok: true,
+      service: SERVICE_NAME,
+      apiVersion: API_VERSION,
+      mode: 'deterministic-d1',
+      matched: false,
+      clarificationRequired: true,
+      release,
+      answer: 'Which approved project are you referring to?',
+      item: null,
+      items: [],
+      actions: [],
+    }
+  } else if (!boundaryMatch && contextItems.length > 1 && refersToPluralContext) {
+    selectedRows = contextItems
+  } else if (!boundaryMatch && contextItems.length > 1 && refersToSingleContext) {
+    return {
+      ok: true,
+      service: SERVICE_NAME,
+      apiVersion: API_VERSION,
+      mode: 'deterministic-d1',
+      matched: false,
+      clarificationRequired: true,
+      release,
+      answer: 'Which of the two projects do you mean?',
+      item: null,
+      items: [],
+      actions: [],
+    }
+  } else if (!boundaryMatch && contextItems.length === 1 && (refersToPluralContext || refersToSingleContext)) {
+    selectedRows = contextItems
+  }
+
+  if (selectedRows.length > 0) {
+    const items = selectedRows.map(publicItem)
+    const answer = items.length === 1
+      ? items[0].answer
+      : items.map((item) => `${item.title}: ${item.answer}`).join('\n\n')
+    return {
+      ok: true,
+      service: SERVICE_NAME,
+      apiVersion: API_VERSION,
+      mode: 'deterministic-d1',
+      matched: true,
+      release,
+      match: explicitProjects.length ? {
+        terms: selectedRows.map((row) => scoresByItem.get(row.knowledge_item_id)?.term.normalized_term).filter(Boolean),
+      } : { context: true },
+      answer,
+      item: items[0],
+      items,
+      actions: items.flatMap((item) => item.actions),
+    }
+  }
+
+  if (!winningTerm) {
+    const hasUnresolvedReference = refersToPluralContext || refersToSingleContext
+
+    const fallbackResult = {
+      ok: true,
+      service: SERVICE_NAME,
+      apiVersion: API_VERSION,
+      mode: 'deterministic-d1',
+      matched: false,
+      release,
+      answer: hasUnresolvedReference
+        ? 'Which approved project do you mean?'
+        : 'I do not have approved evidence for that question yet. I can help with Mark’s verified background, projects, role fit, résumé, contact details, or booking options.',
+      item: null,
+      items: [],
+      clarificationRequired: hasUnresolvedReference,
+      actions: FALLBACK_ACTIONS,
+    }
+    return fallbackResult
   }
 
   const row = rowsById.get(winningTerm.knowledge_item_id)
@@ -335,6 +467,7 @@ export async function queryApprovedKnowledge(db, rawMessage) {
     },
     answer: item.answer,
     item,
+    items: [item],
     actions: item.actions.length ? item.actions : FALLBACK_ACTIONS,
   }
 }

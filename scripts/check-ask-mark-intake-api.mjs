@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import { spawn, spawnSync } from 'node:child_process'
 import { createServer } from 'node:net'
-import { rmSync } from 'node:fs'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import workerModule from '../workers/ask-mark/src/index.js'
 import {
@@ -10,14 +11,11 @@ import {
   migrate,
   query,
   root,
-  worker,
   wranglerCli,
 } from './lib/ask-mark-d1.mjs'
 
-const state = path.join(
-  worker,
-  '.wrangler-intake-api-check',
-)
+const runRoot = mkdtempSync(path.join(tmpdir(), 'ask-mark-intake-api-'))
+const state = path.join(runRoot, 'd1-state')
 
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds))
@@ -98,7 +96,7 @@ async function removeDisposableState({ strict = false } = {}) {
 
   for (let attempt = 1; attempt <= 20; attempt += 1) {
     try {
-      rmSync(state, {
+      rmSync(runRoot, {
         recursive: true,
         force: true,
       })
@@ -575,7 +573,7 @@ try {
     await removeDisposableState()
   } else {
     console.error(
-      `Disposable intake API state retained at ${state}`,
+      `Disposable intake API state retained at ${runRoot}`,
     )
 
     if (stdout || stderr) {
