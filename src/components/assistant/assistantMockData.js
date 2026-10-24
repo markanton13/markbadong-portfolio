@@ -465,6 +465,58 @@ function buildProfileResponse(key, extraActions = []) {
   }
 }
 
+const comparativeQuestionPattern = /^which\s+(?:one|project)\s+(?:focus(?:es|ed)?\s+more\s+on|is\s+more\s+focused\s+on|is\s+more\s+about|better\s+matches?\s+for|better\s+fits?)\s+(.+?)\s*[?.!]*$/i
+const comparativeStopWords = new Set([
+  'about', 'and', 'are', 'for', 'from', 'into', 'more', 'one', 'project',
+  'that', 'the', 'their', 'them', 'they', 'this', 'which', 'with',
+])
+
+function comparativeTerms(value) {
+  return normalize(value)
+    .split(' ')
+    .filter((term) => term.length >= 3 && !comparativeStopWords.has(term))
+    .map((term) => term.endsWith('ies')
+      ? `${term.slice(0, -3)}y`
+      : term.length > 4 && term.endsWith('s') ? term.slice(0, -1) : term)
+}
+
+function scoreProjectForCriterion(project, criterionTerms) {
+  const descriptionTerms = new Set(comparativeTerms(`${project.summary} ${project.status}`))
+  return criterionTerms.reduce((score, term) => score + (descriptionTerms.has(term) ? 1 : 0), 0)
+}
+
+function buildComparativeProjectFollowUp(question, projects, context) {
+  const match = question.match(comparativeQuestionPattern)
+  if (!match || projects.length !== 2) return null
+
+  const criterion = match[1].trim().replace(/[?.!]+$/, '')
+  const terms = comparativeTerms(criterion)
+  if (!terms.length) return null
+
+  const scores = projects.map((project) => scoreProjectForCriterion(project, terms))
+  if (scores[0] === scores[1]) {
+    return {
+      category: 'clarification',
+      context,
+      answer: `The approved descriptions do not clearly distinguish ${projects[0].label} from ${projects[1].label} for “${criterion}.” Which specific feature would you like me to compare?`,
+      sources: projects.map(projectSource),
+      actions: [],
+    }
+  }
+
+  const winnerIndex = scores[0] > scores[1] ? 0 : 1
+  const winner = projects[winnerIndex]
+  const other = projects[1 - winnerIndex]
+
+  return {
+    category: 'comparative_follow_up',
+    context,
+    answer: `Based on the approved project descriptions, ${winner.label} is the closer match for ${criterion}.\n\n${winner.summary}\n\n${other.summary}`,
+    sources: [projectSource(winner), projectSource(other)],
+    actions: projects.flatMap(projectActions),
+  }
+}
+
 function buildGreetingResponse(pathname) {
   const routePrompts = getPromptsForRoute(pathname)
   const routeStarter = routePrompts[0]
@@ -532,6 +584,10 @@ function getContextualResponse(question, context) {
       .slice(0, 2)
       .map((entry) => findProjectById(entry.id))
       .filter((project) => project && APPROVED_D1_PROJECT_IDS.has(project.id))
+    if (projects.length > 1) {
+      const comparativeFollowUp = buildComparativeProjectFollowUp(trimmed, projects, context)
+      if (comparativeFollowUp) return comparativeFollowUp
+    }
     if (projects.length > 1 && /\b(?:these|those|both|they|them)\b/i.test(trimmed)) {
       return buildMultiProjectResponse(projects)
     }
