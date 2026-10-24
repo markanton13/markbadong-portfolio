@@ -1,3 +1,5 @@
+import { getAssistantMessageLinks } from './assistantMessageLinks.js'
+
 function ExternalIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16">
@@ -9,6 +11,7 @@ function ExternalIcon() {
 
 export function AssistantMessage({ message, onAction, onFollowUp }) {
   const isAssistant = message.role === 'assistant'
+  const { sources, actions } = getAssistantMessageLinks(message.sources, message.actions)
 
   return (
     <article
@@ -28,11 +31,11 @@ export function AssistantMessage({ message, onAction, onFollowUp }) {
       <div className="ask-mark-message__content">
         <p>{message.text}</p>
 
-        {message.sources?.length > 0 && (
+        {sources.length > 0 && (
           <div className="ask-mark-sources" aria-label="Relevant portfolio sources">
             <span className="ask-mark-sources__label">Portfolio proof</span>
             <div className="ask-mark-sources__list">
-              {message.sources.map((source) => (
+              {sources.map((source) => (
                 <a key={`${source.href}-${source.label}`} href={source.href}>
                   {source.label}
                   <span aria-hidden="true">→</span>
@@ -56,9 +59,9 @@ export function AssistantMessage({ message, onAction, onFollowUp }) {
           </div>
         )}
 
-        {message.actions?.length > 0 && (
+        {actions.length > 0 && (
           <div className="ask-mark-actions" aria-label="Recommended actions">
-            {message.actions.map((item) => (
+            {actions.map((item) => (
               <a
                 key={`${item.href}-${item.label}`}
                 className={`ask-mark-action ask-mark-action--${item.type}`}
