@@ -324,7 +324,9 @@
 }
 
 .ask-mark-message__content {
+  min-width: 0;
   max-width: 84%;
+  overflow-wrap: anywhere;
 }
 
 .ask-mark-message__content > p {
@@ -567,6 +569,13 @@
   animation-delay: 240ms;
 }
 
+.ask-mark-waiting {
+  margin: 8px 0 0 45px;
+  color: var(--ask-mark-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .ask-mark-retry {
   margin: 12px 0 0 45px;
   padding: 9px 12px;
@@ -619,7 +628,7 @@
 }
 
 .ask-mark-composer textarea::placeholder {
-  color: #8a867e;
+  color: var(--ask-mark-muted);
 }
 
 .ask-mark-send {
@@ -655,6 +664,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   color: var(--ask-mark-muted);
   font-size: 10px;
@@ -673,9 +683,14 @@
   color: var(--ask-mark-blue);
 }
 
+.ask-mark-composer__meta .ask-mark-cancel {
+  color: var(--ask-mark-blue-dark);
+  font-weight: 750;
+}
+
 .ask-mark-composer > p {
   margin: 1px 2px 0;
-  color: #817d75;
+  color: var(--ask-mark-muted);
   font-size: 9.5px;
   line-height: 1.35;
   text-align: center;
@@ -834,18 +849,6 @@
   .ask-mark-root {
     inset: auto max(14px, env(safe-area-inset-right))
       max(14px, env(safe-area-inset-bottom)) auto;
-  }
-
-  .ask-mark-root[data-markverse-position='top-right'] {
-    inset: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) auto auto;
-  }
-
-  .ask-mark-root[data-markverse-position='top-left'] {
-    inset: max(14px, env(safe-area-inset-top)) auto auto max(14px, env(safe-area-inset-left));
-  }
-
-  .ask-mark-root[data-markverse-position='bottom-left'] {
-    inset: auto auto max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
   }
 
   .ask-mark-launcher {

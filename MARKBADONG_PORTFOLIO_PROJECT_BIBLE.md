@@ -402,20 +402,7 @@ A React, Express, and MySQL application connecting:
 
 ### Current public treatment
 
-```text
-Client project · In progress
-```
-
-A full case study remains deferred.
-
-### Publish only after
-
-1. final design polish;
-2. remaining pages are complete;
-3. forms and booking flows are validated;
-4. desktop, tablet, and mobile QA pass;
-5. written client or TL approval is saved;
-6. sensitive GoHighLevel and customer data are removed.
+Owner authorization dated 2026-10-24 approves this limited portfolio description: the public company name and website, a six-page responsive website implemented with GoHighLevel and custom HTML/CSS, responsive design, UX, QA, and a high-level description of Mark’s implementation responsibilities. The prior internal written client/TL permission gate is superseded for this owner-authored scope. Written client permission evidence remains **unverified** and must not be claimed. Do not include private records, internal operations, credentials, financial details, private communications, or unapproved assets. If an actual NDA, contract, or binding publication restriction is found, stop for review of that specific restriction.
 
 ### Never publish
 
@@ -696,7 +683,7 @@ Planned work:
 - maintain Master Career Profile accuracy;
 - update the Wipro date after August 14, 2026;
 - add verified testimonials or outcomes when available;
-- complete Childcare Culture & Co. and publish only after written approval;
+- retain the owner-approved high-level Childcare Culture & Co. website description; written client permission evidence remains unverified; exclude details outside the approved scope;
 - expand supporting-project proof selectively;
 - review portfolio conversion points and recruiter feedback.
 
@@ -710,7 +697,7 @@ ApplyLang standalone web application remains a separate product-development phas
 
 Use this at the beginning of the next portfolio thread:
 
-> Continue MARKBADONG.COM after the Phase 4 closeout. Read `MARKBADONG_PORTFOLIO_PROJECT_BIBLE.md` first. Phase 1 foundation, Phase 2 real proof, Phase 3 accessibility/SEO/performance, Phase 4A career-source activation, and Phase 4B GitHub proof integration are complete. Begin Phase 5 career launch and continuous proof, while keeping Childcare Culture & Co. deferred until final QA and written publication permission.
+> Continue MARKBADONG.COM after the Phase 4 closeout. Read `MARKBADONG_PORTFOLIO_PROJECT_BIBLE.md` first. Phase 1 foundation, Phase 2 real proof, Phase 3 accessibility/SEO/performance, Phase 4A career-source activation, and Phase 4B GitHub proof integration are complete. Begin Phase 5 career launch and continuous proof, while limiting Childcare Culture & Co. to the owner-authorized high-level website description; written client permission evidence remains unverified.
 
 ---
 

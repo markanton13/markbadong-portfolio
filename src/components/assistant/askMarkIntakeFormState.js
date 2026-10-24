@@ -7,6 +7,7 @@ export const MESSAGE_VALIDATION_CODES = new Set([
   'message_required',
   'message_too_short',
   'message_too_long',
+  'sensitive_content_not_accepted',
   'payload_too_large',
   'invalid_unicode',
 ])
@@ -26,6 +27,8 @@ function validationMessage(code) {
       return `Use at least ${ASK_MARK_INTAKE_MESSAGE_MIN_CODE_POINTS} characters.`
     case 'message_too_long':
       return `Keep the message within ${ASK_MARK_INTAKE_MESSAGE_MAX_CODE_POINTS} characters.`
+    case 'sensitive_content_not_accepted':
+      return 'Remove contact details and credential-like values. Use placeholders in code examples.'
     case 'payload_too_large':
       return 'This message uses too many encoded bytes. Shorten it and try again.'
     case 'invalid_unicode':

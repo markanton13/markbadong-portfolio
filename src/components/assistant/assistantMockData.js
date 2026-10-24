@@ -390,6 +390,60 @@ function findProjectById(id) {
   return projectKnowledge.find((project) => project.id === id) || null
 }
 
+const APPROVED_D1_PROJECT_IDS = new Set([
+  'personalvabot',
+  'markhq',
+  'applylang',
+  'learning-library',
+  'funnel-lab',
+  'leaveflow',
+])
+
+const APPROVED_PROJECT_KEYS = Object.freeze({
+  personalvabot: 'project.personalvabot',
+  markhq: 'project.markhq',
+  applylang: 'project.applylang',
+  'learning-library': 'project.learning_library',
+  'funnel-lab': 'project.funnel_lab',
+  leaveflow: 'project.leaveflow',
+})
+
+function explicitApprovedProjectReferences(question) {
+  const normalized = normalize(question)
+  const matches = projectKnowledge
+    .filter((project) => APPROVED_D1_PROJECT_IDS.has(project.id))
+    .map((project) => {
+      const positions = project.aliases
+        .map((alias) => normalized.indexOf(normalize(alias)))
+        .filter((position) => position >= 0)
+      return positions.length ? { project, position: Math.min(...positions) } : null
+    })
+    .filter(Boolean)
+    .sort((left, right) => left.position - right.position)
+  return matches.slice(0, 3).map(({ project }) => project)
+}
+
+function buildMultiProjectResponse(projects) {
+  const selected = projects.slice(0, 2)
+  return {
+    category: 'project',
+    context: {
+      type: 'projects',
+      projects: selected.map((project) => ({
+        id: project.id,
+        label: project.label,
+        key: APPROVED_PROJECT_KEYS[project.id],
+      })),
+    },
+    answer: selected
+      .map((project) => `${project.label}: ${project.summary}`)
+      .join('\n\n'),
+    sources: selected.map(projectSource),
+    actions: selected.flatMap(projectActions),
+    knowledgeKeys: selected.map((project) => APPROVED_PROJECT_KEYS[project.id]),
+  }
+}
+
 function findRoleById(id) {
   return roleKnowledge.find((role) => role.id === id) || null
 }
@@ -419,7 +473,7 @@ function buildGreetingResponse(pathname) {
     category: 'greeting',
     context: null,
     answer:
-      'Hello! I’m Ask Mark, Mark Anton Badong’s AI portfolio concierge. I can help you quickly explore his customer and technical support background, operations and training experience, projects, skills, role fit, résumé, contact details, and booking options.\n\nAsk me a question in your own words, or choose one of the starters below.',
+      'Hi! I’m Ask Mark. Ask about Mark’s approved projects, skills, or customer and technical support background. You can also choose one of the starters below.',
     sources: [],
     actions: [
       action('Explore Mark’s work', assistantLinks.work),
@@ -473,6 +527,25 @@ function getContextualResponse(question, context) {
 
   const trimmed = question.trim()
 
+  if (context.type === 'projects' && Array.isArray(context.projects)) {
+    const projects = context.projects
+      .slice(0, 2)
+      .map((entry) => findProjectById(entry.id))
+      .filter((project) => project && APPROVED_D1_PROJECT_IDS.has(project.id))
+    if (projects.length > 1 && /\b(?:these|those|both|they|them)\b/i.test(trimmed)) {
+      return buildMultiProjectResponse(projects)
+    }
+    if (projects.length > 1 && /\b(?:that project|that one|it|tell me more|more about that)\b/i.test(trimmed)) {
+      return {
+        category: 'clarification',
+        context,
+        answer: `Which project do you mean: ${projects.map((project) => project.label).join(' or ')}?`,
+        sources: [],
+        actions: [],
+      }
+    }
+  }
+
   if (
     context.type === 'clarification' &&
     /^(yes|yeah|yep|correct|exactly|that is right|that s right|you got it)\b/i.test(
@@ -481,7 +554,9 @@ function getContextualResponse(question, context) {
   ) {
     if (context.entityType === 'project') {
       const project = findProjectById(context.id)
-      return project ? buildProjectResponse(project) : null
+      return project && APPROVED_D1_PROJECT_IDS.has(project.id)
+        ? buildProjectResponse(project)
+        : null
     }
 
     if (context.entityType === 'role') {
@@ -506,7 +581,7 @@ function getContextualResponse(question, context) {
 
   if (context.type === 'project') {
     const project = findProjectById(context.id)
-    if (!project) return null
+    if (!project || !APPROVED_D1_PROJECT_IDS.has(project.id)) return null
 
     if (
       /\b(inquire|inquiry|interested|contact|reach|hire|work with|discuss|book|call)\b/i.test(
@@ -847,7 +922,22 @@ export function getMockResponse(question, pathname, context = null) {
   }
 
   const contextual = getContextualResponse(cleaned, context)
-  if (contextual) return contextual
+  if (contextual) {
+    return {
+      ...contextual,
+      conversationalFollowUp: true,
+    }
+  }
+
+  if (/\b(?:that project|that one|it|tell me more about that|more about that|these projects|those projects)\b/i.test(cleaned)) {
+    return {
+      category: 'clarification',
+      context: null,
+      answer: 'Which approved project are you referring to?',
+      sources: [],
+      actions: [],
+    }
+  }
 
   if (
     /^(hi|hello|hey|hiya|greetings|good morning|good afternoon|good evening|hello there|hi there|hey there|hello ask mark|hi ask mark|kamusta|kumusta|kamusta po|kumusta po)$/i.test(
@@ -874,7 +964,7 @@ export function getMockResponse(question, pathname, context = null) {
       ...buildGreetingResponse(pathname),
       category: 'small_talk',
       answer:
-        'I’m ready to help! I’m Ask Mark, Mark Anton Badong’s AI portfolio concierge. I can guide you through his customer support background, professional experience, projects, skills, résumé, contact details, and booking options.',
+        'I’m ready to help. Ask me about Mark’s approved projects, skills, or professional background.',
     }
   }
 
@@ -1029,10 +1119,10 @@ export function getMockResponse(question, pathname, context = null) {
   ) {
     return {
       category: 'project_types',
-      context: { type: 'topic', id: 'portfolio.project_types', label: 'Project and client-work distinctions' },
+      context: { type: 'projects', id: 'approved-project-categories', label: 'Project categories' },
       answer: profileKnowledge.projectTypes.summary,
-      sources: [source('Explore projects', assistantLinks.work)],
-      actions: [action('Explore projects', assistantLinks.work)],
+      sources: [source('Selected work', assistantLinks.work)],
+      actions: [action('View selected work', assistantLinks.work)],
     }
   }
 
@@ -1041,16 +1131,51 @@ export function getMockResponse(question, pathname, context = null) {
       normalizedQuestion,
     )
   ) {
-    const projectNames = projectKnowledge.map((project) => project.label).join(', ')
+    const projectNames = projectKnowledge
+      .filter((project) => APPROVED_D1_PROJECT_IDS.has(project.id))
+      .map((project) => project.label)
+      .join(', ')
     return {
-      category: 'project_inventory',
-      context: { type: 'topic', id: 'portfolio.projects', label: 'Featured projects' },
-      answer: `The featured portfolio includes ${projectNames}. Their roles and statuses vary across personal products, client work, and portfolio demos; each card describes its own evidence and current status.`,
-      sources: [source('Explore the project collection', assistantLinks.work)],
-      actions: [action('Explore projects', assistantLinks.work)],
+      category: 'projects',
+      context: { type: 'projects', id: 'approved-projects', label: 'Approved projects' },
+      answer: `Approved featured projects include ${projectNames}. Their roles and statuses vary; each card describes its own evidence and current status.`,
+      sources: [source('Selected work', assistantLinks.work)],
+      actions: [action('View selected work', assistantLinks.work)],
     }
   }
 
+  const projectReferences = explicitApprovedProjectReferences(cleaned)
+  if (projectReferences.length > 1 && /\b(?:compare|between|and|both|which of|technologies|projects)\b/i.test(cleaned)) {
+    if (projectReferences.length > 2) {
+      return {
+        category: 'clarification',
+        answer: 'I can compare up to two approved projects at a time. Which two would you like me to compare?',
+        sources: [],
+        actions: [],
+      }
+    }
+    return buildMultiProjectResponse(projectReferences)
+  }
+
+  const normalizedPublicQuestion = normalize(cleaned)
+  const publicAliases = projectKnowledge.flatMap((project) =>
+    project.aliases.map((alias) => ({ project, alias: normalize(alias) })),
+  ).filter((match) => match.alias && normalizedPublicQuestion.includes(match.alias))
+  const publicProjectMentions = [...new Set(publicAliases
+    .filter((match) => !publicAliases.some((other) =>
+      other.alias.length > match.alias.length &&
+      other.alias.includes(match.alias) &&
+      normalizedPublicQuestion.indexOf(other.alias) <= normalizedPublicQuestion.indexOf(match.alias),
+    ))
+    .map(({ project }) => project))]
+  if (publicProjectMentions.length > 1) {
+    return {
+      category: 'clarification',
+      answer: 'Which single approved portfolio project would you like me to describe?',
+      sources: [],
+      actions: [],
+    }
+  }
   const projectMatch = detectEntity(cleaned, projectKnowledge, 0.78)
   if (projectMatch?.exact) return buildProjectResponse(projectMatch.entity)
 

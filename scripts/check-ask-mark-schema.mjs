@@ -1,5 +1,6 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -7,7 +8,8 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = path.resolve(scriptDirectory, '..')
 const workerDirectory = path.join(repositoryRoot, 'workers', 'ask-mark')
 const configPath = path.join(workerDirectory, 'wrangler.jsonc')
-const stateDirectory = path.join(workerDirectory, '.wrangler-schema-check')
+const runRoot = mkdtempSync(path.join(tmpdir(), 'ask-mark-schema-check-'))
+const stateDirectory = path.join(runRoot, 'd1')
 const databaseName = 'ask-mark-knowledge-local'
 
 const expectedTables = [
@@ -60,6 +62,7 @@ function runWrangler(argumentsList, { capture = false } = {}) {
       ...process.env,
       CI: '1',
       WRANGLER_SEND_METRICS: 'false',
+      WRANGLER_WRITE_LOGS: 'false',
     },
     stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
     windowsHide: true,
@@ -149,10 +152,6 @@ function migrationArguments(command) {
   ]
 }
 
-rmSync(stateDirectory, { recursive: true, force: true })
-
-let validationSucceeded = false
-
 try {
   runWrangler(migrationArguments('apply'))
 
@@ -231,19 +230,12 @@ try {
     fail(`Expected schema version 4C.1, found ${row.schema_version ?? 'none'}.`)
   }
 
-  validationSucceeded = true
-
   console.log(
     `Ask Mark D1 schema checks passed: ${actualTableCount} tables, ` +
       `${actualViewCount} view, ${actualMigrationCount} migrations, ` +
       `schema ${row.schema_version}.`,
   )
 } finally {
-  if (validationSucceeded) {
-    rmSync(stateDirectory, { recursive: true, force: true })
-  } else {
-    console.error(
-      `Disposable local state was retained for inspection at ${stateDirectory}`,
-    )
-  }
+  // This directory was created exclusively by this invocation.
+  if (existsSync(runRoot)) rmSync(runRoot, { recursive: true, force: true })
 }

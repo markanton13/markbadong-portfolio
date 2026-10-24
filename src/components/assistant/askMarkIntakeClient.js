@@ -37,6 +37,7 @@ const KNOWN_SERVER_ERROR_CODES = new Set([
   'method_not_allowed',
   'payload_too_large',
   'message_too_long',
+  'sensitive_content_not_accepted',
   'unsupported_media_type',
   'duplicate_submission',
   'rate_limited',

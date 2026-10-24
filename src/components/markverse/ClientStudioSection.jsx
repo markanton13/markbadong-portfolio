@@ -6,78 +6,23 @@ export function ClientStudioSection() {
       <div className="markverse-section-heading">
         <p className="eyebrow">Client Studio · Independent work</p>
         <div>
-          <h2 id="client-studio-heading">A connected client experience, from website to workflow.</h2>
-          <p>
-            A practical GoHighLevel engagement across website development, CRM systems, automation,
-            and technical QA. The summary separates delivered implementation, configuration,
-            selected manual tests, and work that remained in draft or dependent on approval.
-          </p>
+          <h2 id="client-studio-heading">A responsive website, built for Childcare Culture &amp; Co.</h2>
+          <p>A six-page GoHighLevel implementation using custom HTML/CSS, with responsive design, UX, and QA.</p>
         </div>
       </div>
-
       <article className="client-studio-banner">
         <div className="client-studio-identity">
           <span className="client-studio-sigil" aria-hidden="true">C<span>+</span></span>
-          <p className="eyebrow">Independent client engagement</p>
+          <p className="eyebrow">Website implementation</p>
         </div>
         <div className="client-studio-intro">
-          <p className="client-studio-client">{clientStudioScope.client}</p>
+          <p className="client-studio-client">Childcare Culture &amp; Co.</p>
           <h3>{clientStudioScope.role}</h3>
-          <div className="client-studio-tags">
-            <span>{clientStudioScope.engagement}</span>
-            <span>{clientStudioScope.specialization}</span>
-          </div>
+          <div className="client-studio-tags"><span>GoHighLevel</span><span>Custom HTML/CSS</span><span>Responsive design · UX · QA</span></div>
           <p>{clientStudioScope.summary}</p>
+          <p><a href={clientStudioScope.website} target="_blank" rel="noreferrer">Visit childcarecultureco.com <span aria-hidden="true">↗</span></a></p>
         </div>
-        <figure className="client-studio-map">
-          <img
-            src="/images/projects/ccc-digital-operations-map.svg"
-            alt="Sanitized overview diagram connecting a public website, GoHighLevel CRM, program workflows, and human review. It contains no client records or private dashboard data."
-            loading="lazy"
-          />
-          <figcaption>Sanitized workflow overview · conceptual map, not a client-system screenshot</figcaption>
-        </figure>
       </article>
-
-      <div className="client-studio-overview" aria-label="Engagement overview">
-        {clientStudioScope.overview.map((item) => (
-          <div key={item.label}>
-            <span>{item.label}</span>
-            <strong>{item.value}</strong>
-          </div>
-        ))}
-      </div>
-
-      <details className="client-studio-details">
-        <summary>
-          <span>Detailed work summary</span>
-          <small>Implementation, configuration, testing, drafts, and dependencies by workstream</small>
-        </summary>
-        <div className="client-studio-grid">
-          {clientStudioScope.workstreams.map((item, index) => (
-            <article key={item.title} className="client-workstream-card">
-              <span className="client-workstream-index">0{index + 1}</span>
-              <p>{item.contribution}</p>
-              <h3>{item.title}</h3>
-              <div>{item.status}</div>
-              {item.detail && <small>{item.detail}</small>}
-            </article>
-          ))}
-        </div>
-      </details>
-
-      <article className="luma-demo-card">
-        <div>
-          <span className="eyebrow">Separate portfolio demo</span>
-          <h3>{clientStudioScope.separateDemo.name}</h3>
-          <p>{clientStudioScope.separateDemo.summary}</p>
-        </div>
-        <span className="status-pill">{clientStudioScope.separateDemo.status}</span>
-      </article>
-      <p className="client-studio-disclosure">
-        No private client records, internal screenshots, agreement terms, payment details, or unpublished campaign assets are included.
-        CCC&amp;C is independent client work and is separate from the Luma Home Care demo.
-      </p>
     </section>
   )
 }

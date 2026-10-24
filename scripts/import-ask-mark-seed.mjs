@@ -20,10 +20,11 @@ const unique = (values,label) => {
 }
 
 function args(list) {
-  const out = { state:path.join(worker,'.wrangler','state'), seed:defaultSeed }
+  const out = { state:path.join(worker,'.wrangler','state'), seed:defaultSeed, scratch:null }
   for (let i=0;i<list.length;i+=1) {
     if (list[i] === '--persist-to') out.state = path.resolve(root,list[++i] || '')
     else if (list[i] === '--seed') out.seed = path.resolve(root,list[++i] || '')
+    else if (list[i] === '--scratch-dir') out.scratch = path.resolve(root,list[++i] || '')
     else fail(`Unknown argument: ${list[i]}`)
   }
   return out
@@ -98,8 +99,11 @@ export function importSeed(options={}) {
     (SELECT COUNT(*) FROM publication_releases) release_count;`)
   if (!counts || Number(counts.source_count)+Number(counts.knowledge_count)+Number(counts.release_count) !== 0)
     fail('The target local D1 database already contains knowledge. Use npm run askmark:d1:reset:local.')
-  const temp=path.join(worker,'.wrangler','seed-import'), file=path.join(temp,'seed.sql')
-  rmSync(temp,{recursive:true,force:true}); mkdirSync(temp,{recursive:true}); writeFileSync(file,build(seed))
+  const temp=path.resolve(options.scratch || path.join(worker,'.wrangler','seed-import'))
+  const file=path.join(temp,'seed.sql')
+  if (existsSync(temp)) fail('Seed importer scratch directory already exists; refusing to overwrite it.')
+  mkdirSync(temp,{recursive:false})
+  writeFileSync(file,build(seed),{flag:'wx'})
   let ok=false
   try {
     run(['d1','execute',...localArgs(state),'--file',file,'--yes'])
