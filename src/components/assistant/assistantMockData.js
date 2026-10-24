@@ -299,11 +299,12 @@ function projectSource(project) {
 }
 
 function projectActions(project) {
-  const actions = [action('Contact Mark about this', assistantLinks.contact, 'contact')]
+  const actions = [action('Contact Mark', assistantLinks.contact, 'contact')]
 
   if (project.githubUrl) {
+    const projectActionLabel = project.id === 'markhq' ? 'MarkHQ' : project.label
     actions.unshift(
-      action('Open GitHub proof', project.githubUrl, 'external_link', true),
+      action(`${projectActionLabel} · GitHub`, project.githubUrl, 'external_link', true),
     )
   }
 
