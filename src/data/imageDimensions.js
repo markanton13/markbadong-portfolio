@@ -16,6 +16,10 @@ export const imageDimensions = Object.freeze({
   "/images/projects/funnel-lab/gallery-overview.webp": { width: 1440, height: 900 },
   "/images/projects/funnel-lab/luma-home-care.webp": { width: 1440, height: 1000 },
   "/images/projects/funnel-lab/northline-build.webp": { width: 1440, height: 1000 },
+  "/images/projects/short-form-video/brand-storytelling-reel.webp": { width: 720, height: 1280 },
+  "/images/projects/short-form-video/mission-driven-reel.webp": { width: 720, height: 1280 },
+  "/images/projects/short-form-video/short-form-video-overview.webp": { width: 1440, height: 900 },
+  "/images/projects/short-form-video/sponsor-promotional-reel.webp": { width: 720, height: 1280 },
   "/images/projects/leaveflow/employee-calendar.webp": { width: 1600, height: 799 },
   "/images/projects/leaveflow/employee-dashboard.webp": { width: 1600, height: 797 },
   "/images/projects/leaveflow/login.webp": { width: 1600, height: 794 },
@@ -49,4 +53,5 @@ export const imageDimensions = Object.freeze({
   "/images/seo/mark-anton-portfolio-og.png": { width: 1200, height: 630 },
   "/images/seo/markhq-og.png": { width: 1200, height: 630 },
   "/images/seo/personalvabot-og.png": { width: 1200, height: 630 },
+  "/images/seo/short-form-video-og.png": { width: 1200, height: 630 },
 })

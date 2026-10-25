@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict'
+import assert from 'node:assert/strict'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
@@ -17,13 +17,27 @@ function artifactText(files) {
     .map((file) => readFileSync(path.join(dist, file), 'utf8')).join('\n')
 }
 
-test('production artifact excludes held Short-Form Video assets and public references', () => {
+test('production artifact includes the approved Short-Form Video project and its portfolio media', () => {
   const files = listFiles(dist)
-  const paths = files.filter((file) => /short-form-video|brand-storytelling-reel|mission-driven-reel|sponsor-promotional-reel/i.test(file))
+  const normalizedPaths = files.map((file) => file.replace(/\\/g, '/'))
+  const requiredPaths = [
+    'projects/short-form-video.html',
+    'images/projects/short-form-video/brand-storytelling-reel.webp',
+    'images/projects/short-form-video/mission-driven-reel.webp',
+    'images/projects/short-form-video/short-form-video-overview.webp',
+    'images/projects/short-form-video/sponsor-promotional-reel.webp',
+    'images/seo/short-form-video-og.png',
+    'videos/short-form-video/brand-storytelling-reel.mp4',
+    'videos/short-form-video/mission-driven-reel.mp4',
+    'videos/short-form-video/sponsor-promotional-reel.mp4',
+  ]
+  for (const requiredPath of requiredPaths) {
+    assert.equal(normalizedPaths.includes(requiredPath), true, `approved project asset missing: ${requiredPath}`)
+  }
   const text = artifactText(files)
-  const namedReferences = /Short-Form Video Editing|\/projects\/short-form-video|\/videos\/short-form-video|brand-storytelling-reel|mission-driven-reel|sponsor-promotional-reel/i.test(text)
-  assert.equal(paths.length, 0, 'held campaign asset paths remain in the production artifact')
-  assert.equal(namedReferences, false, 'a held campaign reference remains in production text')
+  assert.match(text, /Short-Form Video Editing/)
+  assert.match(text, /\/projects\/short-form-video/)
+  assert.match(text, /Approved deliverables/)
 })
 
 test('production artifact omits unapproved phone numbers while preserving email contact', () => {
