@@ -120,17 +120,18 @@ async function queryWorker({ message, generative = false, contextKey, contextKey
   }
 }
 
-test('source coverage baseline exposes projects that need owner review before synchronization', () => {
+test('portfolio approval does not automatically add Short-Form Video to Ask Mark knowledge', () => {
   const featured = new Set(featuredProjects.map((project) => project.slug))
   const assistant = new Set(projectKnowledge.map((project) => project.id))
   const d1 = new Set(projectSeed.map((item) => item.key.slice('project.'.length).replace('_', '-')))
 
   assert.deepEqual([...d1].filter((id) => !assistant.has(id)), [])
   assert.deepEqual([...d1].filter((id) => !featured.has(id)), [])
-  assert.deepEqual([...featured].filter((id) => !assistant.has(id)), [])
-  const portfolioOnly = ['ask-mark', 'childcare-culture', 'ledger', 'tambayan-royale', 'tambayan-royale-play']
+  assert.deepEqual([...featured].filter((id) => !assistant.has(id)).sort(), ['short-form-video'])
+  const portfolioOnly = ['ask-mark', 'childcare-culture', 'ledger', 'short-form-video', 'tambayan-royale', 'tambayan-royale-play']
+  const assistantPortfolioOnly = portfolioOnly.filter((id) => id !== 'short-form-video')
   assert.deepEqual([...featured].filter((id) => !d1.has(id)).sort(), portfolioOnly)
-  assert.deepEqual([...assistant].filter((id) => !d1.has(id)).sort(), portfolioOnly)
+  assert.deepEqual([...assistant].filter((id) => !d1.has(id)).sort(), assistantPortfolioOnly)
 })
 
 test('each seeded project introduction uses its approved frontend record and public route', () => {

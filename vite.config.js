@@ -17,6 +17,7 @@ export default defineConfig({
         leaveflow: resolve(projectRoot, 'projects/leaveflow.html'),
         learningLibrary: resolve(projectRoot, 'projects/learning-library.html'),
         funnelLab: resolve(projectRoot, 'projects/funnel-lab.html'),
+        shortFormVideo: resolve(projectRoot, 'projects/short-form-video.html'),
       },
     },
   },

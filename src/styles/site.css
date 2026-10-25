@@ -2025,3 +2025,185 @@ h1 em { font-style: normal; color: var(--blue); }
     margin-top: 32px;
   }
 }
+
+/* Short-form video editing case study — start */
+.project-card-short-form-video .project-visual-real img {
+  object-position: center;
+}
+
+.short-form-hero-figure .expandable-image-trigger > img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.short-form-reels-section {
+  overflow: hidden;
+}
+
+.short-form-reel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.short-form-reel-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 24px;
+  background: rgba(255,255,255,.055);
+}
+
+.short-form-reel-card.is-featured {
+  border-color: rgba(174,189,241,.46);
+  box-shadow: 0 20px 60px rgba(0,0,0,.22);
+}
+
+.short-form-reel-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 94px;
+  padding: 4px 2px 18px;
+}
+
+.short-form-reel-heading > span {
+  flex: 0 0 auto;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.short-form-reel-heading div {
+  min-width: 0;
+}
+
+.short-form-reel-heading p {
+  margin: 0 0 6px;
+  color: #aebdf1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.short-form-reel-heading h3 {
+  margin: 0;
+  color: white;
+  font-size: clamp(18px, 1.65vw, 23px);
+  line-height: 1.25;
+}
+
+.short-form-video-frame {
+  width: min(100%, 360px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 22px;
+  background: #090a0f;
+  box-shadow: 0 20px 46px rgba(0,0,0,.26);
+}
+
+.short-form-video-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #090a0f;
+  object-fit: cover;
+}
+
+.short-form-reel-summary {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.72);
+}
+
+.short-form-reel-summary summary {
+  padding: 15px 2px 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.short-form-reel-summary p {
+  margin: 12px 2px 2px;
+  color: rgba(255,255,255,.66);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.short-form-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.short-form-workflow-grid article {
+  min-height: 270px;
+  padding: clamp(28px, 4vw, 42px);
+  background: var(--white);
+}
+
+.short-form-workflow-grid article > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.short-form-workflow-grid h3 {
+  margin: 52px 0 14px;
+  font-size: clamp(24px, 2.4vw, 31px);
+}
+
+.short-form-workflow-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+@media (max-width: 980px) {
+  .short-form-reel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .short-form-reel-card:last-child {
+    grid-column: 1 / -1;
+    width: min(100%, 520px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .short-form-reel-grid,
+  .short-form-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .short-form-reel-card:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .short-form-reel-heading {
+    min-height: auto;
+  }
+
+  .short-form-workflow-grid article {
+    min-height: auto;
+  }
+
+  .short-form-workflow-grid h3 {
+    margin-top: 34px;
+  }
+}
+/* Short-form video editing case study — end */

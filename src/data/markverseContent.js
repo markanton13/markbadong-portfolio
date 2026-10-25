@@ -53,6 +53,7 @@ export const markverseProjectStatus = {
   applylang: { status: 'Complete Discord product', district: 'Automation Lab' },
   'learning-library': { status: 'Live portfolio demo · test integrations', district: 'Developer Studio' },
   'funnel-lab': { status: 'Live portfolio showcase', district: 'Client Studio' },
+  'short-form-video': { status: 'Approved campaign reels · portfolio proof', district: 'Client Studio' },
   'childcare-culture': { status: 'Owner-approved high-level website project', district: 'Client Studio' },
   leaveflow: { status: 'Functional application · portfolio proof', district: 'Developer Studio' },
   'enterprise-assessment': { status: 'Internal workflow · sanitized proof only', district: 'Operations HQ' },
